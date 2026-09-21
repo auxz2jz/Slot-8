@@ -141,3 +141,6 @@ Requirements:
 - A build should not be considered fully tested until its version-specific guide has been worked through or intentionally skipped with notes.
 
 v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, camera capture, horizontal photo-strip scrolling, vertical project-page scrolling, image import/delete, Analyze, and Laser/Hybrid placeholder screens.
+
+
+- 2026-09-21 — v0.2.1 test-guide build failed at Kotlin compilation in `ProjectsScreen.kt` because `IconButton` was used without importing `androidx.compose.material3.IconButton`. Fixed the missing import, bumped the test build to v0.2.2/versionCode 4, and retained the same version-specific test guide. Awaiting v0.2.2 build test.
