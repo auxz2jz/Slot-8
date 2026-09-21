@@ -140,3 +140,20 @@ v0.5.1 changes the pre-bundle-adjustment strategy:
 7. Export all pair diagnostics so bridge-photo or future graph-matching decisions are data-driven.
 
 This is still not bundle adjustment and still uses unit-length relative translations, but it provides a valid connected component for the next optimization stage instead of discarding later strong geometry.
+
+
+## v0.6.0 shared-track bundle refinement
+
+v0.5.1 proved a stable 14-camera connected component, but its point cloud is a merge of independently triangulated adjacent-pair points. Bundle adjustment needs shared observations of the same physical feature across multiple views.
+
+v0.6 therefore:
+1. Recomputes ORB correspondences inside the connected component.
+2. Builds explicit feature tracks observed in at least 3 cameras.
+3. Triangulates one shared 3D point per usable track.
+4. Alternates robust reprojection-error optimization of shared 3D points and camera translations.
+5. Keeps camera rotations/intrinsics fixed for this first on-device optimization milestone.
+6. Fixes the first two cameras to preserve gauge/scale.
+7. Reports before/after RMS reprojection error and filters high-error tracks.
+8. Exports the refined sparse PLY and a detailed refinement report.
+
+This is a limited but genuine reprojection-error bundle-refinement stage. Later versions can refine rotations/intrinsics and add graph/loop-closure constraints before dense reconstruction.
