@@ -101,3 +101,25 @@ Next photogrammetry stage after v0.3 passes:
 - triangulation,
 - initial sparse point cloud,
 - then multi-view expansion/bundle adjustment.
+
+
+## v0.4.0 sparse geometry milestone
+
+The Android app now advances beyond descriptor matching into real projective geometry:
+
+1. Recompute ORB features/correspondences for adjacent image pairs.
+2. Estimate an essential matrix with RANSAC.
+3. Recover the relative camera rotation/translation direction.
+4. Score adjacent pairs by recovered-pose inliers.
+5. Select the best verified pair.
+6. Triangulate a first sparse 3D point cloud.
+7. Persist the result locally and export it as ASCII PLY.
+
+Camera intrinsics are estimated from 35mm-equivalent EXIF focal metadata when available; otherwise v0.4 uses a documented focal-length fallback. Translation scale remains arbitrary in this two-view stage.
+
+Next engine milestone after device validation:
+- build multi-image feature tracks,
+- expand camera poses across more views,
+- triangulate shared tracks,
+- run bundle adjustment,
+- only then proceed toward dense reconstruction.
