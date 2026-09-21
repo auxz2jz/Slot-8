@@ -172,3 +172,22 @@ v0.6.1 therefore leaves the geometry engine unchanged and improves observability
 - make the test guide accessible from all major screens.
 
 This establishes a stronger test/debug contract before dense reconstruction work begins.
+
+
+## v0.7.0 first dense stereo pair
+
+v0.6/v0.6.1 established a refined sparse component and shared multi-view tracks. v0.7 deliberately validates dense stereo on one already verified pair before attempting full multi-pair fusion.
+
+Pipeline:
+1. Select the saved best sparse pair.
+2. Recompute ORB correspondences and essential-matrix/RANSAC geometry.
+3. Recover the relative two-camera pose.
+4. Stereo-rectify the two working images.
+5. Compute disparity with OpenCV StereoSGBM.
+6. Convert fixed-point disparity to float and reproject it with the stereo Q matrix.
+7. Keep finite positive-depth points, trim extreme depth outliers, and cap the export to a mobile-friendly point count.
+8. Persist a dense-pair report and point cloud; export fingerprinted text/PLY results.
+
+The pair translation magnitude remains arbitrary, so the dense cloud is not metric yet. This first milestone also assumes zero lens distortion during rectification. Camera calibration, full intrinsic/rotation refinement, and multi-pair dense fusion come later.
+
+The v0.7 version-test report now includes current ReconstructionStatus (state/progress/message) so failures that occur before a stage report is created are still captured automatically.
