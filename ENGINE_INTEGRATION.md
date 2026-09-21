@@ -157,3 +157,18 @@ v0.6 therefore:
 8. Exports the refined sparse PLY and a detailed refinement report.
 
 This is a limited but genuine reprojection-error bundle-refinement stage. Later versions can refine rotations/intrinsics and add graph/loop-closure constraints before dense reconstruction.
+
+
+## v0.6.1 diagnostics and report identity
+
+The v0.6 shared-track refinement test succeeded numerically: 471 tracks were built/optimized, 1,276 observations survived filtering, 389 refined sparse points remained, and RMS reprojection error fell from 9.1838 px to 2.9032 px. The user's test-step Problem flag reflected uncertainty about interpreting the metric, not an optimizer regression.
+
+v0.6.1 therefore leaves the geometry engine unchanged and improves observability:
+- report the RMS change in plain language and percentage terms,
+- include build/device information in the version test report,
+- embed a pipeline diagnostic snapshot in the version test report,
+- tag exported reports with project ID and stable fingerprints,
+- add matching identity comments to exported PLY files,
+- make the test guide accessible from all major screens.
+
+This establishes a stronger test/debug contract before dense reconstruction work begins.
