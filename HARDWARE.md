@@ -146,3 +146,22 @@ Controller responses:
 - `ERROR ...`
 
 The Android app should not capture a step-and-capture frame until the controller reports that motion has completed.
+
+
+## Structured-light / depth camera
+
+Add a future depth-sensor input that can provide calibrated depth frames or point clouds directly.
+
+Candidate categories:
+- Xbox 360 Kinect / Kinect v1 for experimentation with projected infrared structured light.
+- Modern Orbbec/Astra-family USB depth cameras where Android SDK support is available.
+- Active-stereo depth cameras may also be accepted even when their sensing method is not identical to Kinect v1.
+
+The depth camera should be treated as another sensor source, not a separate application. The same turntable and coordinate system can be used to align its geometry with photogrammetry and laser-line scans.
+
+For a hybrid capture, the system can collect:
+1. High-resolution color photos for texture and photogrammetry.
+2. Laser-line triangulation points for precise surface measurements.
+3. Structured-light/depth frames for fast whole-surface depth coverage.
+
+All three datasets can later be registered/fused into one model.
