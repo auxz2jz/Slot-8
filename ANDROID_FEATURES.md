@@ -124,3 +124,20 @@ Status legend:
 - TODO — Convert depth frames to point clouds.
 - TODO — Register multiple turntable views.
 - TODO — Fuse depth geometry with photogrammetry and laser-line scans.
+
+
+## Permanent test-guide rule
+
+Starting with Android v0.2.1, every future test build must include an in-app **Test This Version** walkthrough.
+
+Requirements:
+- The guide appears automatically the first time each new app version is launched.
+- The guide is always accessible later from the main screen.
+- Each step tells the tester exactly what to do.
+- Each step states the expected result.
+- Each step can be marked **Works** or **Problem**.
+- Test progress/results should persist when the tester temporarily closes the guide to perform a test.
+- The guide must focus on features added or changed in that version and include important regression checks.
+- A build should not be considered fully tested until its version-specific guide has been worked through or intentionally skipped with notes.
+
+v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, camera capture, horizontal photo-strip scrolling, vertical project-page scrolling, image import/delete, Analyze, and Laser/Hybrid placeholder screens.
