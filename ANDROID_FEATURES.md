@@ -148,3 +148,7 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 
 - 2026-09-21 — v0.2.2 passed user testing: build/install/open, Photo/Laser/Hybrid project creation, camera capture, scrolling, import/delete, and test-guide behavior all reported working.
 - 2026-09-21 — v0.3.0 prepared. This is the first real on-device photogrammetry computation stage. Added official OpenCV Android AAR (4.14.0), ORB feature detection, adjacent-photo Hamming k-NN matching with ratio filtering, overlap-quality labels, keypoint/match statistics, warnings for weak neighboring views, progress reporting, and v0.3-specific in-app test guide. Awaiting build/device test.
+
+
+- 2026-09-21 — v0.3.0 feature matching passed user testing with approximately 30 photos. User reported 29/29 adjacent pairs as Strong, confirming the OpenCV matching stage runs successfully. Testing exposed workflow gaps rather than matcher failure: only the first eight pair details were visible, match reports disappeared after leaving/reopening the project, projects could not be deleted, and the version test guide could not capture/export tester explanations.
+- 2026-09-21 — v0.3.1 prepared as a testing/persistence cleanup release. Added persistent per-project feature-match reports, automatic invalidation when photos change, scrollable View All pair results, feature-match .txt export, project deletion with confirmation, per-step Problem explanations in the test guide, and full version test-report .txt export for upload back to ChatGPT. Awaiting device test.
