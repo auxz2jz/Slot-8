@@ -106,3 +106,8 @@ Status legend:
 - TODO — Free-space checks.
 - TODO — Export/import complete scan project.
 - TODO — Diagnostics/logging.
+
+
+## Build test history
+
+- 2026-09-21 — v0.1 first Android Studio build reached Kotlin compilation but failed in `ProjectScreen.kt` because of an explicit `import androidx.compose.foundation.layout.weight`. Current Compose exposes `weight` through `RowScope` / `ColumnScope`; the explicit import resolved to an internal member. Fixed by removing that import and repackaged as v0.1.1. Awaiting retest.
