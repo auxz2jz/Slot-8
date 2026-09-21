@@ -113,3 +113,14 @@ Status legend:
 - 2026-09-21 — v0.1 first Android Studio build reached Kotlin compilation but failed in `ProjectScreen.kt` because of an explicit `import androidx.compose.foundation.layout.weight`. Current Compose exposes `weight` through `RowScope` / `ColumnScope`; the explicit import resolved to an internal member. Fixed by removing that import and repackaged as v0.1.1. Awaiting retest.
 
 - 2026-09-21 — v0.1.1 successfully compiled, installed, opened, and captured photos on the user's Android test device. User reported photo review needed better scrolling. v0.2 prepared with vertically scrollable project content, horizontally scrollable photo strip, persisted Photo/Laser/Hybrid scan modes, and backward compatibility for v0.1 projects. Awaiting v0.2 build test.
+
+
+## Structured-light / depth scanning
+
+- TODO — Depth-camera source abstraction.
+- TODO — Kinect-style structured-light/depth proof of concept.
+- TODO — USB depth-camera SDK integration.
+- TODO — Depth-frame preview.
+- TODO — Convert depth frames to point clouds.
+- TODO — Register multiple turntable views.
+- TODO — Fuse depth geometry with photogrammetry and laser-line scans.
