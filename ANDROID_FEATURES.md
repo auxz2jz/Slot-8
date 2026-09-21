@@ -13,19 +13,19 @@ Status legend:
 - DONE — CameraX photo capture.
 - DONE — Import multiple existing photos.
 - DONE — Local project/photo storage.
-- DONE — Photo thumbnail gallery.
+- DONE — Photo thumbnail gallery.\n- DONE — v0.2: project page scrolls vertically and photo thumbnails scroll horizontally for easier review.
 - DONE — Delete unwanted photos.
 - DONE — Basic photo-set analysis.
 - DONE — Warnings for too few photos, changing resolution, and focal-length/zoom changes.
 - DONE — Basic capture guidance.
 - PARTIAL — Reconstruction-engine interface.
 - TODO — Actual on-device 3D reconstruction.
-- TODO — Move the tested Android source into this repository.
+- TODO — Move the tested Android source into this repository after v0.2 is confirmed building.
 
 ## Main scan modes
 
-- TODO — Home screen with Photo Scan / Laser Scan / Hybrid Scan.
-- TODO — Shared scan-project format that can hold all three data types.
+- PARTIAL — Project creation supports Photo Scan / Laser Scan / Hybrid Scan in v0.2; dedicated home-mode workflow can be refined later.
+- PARTIAL — Scan mode is persisted in project metadata; new projects create photo/laser/depth/model folders. Full shared data model is still TODO.
 - TODO — Advanced/manual controls.
 - TODO — Simple automatic workflow.
 
@@ -111,3 +111,5 @@ Status legend:
 ## Build test history
 
 - 2026-09-21 — v0.1 first Android Studio build reached Kotlin compilation but failed in `ProjectScreen.kt` because of an explicit `import androidx.compose.foundation.layout.weight`. Current Compose exposes `weight` through `RowScope` / `ColumnScope`; the explicit import resolved to an internal member. Fixed by removing that import and repackaged as v0.1.1. Awaiting retest.
+
+- 2026-09-21 — v0.1.1 successfully compiled, installed, opened, and captured photos on the user's Android test device. User reported photo review needed better scrolling. v0.2 prepared with vertically scrollable project content, horizontally scrollable photo strip, persisted Photo/Laser/Hybrid scan modes, and backward compatibility for v0.1 projects. Awaiting v0.2 build test.
