@@ -26,10 +26,17 @@ Build a self-contained Android 3D scanning application in Kotlin + Jetpack Compo
 - Lock focus, exposure, white balance, zoom, day/night mode, and camera geometry during a calibrated scan.
 - Start with step-and-capture rather than continuous-motion scanning.
 
+### Structured-Light / Depth Scan
+- Support depth cameras that project an infrared pattern or otherwise provide a calibrated depth map (for example Kinect-style structured light or active-stereo depth cameras).
+- Treat the depth stream as another geometry source inside the same scan project.
+- Prefer devices with documented USB/Android SDK access when possible.
+- Candidate hardware families include the existing Xbox 360 Kinect for experimentation and modern Orbbec/Astra-style depth cameras.
+- Keep the Android device as the main controller/processor when the selected sensor can stream depth locally over USB/network.
+
 ### Hybrid Scan
 - Capture ordinary photographs with the laser off.
 - Capture laser geometry with the laser on.
-- Align/fuse photogrammetry and laser point-cloud/mesh data.
+- Align/fuse photogrammetry, laser-line, and structured-light/depth point-cloud/mesh data.
 - Use photographs for realistic texture/color and laser data to strengthen geometry.
 - Keep all data in one scan project so the user does not need separate apps.
 
