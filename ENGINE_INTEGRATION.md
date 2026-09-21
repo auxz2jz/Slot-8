@@ -80,3 +80,24 @@ Hybrid pipeline:
 ## Runtime rule
 
 GitHub is never a runtime dependency. Any required native library, configuration file, calibration asset, or model/resource needed for scanning must be packaged locally in the app or stored locally as app data.
+
+
+## OpenCV Android milestone (v0.3)
+
+The Android prototype now begins real local computer-vision processing with the official OpenCV Android Maven artifact `org.opencv:opencv:4.14.0`.
+
+Implemented stage:
+1. Decode reduced in-memory working images while preserving originals.
+2. Detect ORB keypoints/descriptors.
+3. Match adjacent photos with Hamming k-NN matching.
+4. Apply ratio filtering.
+5. Report good-match counts and overlap quality.
+
+This dependency is obtained during the Android build and bundled in the APK; the installed app does not require GitHub or cloud access for feature matching.
+
+Next photogrammetry stage after v0.3 passes:
+- geometric verification/RANSAC,
+- camera-pose estimation,
+- triangulation,
+- initial sparse point cloud,
+- then multi-view expansion/bundle adjustment.
