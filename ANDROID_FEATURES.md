@@ -144,3 +144,7 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 
 
 - 2026-09-21 — v0.2.1 test-guide build failed at Kotlin compilation in `ProjectsScreen.kt` because `IconButton` was used without importing `androidx.compose.material3.IconButton`. Fixed the missing import, bumped the test build to v0.2.2/versionCode 4, and retained the same version-specific test guide. Awaiting v0.2.2 build test.
+
+
+- 2026-09-21 — v0.2.2 passed user testing: build/install/open, Photo/Laser/Hybrid project creation, camera capture, scrolling, import/delete, and test-guide behavior all reported working.
+- 2026-09-21 — v0.3.0 prepared. This is the first real on-device photogrammetry computation stage. Added official OpenCV Android AAR (4.14.0), ORB feature detection, adjacent-photo Hamming k-NN matching with ratio filtering, overlap-quality labels, keypoint/match statistics, warnings for weak neighboring views, progress reporting, and v0.3-specific in-app test guide. Awaiting build/device test.
