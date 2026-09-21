@@ -123,3 +123,20 @@ Next engine milestone after device validation:
 - triangulate shared tracks,
 - run bundle adjustment,
 - only then proceed toward dense reconstruction.
+
+
+## v0.5.1 weak-link recovery
+
+The first v0.5 multi-view implementation was intentionally simple but too brittle: it started at the first photo and aborted the entire sequential chain when any adjacent pair fell below the pose-inlier threshold.
+
+v0.5.1 changes the pre-bundle-adjustment strategy:
+
+1. Compute geometric verification and relative pose for every adjacent pair.
+2. Keep diagnostics for all pairs, even after a weak link.
+3. Find the largest contiguous run of usable adjacent-pair poses.
+4. Use the first camera of that run as the local origin.
+5. Chain poses and triangulated points only inside that largest connected component.
+6. Keep cameras outside the component explicitly marked disconnected instead of silently merging unrelated coordinate frames.
+7. Export all pair diagnostics so bridge-photo or future graph-matching decisions are data-driven.
+
+This is still not bundle adjustment and still uses unit-length relative translations, but it provides a valid connected component for the next optimization stage instead of discarding later strong geometry.
