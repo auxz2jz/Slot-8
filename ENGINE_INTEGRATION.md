@@ -251,3 +251,16 @@ Fusion gate:
 
 Tooling recovery:
 The interrupted v0.8.1 session stalled during a tooling check because this runtime has Java and a standalone Kotlin compiler but no system Gradle and no gradle-wrapper.jar in the project. The wrapper bootstraps that JAR from raw.githubusercontent.com, which this runtime cannot resolve. Wrapper bootstrap commands now use short timeouts so that limitation fails immediately instead of looking hung.
+
+
+## v0.8.2 capture/viewer stabilization
+
+Two independent v0.8.1 projects reached successful multi-pair dense fusion, so v0.8.2 intentionally leaves the reconstruction math unchanged and fixes capture/viewer/testability issues before surface reconstruction.
+
+1. Hold Rapid: the v0.8.1 shutter pointerInput was keyed on rapidActive. Starting Rapid changed that key, cancelling the active press coroutine and immediately running the release/finally path. v0.8.2 removes rapidActive from the pointer-input restart keys and reads the current Rapid state without restarting the gesture.
+2. Rapid throughput: each run records target interval, elapsed time, saved count, actual photos/sec, average full-resolution ImageCapture save latency, and stop reason. A 5/sec request remains a target; the serialized full-resolution pipeline may sustain less.
+3. Rotation/configuration: app screen/test-guide state and camera capture settings are saveable so normal Android activity recreation no longer returns the user to the project list merely for rotating the phone.
+4. Viewer: the common point-cloud preview now applies yaw around Y, pitch around X, then roll around Z before perspective projection. Touch drag controls yaw/pitch, pinch controls zoom, two-finger twist controls roll, and explicit sliders/preset orthogonal views provide deterministic inspection.
+5. Test notes: Works steps can carry optional saved/exported tester notes, and version reports include recent Rapid diagnostics.
+
+Next geometry milestone: create a surface/triangle mesh from a validated fused dense cloud.
