@@ -280,3 +280,17 @@ The previous dense seed always reused the globally best sparse pair. On test4 th
 6. Show candidate/stage progress beside the dense button and include the attempt log in exported version-test diagnostics.
 
 The StereoSGBM and multi-pair fusion math remain otherwise unchanged in this maintenance build.
+
+
+## v0.8.3 connected-component dense recovery
+
+The v0.8.2 test4 project contained 175 photos and successfully completed feature matching, two-view sparse reconstruction, a 100-camera largest connected component, and limited bundle refinement. Its global best sparse pair was immediately before the chosen largest connected component, so the one-pair dense stage was not anchored to geometry included in the refined camera solution.
+
+v0.8.3 changes dense-seed selection:
+1. If the saved best sparse pair belongs to the largest connected multi-view component, keep it unchanged.
+2. Otherwise choose the connected adjacent pair with the strongest recovered-pose support (triangulated-point count as tie-breaker).
+3. Skip the old sparse-radius guidance when a different pair is selected, because that saved sparse cloud belongs to another baseline.
+4. Preserve adaptive rectified-disparity selection and all previous dense filtering.
+5. Persist start/progress/success/failure events for the dense attempt so a future no-output event has an exact stage and exception in the exported test report.
+
+This is a recovery/stability change; multi-pair fusion mathematics is unchanged.
