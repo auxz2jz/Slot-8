@@ -75,3 +75,18 @@ Current test package: `PhotogrammetryStudioAndroid-v0.9.0-Stage7-Surface-Mesh-An
 SHA-256: `9d70424152884746fe693d49bcdde286e8230f9a7f75f597e88f521edccbe174`.
 
 See `PROJECT_CHECKPOINT.md` for the exact device-test sequence.
+
+
+## v0.9.1 topology-cleanup test build
+
+v0.9.0 passed all seven device-test steps and proved Stage 7 triangle generation, persistence, viewing, OBJ export, and triangle PLY export. Inspection of the exported topology found many overlapping non-manifold edges, so v0.9.1 cleans the mesh before later smoothing/hole/texture work.
+
+v0.9.1 uses ordered local triangle fans, limits every undirected edge to at most two incident faces, filters tiny disconnected fragments, compacts unused vertices, and exposes topology statistics in the Stage 7 card/report.
+
+Android Studio package:
+`PhotogrammetryStudioAndroid-v0.9.1-Stage7-Topology-Cleanup-Android-Studio-Ready.zip`
+
+SHA-256:
+`a52e4fbdf42f6ef022f609a462c0d595ee686bb414474b1a5e5fc72008d9df83`
+
+Pure-Kotlin validation on the real uploaded fused clouds reached zero non-manifold edges for both test4 and test3. See `PROJECT_CHECKPOINT.md` for the exact device-test sequence.
