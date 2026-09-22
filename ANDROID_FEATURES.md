@@ -251,3 +251,30 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - TODO — Make every primary action button identify the next stage explicitly.
 - TODO — Keep old milestone version labels only as secondary/history text.
 - TODO — Version-test instructions must quote exact on-screen card and button labels.
+
+
+## v0.9.0 — Stage 7 experimental surface mesh
+
+- PASSED — v0.8.4 device test: 6 Works / 0 Problems / 0 Untested.
+- PASSED — test3 remained 41,017 fused points.
+- PASSED — test4 v0.8.4 preflight filtered 27 unusable candidates and produced 40,922 fused points.
+- DONE — Version 0.9.0 / versionCode 19.
+- DONE — Stable Stage 1–7 reconstruction card titles.
+- DONE — Main continuation buttons explicitly identify the next stage.
+- DONE — Test-guide instructions quote exact visible labels.
+- DONE — Stage 7 local-neighbor triangle mesher from Stage 6 fused points.
+- DONE — Robust extreme-point trim, adaptive voxel reduction, and spatial-hash neighbors.
+- DONE — Long/high-aspect/degenerate triangle rejection.
+- DONE — 30,000-face mobile safety cap.
+- DONE — Persistent mesh result.
+- DONE — Full-screen wireframe mesh viewer.
+- DONE — Stage 7 report, OBJ, and triangle PLY exports.
+- LOCAL VALIDATION — test4: 5,795 vertices / 30,000 triangles; test3: 2,840 vertices / 28,555 triangles.
+- TEST — Android Studio compile/install and v0.9.0 device guide.
+- NEXT — use the device result to improve topology, normals, smoothing/hole filling, then texture projection.
+
+### External USB camera clarification
+- TODO — Camera-source selector.
+- TODO — Android USB UVC enumeration/permission.
+- TODO — Direct still capture from supported UVC cameras into the active project.
+- TODO — Manual focus/exposure/resolution controls where supported.
