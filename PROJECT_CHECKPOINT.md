@@ -2,111 +2,74 @@
 
 ## Current build
 
-- Version: **v0.8.4**
-- Android versionCode: **18**
-- Package: `PhotogrammetryStudioAndroid-v0.8.4-Android-Studio-Ready.zip`
-- Package SHA-256: `e9c1b5ce1fecbcccd41e698084b95eb2ca3cabf0bbcb6753782d2b0339345a2e`
-- Canonical repository: `auxz2jz/Slot-8`, branch `main`
-- Packaging status: **corrected Android Studio-ready ZIP verified**
-- Includes: `settings.gradle.kts`, root/app Gradle files, `gradlew`, `gradlew.bat`, `gradle-wrapper.properties`, and included `gradle-wrapper.jar`
+- Version: **v0.9.0**
+- Android versionCode: **19**
+- Package: `PhotogrammetryStudioAndroid-v0.9.0-Stage7-Surface-Mesh-Android-Studio-Ready.zip`
+- Package SHA-256: `9d70424152884746fe693d49bcdde286e8230f9a7f75f597e88f521edccbe174`
+- Source-manifest SHA-256: `4c84ca84258b447a616ff4ec092ed17900c14227c2df0f6c3b9716ca6432471a`
+- v0.8.4 -> v0.9.0 patch SHA-256: `354cecfc80d2a1ce0d3941f6a1a9c80f99e33f9b37bd8e8100e6e512d27b3840`
 - ZIP integrity test: **passed**
-- Device compile/test: **pending**
+- Includes Gradle wrapper JAR and normal Android Studio project files.
+- Android Studio/device compile: **pending**
 
-## Last confirmed device results
+## Last confirmed device results — v0.8.4 PASSED
 
-v0.8.3 passed its recovery objective:
-- Version guide: **6 Works / 0 Problems / 0 Untested**
-- test3: 95 photos, 41 connected cameras, 30,000-point dense seed, 6/6 selected fusion pairs accepted, 41,017 fused points, ready for surface reconstruction.
-- test4: 175 photos, 100-camera refined component, bundle RMS 12.3533 px -> 2.2892 px, corrected connected-component dense seed 30,000 points, 14,191 fused points, ready for surface reconstruction.
+Guide: **6 Works / 0 Problems / 0 Untested**.
 
-## v0.8.4 maintenance fix
-
-v0.8.3 exposed a smaller fusion-selection issue: two selected later test4 pairs were inside the refined component but their first camera had no completed shared-world pose after an earlier break in the fusion engine's separately rebuilt rotation chain. They were selected anyway and later reported with the overly broad `Missing refined pose or image file.` reason.
-
-v0.8.4 now:
-1. Preflights every dense-fusion candidate before distributed selection.
-2. Requires both image files.
-3. Requires both refined camera centers.
-4. Requires a completed shared-world pose for the pair's first camera.
-5. Selects up to six distributed pairs only from this eligible set.
-6. Records how many geometric candidates were filtered before selection.
-7. Uses precise defensive reasons for missing camera index, first/second image, refined center, or world pose.
-8. Adds a v0.8.4-specific in-app test guide.
-
-Dense-stereo math, dense-pair reconstruction math, global trimming, voxel downsampling, and readiness thresholds are unchanged.
-
-## Validation limitation
-
-This recovery environment has Java and Kotlin but no Android SDK, no system Gradle, and no local Gradle wrapper JAR. Therefore the v0.8.4 package was source-checked and ZIP-integrity-tested here, but **not compiled into an APK in this environment**. Android Studio on the user's development PC remains the authoritative compile/install check.
-
-## Next device test
-
-1. Open the v0.8.4 project in Android Studio and build/install it.
-2. Run the built-in v0.8.4 guide.
-3. Open test4 and rebuild multi-pair dense fusion.
-4. Confirm selected pairs no longer fail with the old generic missing-pose-or-image message.
-5. Export the test4 dense-fusion report.
-6. Re-run test3 fusion as a regression check.
-7. Export the v0.8.4 version-test report.
-8. If regression passes, begin **surface/triangle mesh reconstruction**.
-
-## GitHub checkpoint rule
-
-Keep GitHub current after meaningful code/version changes, before and after long device tests, when a root cause is identified, before packaging a replacement build, and whenever a chat approaches its context limit.
-
-
-## Packaging correction — 2026-09-22
-
-The first v0.8.4 ZIP was labeled Android Studio-ready while omitting `gradle/wrapper/gradle-wrapper.jar` and relying on a bootstrap download. That package has been superseded.
-
-Use only:
-`PhotogrammetryStudioAndroid-v0.8.4-Android-Studio-Ready.zip`
-
-SHA-256:
-`e9c1b5ce1fecbcccd41e698084b95eb2ca3cabf0bbcb6753782d2b0339345a2e`
-
-The replacement includes the wrapper JAR and all required project files. No patch file or manual source copying is required.
-
-
-## v0.8.4 device test — PASSED
-
-User tested v0.8.4 on Samsung SM-S908U1 / Android 16.
-
-Version guide result:
-- 6 Works
-- 0 Problems
-- 0 Untested
-
-test3 regression:
+test3:
 - 95 photos
 - 41 connected cameras
-- 40 eligible dense-pair candidates
-- 6 selected / 6 fused
-- 41,017 fused points
+- 40 eligible dense candidates
+- 6/6 selected pairs fused
+- **41,017 fused points**
 - readyForSurfaceReconstruction=true
 
 test4:
 - 175 photos
 - 100 connected cameras
-- 71 eligible dense-pair candidates
-- 27 connected candidates filtered by preflight before selection
-- 6 selected distributed pairs
-- 4 fused, 2 rejected for insufficient verified-band dense geometry
-- 40,922 fused points
+- 27 unusable connected candidates removed by v0.8.4 preflight
+- 71 eligible dense candidates
+- 4/6 selected pairs fused
+- **40,922 fused points**
 - readyForSurfaceReconstruction=true
 
-This confirms the v0.8.4 preflight fix worked and did not regress test3.
+v0.8.4 therefore fixed the candidate/world-pose issue without regressing test3.
 
-### UI naming rule requested after v0.8.4
+## v0.9.0 — Stage 7 surface mesh
 
-The user reported confusion because cards retain historical milestone titles such as "v0.6 shared-track bundle refinement" while action buttons refer to the current app version such as "Build connected dense stereo pair (v0.8.4)".
+1. Stable reconstruction labels now use Stage 1 through Stage 7 rather than old release numbers as primary card names.
+2. Primary continuation buttons explicitly name the next stage.
+3. Stage 7 builds an experimental local-neighbor triangle mesh from the Stage 6 fused dense cloud.
+4. Robust outlier trimming prevents isolated points from controlling mesh scale.
+5. Adaptive voxel reduction and a 3D spatial hash keep the algorithm phone-friendly.
+6. Long, degenerate, and highly stretched triangles are rejected.
+7. First mobile safety cap: 6,500 mesh vertices target / 30,000 faces maximum.
+8. Mesh persists with the project.
+9. Full-screen wireframe viewer supports yaw/pitch/roll, zoom, and six orthogonal views.
+10. Exports: Stage 7 report, OBJ, and face-containing ASCII PLY.
+11. v0.9.0 test guide quotes the exact card/button wording shown on screen.
 
-Starting with the next UI cleanup:
-1. Primary card headings should use stable pipeline stage names, not old release numbers.
-2. Use a visible stage number/order, e.g. "Stage 5 — Bundle refinement".
-3. Bottom action buttons should explicitly say "Next: Stage 6 — Build dense stereo pair".
-4. Historical version information may remain as small secondary text only, e.g. "Introduced in v0.6; current app v0.8.4".
-5. Test-guide instructions must quote the exact visible button text and card/stage name so the tester knows exactly where to tap.
-6. Avoid referring to actions only by version number.
+## Local mesher validation
 
-Next geometry milestone remains surface/triangle mesh reconstruction, with the UI naming cleanup to be included before or with that build.
+The pure-Kotlin Stage 7 mesher was run against the uploaded v0.8.4 fused clouds:
+- test4: 40,922 input points -> **5,795 mesh vertices / 30,000 triangles**.
+- test3: 41,017 input points -> **2,840 mesh vertices / 28,555 triangles**.
+- synthetic curved 25×25 grid: 625 vertices -> **2,304 triangles**.
+
+The project-level Gradle build could not run here because this environment cannot resolve the Gradle distribution host. Android Studio remains the authoritative compile/install test.
+
+## Exact next device test
+
+1. Build/install v0.9.0.
+2. Open **test4**.
+3. Find **Stage 6 — Dense Fusion**.
+4. Tap **Next: Stage 7 — Build surface mesh**.
+5. On **Stage 7 — Surface Mesh**, tap **View Stage 7 mesh** and inspect all six views.
+6. Export **Stage 7 mesh report**, **mesh OBJ**, and **triangle PLY**.
+7. Leave/reopen test4 and confirm Stage 7 persists.
+8. Repeat Stage 7 on test3.
+9. Export the v0.9.0 version-test report and upload it with both Stage 7 mesh reports.
+
+## External camera roadmap note
+
+USB UVC still capture remains planned as a separate camera-source feature. The intended workflow is direct still capture into the current scan project, not mandatory video-frame extraction.
