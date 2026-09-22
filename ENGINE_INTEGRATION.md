@@ -223,3 +223,31 @@ Pipeline:
 8. Persist/export pair-level FUSED/SKIPPED diagnostics and the fused PLY.
 
 This remains arbitrary-scale and still assumes zero lens distortion. The next major stage after validation is surface/mesh reconstruction, while calibration and broader dense-pair coverage remain follow-up quality improvements.
+
+
+## v0.8.1 capture/orientation integration
+
+v0.8.1 keeps the established reconstruction sequence and adds a capture-quality layer plus one fusion-gating correction.
+
+Capture:
+- Single still.
+- Rapid Hold: capture while the shutter is held.
+- Rapid Start/Stop: tap once to run automatically and tap again to stop.
+- Target intervals from 5 stills/sec through one still every 5 seconds.
+- Optional 3-second delayed start for mounted/rotating-camera use.
+- Full-resolution CameraX stills are serialized: each save callback completes before the next request, so unsupported requested rates fall back to the fastest safe device rate instead of creating a request backlog.
+- Project refresh/analyze runs once at the end of a Rapid sequence.
+
+Orientation:
+- All OpenCV stages now decode through one EXIF-aware bitmap loader.
+- EXIF rotation and mirror values are normalized before ORB matching, sparse/multi-view geometry, bundle refinement, dense stereo, and dense fusion.
+- Project thumbnails use the same normalized loader.
+- The exported version test report audits the EXIF orientation value of every selected-project photo.
+
+Fusion gate:
+- A non-empty corrected dense seed is sufficient to expose/run multi-pair fusion.
+- The fusion engine already performs independent pair-level quality rejection, so the old 1,000-point single-pair readiness threshold must not block the entire multi-pair stage.
+- This specifically allows the 713-point test3 seed to continue into v0.8 fusion evaluation.
+
+Tooling recovery:
+The interrupted v0.8.1 session stalled during a tooling check because this runtime has Java and a standalone Kotlin compiler but no system Gradle and no gradle-wrapper.jar in the project. The wrapper bootstraps that JAR from raw.githubusercontent.com, which this runtime cannot resolve. Wrapper bootstrap commands now use short timeouts so that limitation fails immediately instead of looking hung.
