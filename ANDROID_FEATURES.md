@@ -204,3 +204,20 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - Allow optional tester notes on Works as well as Problems.
 - Export recent Rapid measurements in the version test report.
 - Surface/mesh reconstruction remains the next geometry milestone after v0.8.2 device validation.
+
+
+- 2026-09-22 — v0.8.2 user test: 8 Works, 1 Problem. Rapid Hold now works; measured full-resolution throughput on the Galaxy S22 Ultra is about 1.5–1.7 photos/sec at the fastest targets, while 1/sec hits target. EXIF normalization handled a mixed-orientation 175-photo test4 set. The full 3-axis viewer worked but its controls were too crowded. test3 remained healthy and reached 41,017 fused dense points.
+- 2026-09-22 — test4 contained 175 photos with 174/174 adjacent pairs usable/strong. It completed sparse reconstruction (1,096 points), largest-component multi-view (100 connected cameras / 36,702 points), and bundle refinement (12.3533 px -> 2.2892 px RMS), but tapping the corrected dense-pair stage produced no saved dense report. The global best sparse pair was photos 54-55, immediately before the selected multi-view component beginning at camera 57.
+
+## v0.8.3 — dense-seed recovery + full-screen point-cloud viewer
+
+- DONE — Dense seed selection now prefers verified pairs inside the connected multi-view component.
+- DONE — Up to six verified dense-pair candidates are attempted automatically if a pair fails.
+- DONE — The original global sparse pair is only prioritized when it belongs to the selected connected component; otherwise connected candidates come first.
+- DONE — Fallback pairs do not reuse unrelated sparse-depth guidance from another pair.
+- DONE — Dense-attempt diagnostics persist separately from the dense report, including final failure details when no dense cloud is created.
+- DONE — Dense progress/failure feedback appears next to the dense-build button.
+- DONE — Point clouds now open in a full-screen viewer with fixed Front/Back/Left/Right/Top/Bottom buttons, gestures, zoom, and optional sliders.
+- DONE — Preset controls no longer require horizontal scrolling and no longer push the cloud off-screen by default.
+- DONE — v0.8.3 test guide specifically retests test4 dense recovery/fusion and exports the dense-attempt log.
+- NEXT — Surface/triangle mesh reconstruction after this recovery build passes device testing.
