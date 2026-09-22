@@ -241,3 +241,13 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - DONE — v0.8.4-specific in-app test guide covers test4 preflight, test4 readiness, test3 regression, and precise diagnostics.
 - TEST — Android Studio compile/install and device regression.
 - NEXT — surface/triangle mesh reconstruction after v0.8.4 regression passes.
+
+
+## Post-v0.8.4 UI clarity rule
+
+- DONE — v0.8.4 fusion preflight passed device testing. test4 improved to 40,922 fused points; test3 remained 41,017 points.
+- TODO — Replace historical release-number card titles as the primary navigation labels.
+- TODO — Number the reconstruction pipeline cards/stages in execution order.
+- TODO — Make every primary action button identify the next stage explicitly.
+- TODO — Keep old milestone version labels only as secondary/history text.
+- TODO — Version-test instructions must quote exact on-screen card and button labels.
