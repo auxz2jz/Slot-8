@@ -4,12 +4,13 @@
 
 - Version: **v0.8.4**
 - Android versionCode: **18**
-- Package: `PhotogrammetryStudioAndroid-v0.8.4-fusion-preflight.zip`
-- Package SHA-256: `1fac6fdb2cffc1cc43f644b5617964af80619f30c1e41245daaf818ccd835996`
-- Source manifest SHA-256: `0d47ea33aaaad6f384dce402712bbc726b6fe48af431c9e2543a96805c968927`
-- v0.8.3 -> v0.8.4 code patch SHA-256: `5f56002eaace4578f5d1fc7b03d1fc1b3c3d5780442a8b495a0bdc05e879dacb`
+- Package: `PhotogrammetryStudioAndroid-v0.8.4-Android-Studio-Ready.zip`
+- Package SHA-256: `e9c1b5ce1fecbcccd41e698084b95eb2ca3cabf0bbcb6753782d2b0339345a2e`
 - Canonical repository: `auxz2jz/Slot-8`, branch `main`
-- Build status: **Android Studio-ready source package prepared; device compile/test pending**
+- Packaging status: **corrected Android Studio-ready ZIP verified**
+- Includes: `settings.gradle.kts`, root/app Gradle files, `gradlew`, `gradlew.bat`, `gradle-wrapper.properties`, and included `gradle-wrapper.jar`
+- ZIP integrity test: **passed**
+- Device compile/test: **pending**
 
 ## Last confirmed device results
 
@@ -52,3 +53,16 @@ This recovery environment has Java and Kotlin but no Android SDK, no system Grad
 ## GitHub checkpoint rule
 
 Keep GitHub current after meaningful code/version changes, before and after long device tests, when a root cause is identified, before packaging a replacement build, and whenever a chat approaches its context limit.
+
+
+## Packaging correction — 2026-09-22
+
+The first v0.8.4 ZIP was labeled Android Studio-ready while omitting `gradle/wrapper/gradle-wrapper.jar` and relying on a bootstrap download. That package has been superseded.
+
+Use only:
+`PhotogrammetryStudioAndroid-v0.8.4-Android-Studio-Ready.zip`
+
+SHA-256:
+`e9c1b5ce1fecbcccd41e698084b95eb2ca3cabf0bbcb6753782d2b0339345a2e`
+
+The replacement includes the wrapper JAR and all required project files. No patch file or manual source copying is required.
