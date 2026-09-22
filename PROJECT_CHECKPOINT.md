@@ -73,3 +73,59 @@ The project-level Gradle build could not run here because this environment canno
 ## External camera roadmap note
 
 USB UVC still capture remains planned as a separate camera-source feature. The intended workflow is direct still capture into the current scan project, not mandatory video-frame extraction.
+
+
+## v0.9.0 device test — PASSED
+
+User completed v0.9.0 on Samsung SM-S908U1 / Android 16.
+
+Version guide:
+- **7 Works**
+- **0 Problems**
+- **0 Untested**
+
+test4 Stage 7:
+- source fused points: 40,922
+- mesh vertices: 5,795
+- triangles: 30,000 (hit safety cap)
+- robustly trimmed: 146 extreme points
+- readyForExport=true
+
+test3 Stage 7:
+- source fused points: 41,017
+- mesh vertices: 2,840
+- triangles: 28,555
+- robustly trimmed: 933 extreme points
+- readyForExport=true
+
+All viewer, export, persistence, and stage-label tests passed.
+
+### Topology inspection of exported v0.9.0 meshes
+
+Independent inspection of the uploaded PLY face connectivity found that v0.9.0 succeeded as a triangle-generation proof of concept but is not yet a production-quality manifold mesh.
+
+test4:
+- 30,000 faces, no invalid indices, no duplicate faces
+- 3,070 mesh vertices are unused by any face
+- 11,137 undirected edges have more than two incident faces
+- 7,182 boundary edges
+- several disconnected surface components
+
+test3:
+- 28,555 faces, no invalid indices, no duplicate faces
+- 107 unused vertices
+- 11,600 undirected edges have more than two incident faces
+- 5,492 boundary edges
+- several disconnected surface components
+
+This is consistent with the v0.9.0 local-neighbor combinatorial surface strategy: it deliberately proved that the phone could create/export triangles, but many overlapping local triangles can share the same edge.
+
+## Next build — v0.9.1 topology cleanup
+
+1. Generate a more ordered local fan around each mesh vertex rather than accepting every neighbor pair combination.
+2. Enforce at most two faces per undirected edge.
+3. Compact/remove vertices unused by any accepted face.
+4. Remove only tiny disconnected fragments while preserving meaningful larger surface sections.
+5. Add topology diagnostics to the Stage 7 report: used vertices, boundary edges, non-manifold edges, component counts, and rejected cleanup faces.
+6. Keep Stage 1–7 UI wording unchanged.
+7. Retest test4 and test3 before beginning texture projection.
