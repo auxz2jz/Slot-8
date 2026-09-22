@@ -344,3 +344,14 @@ v0.9.1 therefore focuses on topology rather than adding texture prematurely:
 6. Persist topology statistics so the device report can prove whether the cleanup worked.
 
 This remains an experimental mobile surface stage; watertight Poisson-style reconstruction is not claimed.
+
+
+## v0.9.1 prepared result
+
+The actual Kotlin v0.9.1 mesher was compiled independently and run against the user's real uploaded Stage 6 fused PLY clouds before packaging.
+
+Results:
+- test4: 40,922 source points -> 5,172 compact used vertices / 12,872 faces / 7,982 boundary edges / 0 non-manifold edges / 11 retained components.
+- test3: 41,017 source points -> 2,144 compact used vertices / 4,938 faces / 3,364 boundary edges / 0 non-manifold edges / 34 retained components.
+
+The reduction in face count from v0.9.0 is intentional: overlapping faces are rejected rather than counted as extra surface detail. Boundary edges remain and will guide the next hole/open-border cleanup decision after device validation.
