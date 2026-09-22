@@ -150,3 +150,33 @@ Validated Kotlin topology result:
 - test3: 2,144 vertices / 4,938 faces / 3,364 boundary edges / **0 non-manifold edges** / 34 retained components.
 
 Next device test: rebuild Stage 7 on test4 and test3, verify Non-manifold edges = 0, inspect viewer, export both Stage 7 reports/OBJ/PLY, verify persistence, then export the v0.9.1 version-test report.
+
+
+## v0.9.1 device test / UI state issue — 2026-09-22
+
+The v0.9.1 version test report shows:
+- Samsung SM-S908U1 / Android 16
+- **7 Works / 0 Problems / 0 Untested**
+- test4 Stage 7: 5,172 vertices / 12,872 triangles / 7,982 boundary edges / **0 non-manifold edges** / 11 retained components / readyForExport=true
+- test3 Stage 7: 2,144 vertices / 4,938 triangles / 3,364 boundary edges / **0 non-manifold edges** / 34 retained components / readyForExport=true
+
+User found a reconstruction-state UI bug while intentionally rerunning test4/test3 from Stage 1:
+- Stage 7 remains visible immediately after Quick check and Stage 1 rerun.
+- It disappears only when Stage 6 begins, then reappears after Stage 7 is rebuilt.
+
+Root cause confirmed in v0.9.1 source:
+- `matchSelectedPhotos()`, `startReconstruction()`, `startMultiViewReconstruction()`, and `startBundleAdjustment()` clear saved downstream results through repository cascade, but do not set `_surfaceMeshReport.value = null`.
+- `startDenseFusion()` does set `_surfaceMeshReport.value = null`, which explains why the stale Stage 7 card disappears when Stage 6 begins.
+- There is currently no reconstruction-pipeline reset action; existing Reset controls only reset viewer orientation.
+
+### Required next UI/state fix
+
+1. Centralize downstream invalidation so rerunning any earlier stage immediately clears all later in-memory cards as well as persisted files.
+2. Add a visible **Reset reconstruction stages** action for the current project.
+3. Reset must preserve the project's photos and project metadata.
+4. Reset must clear Stage 1–7 saved reports/models and return the reconstruction UI to the starting state.
+5. Use a confirmation dialog explaining that photos are kept but all generated reconstruction results are removed.
+6. Optionally add a safer per-stage “Rebuild from here” behavior by automatically invalidating only later stages when an earlier stage is rerun.
+7. Add this exact behavior to the next version test guide.
+
+Additional test4 artifacts are still being uploaded; defer final next-geometry decision until the set is complete.
