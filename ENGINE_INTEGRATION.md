@@ -310,3 +310,22 @@ v0.8.4 adds preflight before distributed pair selection:
 7. Use exact defensive diagnostics for missing camera index, first/second image, refined center, or recovered world pose.
 
 The dense-stereo math, pair reconstruction math, world transform, robust global trimming, voxel downsampling, and readiness thresholds remain unchanged. This is a candidate-selection/diagnostic maintenance release before surface meshing.
+
+
+## v0.9.0 Stage 7 local-neighbor surface milestone
+
+The validated Stage 6 fused dense cloud is now input to the first on-device surface stage. This is deliberately a conservative mobile validation algorithm rather than a claim of final Poisson/ball-pivoting quality.
+
+Pipeline:
+1. Reject non-finite fused points.
+2. Use robust 1st/99th percentile coordinate bounds and trim isolated extremes with padding.
+3. Voxel-average the cloud, increasing voxel size only as needed to stay mobile-friendly.
+4. Build a 3D spatial hash for local-neighbor queries.
+5. Estimate local point spacing from nearest neighbors.
+6. Form triangle candidates only when all three edges satisfy adaptive local/global limits.
+7. Reject highly stretched and nearly degenerate triangles.
+8. Orient accepted faces approximately outward relative to the cloud centroid.
+9. Cap the first mobile mesh at 30,000 faces.
+10. Persist and export OBJ plus triangle PLY.
+
+The first viewer is wireframe so connectivity can be inspected without requiring normals/materials. Later mesh work can add stronger surface reconstruction, normal estimation/orientation, smoothing, hole filling, component filtering, and texture projection.
