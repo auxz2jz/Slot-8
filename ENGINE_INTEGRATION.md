@@ -329,3 +329,18 @@ Pipeline:
 10. Persist and export OBJ plus triangle PLY.
 
 The first viewer is wireframe so connectivity can be inspected without requiring normals/materials. Later mesh work can add stronger surface reconstruction, normal estimation/orientation, smoothing, hole filling, component filtering, and texture projection.
+
+
+## v0.9.0 topology findings
+
+Device validation confirmed that the first local-neighbor Stage 7 mesher can build, persist, preview, and export triangle surfaces on-device. The exported face lists are syntactically valid, but independent topology inspection exposed the expected limitation of the combinatorial neighbor-pair strategy: many local triangles overlap, so an undirected edge can accumulate more than two incident faces.
+
+v0.9.1 therefore focuses on topology rather than adding texture prematurely:
+1. Build an approximate local tangent orientation and angularly ordered neighbor fan for each vertex.
+2. Propose primarily adjacent fan triangles instead of all neighbor-pair combinations.
+3. Greedily enforce a two-face maximum per undirected edge.
+4. Compact unused vertices after face cleanup.
+5. Drop only very small disconnected triangle fragments.
+6. Persist topology statistics so the device report can prove whether the cleanup worked.
+
+This remains an experimental mobile surface stage; watertight Poisson-style reconstruction is not claimed.
