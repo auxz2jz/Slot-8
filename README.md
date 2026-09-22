@@ -12,17 +12,24 @@ The app is intended to be a self-contained Android application written in Kotlin
 
 ## Main project documents
 
+- `PROJECT_CHECKPOINT.md` — current recovery-safe project state, last test results, current build, and exact next step.
+- `SOURCE_MANIFEST_v0.8.3.sha256` — SHA-256 integrity manifest for the recovered v0.8.3 Android source snapshot.
 - `PROJECT_NOTES.md` — overall architecture and decisions.
-- `ANDROID_FEATURES.md` — DONE / PARTIAL / TODO roadmap.
+- `ANDROID_FEATURES.md` — DONE / PARTIAL / TODO roadmap and test history.
 - `HARDWARE.md` — camera, turntable, laser, ESP32/Arduino, and motion-control plan.
 - `ENGINE_INTEGRATION.md` — photogrammetry and mesh-engine integration plan.
 
 ## Current state
 
-A first Android Studio-ready Kotlin/Jetpack Compose prototype (v0.1) has been created outside this repository for testing. It contains project creation, CameraX capture, photo import/storage, gallery/review, basic photo-set checks, and a reconstruction-engine interface. Actual 3D reconstruction is not yet wired in.
+The current Android source baseline is **v0.8.3 / versionCode 17**. A complete Android Studio project was recovered from:
 
-The next step is to test that v0.1 build on-device, fix any build/runtime issues, and then begin integrating the scan architecture described here.
+`PhotogrammetryStudioAndroid-v0.8.3-dense-recovery-fullscreen-viewer.zip`
 
+Archive SHA-256:
+
+`0dd2ec35195a214018c3c1695dd35e7a6bad7089a4d7b3f06fe8064c9d42e47f`
+
+The recovered snapshot contains 41 files / 393,404 bytes. See `PROJECT_CHECKPOINT.md` for the exact test state and `SOURCE_MANIFEST_v0.8.3.sha256` for per-file hashes.
 
 ## v0.8.3 dense-seed recovery
 
@@ -30,4 +37,8 @@ v0.8.3 is a stabilization build after a 175-photo project completed matching, sp
 
 The point-cloud viewer is also now full-screen with yaw/pitch/roll gestures, pinch zoom, fixed orthogonal-view buttons, and optional sliders.
 
-Surface/mesh reconstruction remains the next geometry milestone after this recovery build passes device testing.
+**Current next step:** build/install v0.8.3, run the built-in v0.8.3 test guide, and retest `test4` through dense stereo and fusion. Surface/triangle mesh reconstruction is the next geometry milestone after this recovery build passes device testing.
+
+## Recovery/checkpoint policy
+
+GitHub should be updated during development, not only at the end of a long chat. Create or refresh a checkpoint after meaningful code/version changes, before and after long device tests, when a bug/root cause is identified, before packaging a new build, and whenever a chat is approaching its context limit.
