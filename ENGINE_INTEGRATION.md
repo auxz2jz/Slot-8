@@ -206,3 +206,20 @@ v0.7.1 stays on the same dense-stereo path and makes the search data-driven:
 6. Use robust 95th-percentile preview scaling instead of the single most extreme point.
 
 This is a correction to the one-pair dense milestone, not a new branch. After validation, continue with multi-pair dense fusion.
+
+
+## v0.8.0 multi-pair dense fusion
+
+v0.7/v0.7.1 proved the dense stereo stage on one verified pair. v0.8 combines several connected viewpoints while protecting the shared cloud from weak pair geometry.
+
+Pipeline:
+1. Read the largest connected multi-view component and v0.6 refined camera centers.
+2. Recompute adjacent relative rotations across that component.
+3. Select a distributed subset of verified connected pairs for the first mobile fusion pass.
+4. Run adaptive StereoSGBM per selected pair.
+5. Reject extremely low-parallax pairs and pair clouds with too few verified-band dense samples.
+6. Undo left-image rectification, scale local pair geometry to the refined adjacent baseline, and transform it into the shared world coordinate frame.
+7. Robustly trim global outliers, voxel-downsample, and cap the exported fused point cloud.
+8. Persist/export pair-level FUSED/SKIPPED diagnostics and the fused PLY.
+
+This remains arbitrary-scale and still assumes zero lens distortion. The next major stage after validation is surface/mesh reconstruction, while calibration and broader dense-pair coverage remain follow-up quality improvements.
