@@ -66,3 +66,47 @@ SHA-256:
 `e9c1b5ce1fecbcccd41e698084b95eb2ca3cabf0bbcb6753782d2b0339345a2e`
 
 The replacement includes the wrapper JAR and all required project files. No patch file or manual source copying is required.
+
+
+## v0.8.4 device test — PASSED
+
+User tested v0.8.4 on Samsung SM-S908U1 / Android 16.
+
+Version guide result:
+- 6 Works
+- 0 Problems
+- 0 Untested
+
+test3 regression:
+- 95 photos
+- 41 connected cameras
+- 40 eligible dense-pair candidates
+- 6 selected / 6 fused
+- 41,017 fused points
+- readyForSurfaceReconstruction=true
+
+test4:
+- 175 photos
+- 100 connected cameras
+- 71 eligible dense-pair candidates
+- 27 connected candidates filtered by preflight before selection
+- 6 selected distributed pairs
+- 4 fused, 2 rejected for insufficient verified-band dense geometry
+- 40,922 fused points
+- readyForSurfaceReconstruction=true
+
+This confirms the v0.8.4 preflight fix worked and did not regress test3.
+
+### UI naming rule requested after v0.8.4
+
+The user reported confusion because cards retain historical milestone titles such as "v0.6 shared-track bundle refinement" while action buttons refer to the current app version such as "Build connected dense stereo pair (v0.8.4)".
+
+Starting with the next UI cleanup:
+1. Primary card headings should use stable pipeline stage names, not old release numbers.
+2. Use a visible stage number/order, e.g. "Stage 5 — Bundle refinement".
+3. Bottom action buttons should explicitly say "Next: Stage 6 — Build dense stereo pair".
+4. Historical version information may remain as small secondary text only, e.g. "Introduced in v0.6; current app v0.8.4".
+5. Test-guide instructions must quote the exact visible button text and card/stage name so the tester knows exactly where to tap.
+6. Avoid referring to actions only by version number.
+
+Next geometry milestone remains surface/triangle mesh reconstruction, with the UI naming cleanup to be included before or with that build.
