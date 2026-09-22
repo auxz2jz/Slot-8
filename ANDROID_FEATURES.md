@@ -308,3 +308,17 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - VALIDATED — test4 fused cloud -> 5,172 vertices / 12,872 faces / 0 non-manifold edges.
 - VALIDATED — test3 fused cloud -> 2,144 vertices / 4,938 faces / 0 non-manifold edges.
 - TEST — Android Studio/device v0.9.1 guide.
+
+
+## Post-v0.9.1 pipeline reset/state consistency
+
+- PASSED — v0.9.1 guide currently reports 7 Works / 0 Problems / 0 Untested.
+- FOUND — stale Stage 7 card can remain visible after rerunning Stage 1 because downstream files are cleared but the in-memory surface-mesh state is not nulled until Stage 6 starts.
+- ROOT CAUSE — upstream stage functions clear persisted downstream results through repository cascading but do not consistently clear `_surfaceMeshReport`.
+- TODO — central downstream-invalidation helper used by every stage.
+- TODO — immediately hide invalidated downstream cards when rebuilding an earlier stage.
+- TODO — add **Reset reconstruction stages** to the project screen.
+- TODO — reset keeps all captured/imported photos and project metadata.
+- TODO — reset clears generated Stage 1–7 reports/clouds/meshes only.
+- TODO — confirmation dialog before reset.
+- TODO — add reset/rebuild-state coverage to the next in-app test guide.
