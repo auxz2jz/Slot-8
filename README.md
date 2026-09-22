@@ -63,3 +63,15 @@ See `TEST_RESULTS_v0.8.3.md` for the previous device-test evidence and `PROJECT_
 ## Recovery/checkpoint policy
 
 GitHub is updated during development, not only at the end of a long chat. Refresh the checkpoint after meaningful code/version changes, before and after long device tests, when a bug/root cause is identified, before packaging a new build, and whenever a chat is approaching its context limit.
+
+
+## v0.9.0 — Stage 7 surface mesh
+
+v0.8.4 passed device testing: test4 improved to 40,922 fused points while test3 stayed at 41,017. v0.9.0 is the first surface/triangle-mesh milestone.
+
+The reconstruction UI now uses stable Stage 1–7 names, and continuation buttons explicitly name the next stage. Stage 7 performs robust outlier trimming, adaptive voxel reduction, spatial-hash neighborhood lookup, and conservative local triangle generation. It persists the mesh, provides a full-screen wireframe viewer, and exports a report, OBJ, and triangle PLY.
+
+Current test package: `PhotogrammetryStudioAndroid-v0.9.0-Stage7-Surface-Mesh-Android-Studio-Ready.zip`.
+SHA-256: `9d70424152884746fe693d49bcdde286e8230f9a7f75f597e88f521edccbe174`.
+
+See `PROJECT_CHECKPOINT.md` for the exact device-test sequence.
