@@ -129,3 +129,24 @@ This is consistent with the v0.9.0 local-neighbor combinatorial surface strategy
 5. Add topology diagnostics to the Stage 7 report: used vertices, boundary edges, non-manifold edges, component counts, and rejected cleanup faces.
 6. Keep Stage 1–7 UI wording unchanged.
 7. Retest test4 and test3 before beginning texture projection.
+
+
+## v0.9.1 build prepared
+
+- Version: **0.9.1**
+- versionCode: **20**
+- Package: `PhotogrammetryStudioAndroid-v0.9.1-Stage7-Topology-Cleanup-Android-Studio-Ready.zip`
+- Package SHA-256: `a52e4fbdf42f6ef022f609a462c0d595ee686bb414474b1a5e5fc72008d9df83`
+- Source-manifest SHA-256: `d14b74ba1a815221818daf45ece5a7e2334301527407354cc7e423f7d56b1ea5`
+- v0.9.0 -> v0.9.1 patch SHA-256: `54d67a8529dd80bc7438dde9d5739ded7b8f9e5cd8b681d382c9a8bd1f4b36c3`
+- ZIP integrity test: passed
+- Included Gradle wrapper JAR: yes
+- Pure Kotlin mesher compile: passed
+- Kotlin validation on uploaded test4/test3 fused clouds: passed
+- Android Studio/device compile/install: pending
+
+Validated Kotlin topology result:
+- test4: 5,172 vertices / 12,872 faces / 7,982 boundary edges / **0 non-manifold edges** / 11 retained components.
+- test3: 2,144 vertices / 4,938 faces / 3,364 boundary edges / **0 non-manifold edges** / 34 retained components.
+
+Next device test: rebuild Stage 7 on test4 and test3, verify Non-manifold edges = 0, inspect viewer, export both Stage 7 reports/OBJ/PLY, verify persistence, then export the v0.9.1 version-test report.
