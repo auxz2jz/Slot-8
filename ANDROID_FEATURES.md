@@ -189,3 +189,18 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - 2026-09-21 — v0.8.0 was exercised on the new test3 set with 95 photos. Feature matching was very strong (93/94 adjacent pairs usable/strong), sparse reconstruction produced 1,291 points on the best pair, the largest multi-view component connected 41/95 cameras with 19,400 combined points, and bundle refinement improved RMS from 8.6746 px to 2.2359 px. The corrected single-pair dense seed produced 713 points and therefore reported readyForDenseFusion=false under the old 1,000-point seed threshold. Because the v0.8 UI/ViewModel gated fusion on that flag, multi-pair fusion never got a chance to evaluate the remaining connected stereo pairs.
 - 2026-09-21 — v0.8.1 recovered after interrupted tooling check. Adds Single / Rapid Hold / Rapid Start-Stop capture, target intervals 5/sec, 2/sec, 1/sec, every 2 sec, every 5 sec, optional 3-second delayed start for mounted/rotating rigs, serialized full-resolution ImageCapture requests, one project refresh after each Rapid sequence, EXIF orientation/mirror normalization across all OpenCV reconstruction stages and thumbnails, full EXIF orientation audit in the version test report, portrait/landscape-safe photo-size checks, and removal of the old 1,000-point single-pair fusion gate. test3's non-empty 713-point dense seed can now launch fusion so the fusion engine can judge connected pairs itself.
 - 2026-09-21 — Recovery root cause for the earlier hour-long “Checking available Kotlin and Gradle tooling” stall: the project has no bundled gradle-wrapper.jar and this runtime has no system Gradle. The custom wrapper tries to bootstrap the JAR from raw.githubusercontent.com, but this runtime cannot resolve that host. v0.8.1 changes the bootstrap scripts to fail fast with short network timeouts instead of appearing hung. Android Studio remains the actual compile/sync check.
+
+
+- 2026-09-22 — v0.8.1 user testing: version guide reported 6 Works / 3 Problems. Reconstruction/fusion itself succeeded. test3 reached 41 connected cameras and fused 6 dense pair clouds into 40,836 points. test4 used 20 photos, connected 14 cameras, improved bundle RMS from 9.3233 px to 1.8803 px, produced 29,264 single-pair dense points, and fused 6 pair clouds into 59,801 points. Multi-pair dense fusion is therefore functionally validated for this milestone.
+- 2026-09-22 — v0.8.1 issues found: Hold Rapid stopped after one photo; 5/sec full-resolution capture only sustained about 1–2/sec on-device; rotating the phone while the camera screen was open recreated navigation and returned the user to the main/project screen and reopened the guide. User also requested full yaw/pitch/roll inspection instead of a one-axis point-cloud orbit, and optional notes on successful test steps.
+
+## v0.8.2 — Rapid reliability + 3-axis cloud inspection
+
+- Fix Hold Rapid by keeping the press pointer coroutine alive while rapidActive changes.
+- Record requested interval, saved count, elapsed time, actual photos/sec, average full-resolution save latency, and stop reason for recent Rapid runs.
+- Treat fast Rapid choices as target rates; hardware-limited actual rates are diagnostics, not automatic failures.
+- Preserve current app screen/test-guide state and capture style/interval/countdown across configuration recreation.
+- Upgrade the shared point-cloud viewer to yaw/pitch/roll, pinch zoom, two-finger roll, sliders, Reset, and Front/Back/Left/Right/Top/Bottom presets.
+- Allow optional tester notes on Works as well as Problems.
+- Export recent Rapid measurements in the version test report.
+- Surface/mesh reconstruction remains the next geometry milestone after v0.8.2 device validation.
