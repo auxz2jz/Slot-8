@@ -52,11 +52,13 @@ The earlier v0.8.2 failure where corrected dense stereo produced no saved report
 
 ## Current next step
 
-A small fusion-candidate robustness issue was discovered in test4: two of six distributed candidates were selected despite lacking a completed world pose in the fusion engine's separately rebuilt rotation chain. They were reported with the overly broad message `Missing refined pose or image file.`
+**v0.8.4 / versionCode 18 is prepared for device testing.** It keeps the successful v0.8.3 dense recovery and adds a fusion-candidate preflight so only pairs with both images, both refined camera centers, and a recovered shared-world pose are eligible for distributed dense fusion.
 
-The next maintenance build should filter distributed fusion candidates for actual world-transform availability and improve the failure diagnostics. After that regression pass, continue to **surface / triangle mesh reconstruction**.
+The package is `PhotogrammetryStudioAndroid-v0.8.4-fusion-preflight.zip` with SHA-256 `1fac6fdb2cffc1cc43f644b5617964af80619f30c1e41245daaf818ccd835996`.
 
-See `TEST_RESULTS_v0.8.3.md` for the detailed evidence.
+This environment does not contain an Android SDK or usable local Gradle wrapper JAR, so the source package has not been APK-compiled here. The next step is Android Studio build/install followed by the built-in v0.8.4 regression guide. After that passes, continue to **surface / triangle mesh reconstruction**.
+
+See `TEST_RESULTS_v0.8.3.md` for the previous device-test evidence and `PROJECT_CHECKPOINT.md` for the exact v0.8.4 test sequence.
 
 ## Recovery/checkpoint policy
 
