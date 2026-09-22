@@ -278,3 +278,18 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - TODO — Android USB UVC enumeration/permission.
 - TODO — Direct still capture from supported UVC cameras into the active project.
 - TODO — Manual focus/exposure/resolution controls where supported.
+
+
+## v0.9.0 device result / v0.9.1 topology target
+
+- PASSED — v0.9.0 guide: 7 Works / 0 Problems / 0 Untested.
+- PASSED — test4 Stage 7 persisted/exported 5,795 vertices / 30,000 triangles.
+- PASSED — test3 Stage 7 persisted/exported 2,840 vertices / 28,555 triangles.
+- FOUND — v0.9.0 local neighbor combinations create many non-manifold edges because multiple overlapping triangles can reuse the same undirected edge.
+- FOUND — test4 exported many downsampled vertices that were never referenced by an accepted face.
+- TODO v0.9.1 — ordered local triangle fans.
+- TODO v0.9.1 — enforce edge face-count <= 2.
+- TODO v0.9.1 — compact unused vertices after cleanup.
+- TODO v0.9.1 — filter tiny disconnected fragments without forcing one single component.
+- TODO v0.9.1 — export topology counts in Stage 7 report.
+- NEXT after cleanup validation — normals/smoothing/hole strategy, then texture projection.
