@@ -8,39 +8,53 @@
 - Archive SHA-256: `0dd2ec35195a214018c3c1695dd35e7a6bad7089a4d7b3f06fe8064c9d42e47f`
 - Extracted source snapshot: **41 files / 393,404 bytes**
 - Canonical repository: `auxz2jz/Slot-8`, branch `main`
+- Device-test status: **PASSED recovery objective**
+- v0.8.3 guide: **6 Works / 0 Problems / 0 Untested**
 
-## Last confirmed device state before v0.8.3
+## v0.8.3 confirmed results
 
-The v0.8.2 device test recorded **8 Works / 1 Problem**. Rapid Hold was fixed, mixed EXIF orientations were normalized successfully, and the 3-axis point-cloud viewer worked but was too crowded. `test3` rebuilt successfully and produced a healthy fused dense cloud.
+### test3 regression
 
-For `test4`:
+- 95 photos
+- 41 connected cameras
+- Bundle RMS: 10.1079 px -> 1.7285 px
+- Dense pair: 30,000 points
+- Fusion: 6/6 selected pairs fused
+- Fused cloud: **41,017 points**
+- readyForSurfaceReconstruction=true
+
+### test4 large-project recovery
+
 - 175 photos
 - 174/174 adjacent pairs usable/strong
 - sparse reconstruction: 1,096 points
 - largest connected component: 100 cameras / 36,702 points
 - bundle RMS: 12.3533 px -> 2.2892 px
-- failure: corrected dense stereo produced no saved dense report
-- root-cause clue: global best sparse pair was cameras/photos 54->55, while the selected refined connected component began at camera 57
+- v0.8.3 correctly selected a dense seed inside the refined connected component instead of the global sparse-best pair outside it
+- corrected dense pair: **30,000 points**
+- dense valid disparity pixels: 143,648
+- fusion: 3 of 6 distributed pairs accepted
+- fused cloud: **14,191 points**
+- readyForSurfaceReconstruction=true
 
-## v0.8.3 recovery build
+The v0.8.2 no-dense-output blocker is fixed.
 
-v0.8.3 is the current source baseline and is **awaiting device validation**. It adds:
+See `TEST_RESULTS_v0.8.3.md` for full analysis and `TEST_OUTPUT_MANIFEST_v0.8.3.sha256` for the exact uploaded-output hashes.
 
-1. Dense-seed selection from verified pairs inside the selected connected component.
-2. Automatic fallback across up to six verified candidate pairs.
-3. No reuse of sparse-radius guidance when the fallback pair belongs to a different baseline.
-4. Persistent dense-attempt start/progress/success/failure diagnostics even when no dense report is created.
-5. Dense progress/failure feedback in the project UI.
-6. Full-screen point-cloud viewer with Front/Back/Left/Right/Top/Bottom presets, yaw/pitch/roll gestures, pinch zoom, and optional sliders.
-7. A v0.8.3 test guide focused on `test4` dense recovery and fusion.
+## Remaining issue
 
-## Next milestone
+test4 fusion rejected 3 of its 6 selected distributed pairs. One was a legitimate low-dense-support rejection. Two were reported as `Missing refined pose or image file.`
 
-1. Build/install v0.8.3 in Android Studio.
-2. Run the v0.8.3 in-app test guide.
-3. Re-run `test4` through corrected dense stereo and multi-pair fusion.
-4. Export the version-test diagnostics and dense-attempt log.
-5. If recovery passes, proceed to **surface/triangle mesh reconstruction**.
+Those two pairs are present inside the refined 100-camera component. Source inspection shows the fusion candidate selector can choose a pair whose own relative pose exists while its first camera lacks a completed world pose because an earlier link failed during the separately rebuilt rotation chain.
+
+### Next maintenance target
+
+- Filter fusion candidates for actual world-transform availability before distributed selection.
+- Require image files + refined centers + completed first-camera world pose.
+- Replace the generic missing-file/pose message with exact reason diagnostics.
+- Retest test3/test4 fusion.
+
+After that maintenance pass, proceed to **surface/triangle mesh reconstruction**.
 
 ## GitHub checkpoint rule
 
