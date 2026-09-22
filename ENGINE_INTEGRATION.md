@@ -191,3 +191,18 @@ Pipeline:
 The pair translation magnitude remains arbitrary, so the dense cloud is not metric yet. This first milestone also assumes zero lens distortion during rectification. Camera calibration, full intrinsic/rotation refinement, and multi-pair dense fusion come later.
 
 The v0.7 version-test report now includes current ReconstructionStatus (state/progress/message) so failures that occur before a stage report is created are still captured automatically.
+
+
+## v0.7.1 adaptive dense correction
+
+The first dense-pair run passed functionally but exposed a stretched/cone-like preview. The v0.7 report used a generic disparity interval; that interval can miss the disparity band occupied by the verified target and favor farther background structure.
+
+v0.7.1 stays on the same dense-stereo path and makes the search data-driven:
+1. Rectify the already verified pose-inlier feature coordinates with R1/P1 and R2/P2.
+2. Measure robust 5th/50th/95th percentile rectified disparities.
+3. Pad and quantize that band into an SGBM-compatible minDisparity/numDisparities interval.
+4. Reproject dense disparity as before.
+5. Compare dense point radius against the verified sparse pair's broad radius distribution and use it as an optional object-depth prior when enough samples survive.
+6. Use robust 95th-percentile preview scaling instead of the single most extreme point.
+
+This is a correction to the one-pair dense milestone, not a new branch. After validation, continue with multi-pair dense fusion.
