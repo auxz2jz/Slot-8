@@ -294,3 +294,19 @@ v0.8.3 changes dense-seed selection:
 5. Persist start/progress/success/failure events for the dense attempt so a future no-output event has an exact stage and exception in the exported test report.
 
 This is a recovery/stability change; multi-pair fusion mathematics is unchanged.
+
+
+## v0.8.4 fusion candidate preflight
+
+v0.8.3 fixed the 175-photo test4 dense-seed failure and produced a valid 30,000-point connected-component dense seed plus a 14,191-point fused cloud. Review of the pair diagnostics found a smaller fusion-selection issue: two selected later pairs were inside the refined component but failed because their first camera had no shared-world rotation after an earlier break in the fusion engine's separately rebuilt rotation chain.
+
+v0.8.4 adds preflight before distributed pair selection:
+1. Keep the existing connected-pair, pose-inlier, and local relative-pose checks.
+2. Require both source image files.
+3. Require both refined camera centers from bundle refinement.
+4. Require a completed shared-world pose for the pair's first camera.
+5. Select up to six distributed pairs only from this eligible set.
+6. Record how many geometric candidates were filtered before selection.
+7. Use exact defensive diagnostics for missing camera index, first/second image, refined center, or recovered world pose.
+
+The dense-stereo math, pair reconstruction math, world transform, robust global trimming, voxel downsampling, and readiness thresholds remain unchanged. This is a candidate-selection/diagnostic maintenance release before surface meshing.
