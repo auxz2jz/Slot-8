@@ -293,3 +293,18 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - TODO v0.9.1 — filter tiny disconnected fragments without forcing one single component.
 - TODO v0.9.1 — export topology counts in Stage 7 report.
 - NEXT after cleanup validation — normals/smoothing/hole strategy, then texture projection.
+
+
+## v0.9.1 build prepared
+
+- DONE — versionName 0.9.1 / versionCode 20.
+- DONE — ordered local tangent/fan surface proposals.
+- DONE — <=2 faces per undirected edge.
+- DONE — tiny-fragment filtering.
+- DONE — unused-vertex compaction and face reindexing.
+- DONE — topology counters in card/report/version-test snapshot.
+- DONE — Ready for export now requires zero non-manifold edges.
+- VALIDATED — pure Kotlin compile.
+- VALIDATED — test4 fused cloud -> 5,172 vertices / 12,872 faces / 0 non-manifold edges.
+- VALIDATED — test3 fused cloud -> 2,144 vertices / 4,938 faces / 0 non-manifold edges.
+- TEST — Android Studio/device v0.9.1 guide.
