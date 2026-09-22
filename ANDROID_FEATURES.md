@@ -221,3 +221,7 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - DONE — Preset controls no longer require horizontal scrolling and no longer push the cloud off-screen by default.
 - DONE — v0.8.3 test guide specifically retests test4 dense recovery/fusion and exports the dense-attempt log.
 - NEXT — Surface/triangle mesh reconstruction after this recovery build passes device testing.
+
+
+- 2026-09-22 — v0.8.2 device test: 8 Works / 1 Problem. Rapid Hold now works. Galaxy S22 Ultra full-resolution Rapid throughput measured about 1.5–1.7 photos/sec at the 5/sec target, while 1/sec hit target accurately. Mixed EXIF orientations normalized successfully. The 3-axis viewer worked but controls were crowded. test3 rebuilt all stages successfully; test4 (175 photos) completed feature matching, sparse, 100-camera multi-view, and bundle refinement but pressing corrected dense stereo did not produce a saved dense report.
+- 2026-09-22 — v0.8.3 prepared as large-project dense recovery + viewer usability. Root-cause analysis found test4's global best sparse pair (cameras 54→55) lies outside the largest refined multi-view component (cameras 57→156). v0.8.3 keeps the successful sparse pair when it belongs to the refined component; otherwise it chooses the strongest connected adjacent pair for dense stereo. Persistent dense-stage progress/failure diagnostics are now exported in the version report. The point-cloud viewer is now full-screen with fixed preset buttons and optional sliders so the cloud remains visible.
