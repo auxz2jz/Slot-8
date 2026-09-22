@@ -264,3 +264,19 @@ Two independent v0.8.1 projects reached successful multi-pair dense fusion, so v
 5. Test notes: Works steps can carry optional saved/exported tester notes, and version reports include recent Rapid diagnostics.
 
 Next geometry milestone: create a surface/triangle mesh from a validated fused dense cloud.
+
+
+## v0.8.3 dense-seed recovery
+
+The 175-photo test4 run proved that project size alone did not stop the pipeline: feature matching, sparse reconstruction, the 100-camera main component, and bundle refinement all completed. The failure occurred specifically when entering the one-pair dense stage.
+
+The previous dense seed always reused the globally best sparse pair. On test4 that pair is photos 54-55, while the selected/refined multi-view component begins at camera 57. v0.8.3 aligns dense-seed selection with the component used by later fusion:
+
+1. Rank verified connected multi-view pairs by recovered-pose support and triangulated support.
+2. Prefer the global sparse pair only when it is itself inside the connected component.
+3. Attempt up to six verified candidates automatically.
+4. Keep pair-specific sparse-depth guidance only for the original sparse pair; fallback pairs use their own dense filtering rather than an unrelated depth prior.
+5. Persist a dense-attempt log independently from the dense report, so a failed run remains diagnosable after navigation/reopen.
+6. Show candidate/stage progress beside the dense button and include the attempt log in exported version-test diagnostics.
+
+The StereoSGBM and multi-pair fusion math remain otherwise unchanged in this maintenance build.
