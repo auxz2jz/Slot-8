@@ -225,3 +225,19 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 
 - 2026-09-22 — v0.8.2 device test: 8 Works / 1 Problem. Rapid Hold now works. Galaxy S22 Ultra full-resolution Rapid throughput measured about 1.5–1.7 photos/sec at the 5/sec target, while 1/sec hit target accurately. Mixed EXIF orientations normalized successfully. The 3-axis viewer worked but controls were crowded. test3 rebuilt all stages successfully; test4 (175 photos) completed feature matching, sparse, 100-camera multi-view, and bundle refinement but pressing corrected dense stereo did not produce a saved dense report.
 - 2026-09-22 — v0.8.3 prepared as large-project dense recovery + viewer usability. Root-cause analysis found test4's global best sparse pair (cameras 54→55) lies outside the largest refined multi-view component (cameras 57→156). v0.8.3 keeps the successful sparse pair when it belongs to the refined component; otherwise it chooses the strongest connected adjacent pair for dense stereo. Persistent dense-stage progress/failure diagnostics are now exported in the version report. The point-cloud viewer is now full-screen with fixed preset buttons and optional sliders so the cloud remains visible.
+
+
+## v0.8.4 — fusion candidate preflight robustness
+
+- 2026-09-22 — v0.8.3 device test passed 6 Works / 0 Problems / 0 Untested.
+- test3 remained healthy: 6/6 selected fusion pairs accepted, 41,017 fused points, ready for surface reconstruction.
+- test4 recovered the former dense blocker and produced a 30,000-point corrected dense seed plus a 14,191-point fused cloud, ready for surface reconstruction.
+- FOUND — two later test4 fusion candidates were selected even though their first camera lacked a completed shared-world pose after an earlier break in the rebuilt rotation chain.
+- DONE — v0.8.4 preflights candidates before distributed selection.
+- DONE — candidate eligibility requires both image files, both refined camera centers, and a recovered world pose for the first camera in addition to existing connected/pose checks.
+- DONE — unusable transform candidates are filtered before the up-to-six distributed pairs are selected.
+- DONE — defensive failures now name the exact missing prerequisite instead of the generic missing-pose-or-image reason.
+- DONE — fusion reports record how many candidates were filtered by preflight and report the remaining eligible candidate count.
+- DONE — v0.8.4-specific in-app test guide covers test4 preflight, test4 readiness, test3 regression, and precise diagnostics.
+- TEST — Android Studio compile/install and device regression.
+- NEXT — surface/triangle mesh reconstruction after v0.8.4 regression passes.
