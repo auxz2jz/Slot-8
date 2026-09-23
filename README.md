@@ -195,3 +195,14 @@ v0.16 passed all eight tests but only slightly increased texture coverage. v0.17
 The Capture guidance card now also includes overlap, lens consistency, multi-height rings, lighting/sharpness, reflection, and temporary-marker advice.
 
 Package SHA-256: `f55782bfd4906bb0c42d640fee02666d85bd12b4be18350f546b66c0a9a3b728`.
+
+
+## v0.18.0 — guided camera calibration
+
+v0.17 passed but texture-source coverage plateaued, so v0.18 moves the accuracy work to measured camera intrinsics instead of adding looser visibility heuristics.
+
+The app now includes a Camera Calibration screen, printable Letter-size 9×6-inner-corner checkerboard with 25 mm squares, import of a dedicated calibration image set, OpenCV intrinsic/distortion solving, RMS quality reporting, persistent lens profiles, and calibrated focal/principal-point use in compatible reconstruction camera matrices.
+
+The saved distortion coefficients are intentionally not yet applied globally to raster/features; v0.18 first validates the profile solve on the real S22 Ultra workflow.
+
+Package SHA-256: `d5064ce8d2f08b28c0403dd0c680ccc393256c2bbea5a1471b4fba0f97768c7d`.
