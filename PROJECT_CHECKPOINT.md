@@ -305,3 +305,58 @@ No holes are automatically filled yet.
 - test3: 2,144 vertices / 4,938 faces / 3,364 boundary edges / 0 non-manifold / 1 closed loop / 5 open-or-branched groups / 1,043 branch vertices / 2,144 valid normals.
 
 Next after device validation: conservative filling of small/simple closed loops, then texture-preparation work.
+
+
+## v0.10.0 device test — PASSED
+
+- Version guide: **8 Works / 0 Problems / 0 Untested**
+- Device: Samsung SM-S908U1 / Android 16
+- Project-isolation behavior passed.
+- test3 Stage 7 remained 2,144 vertices / 4,938 faces / 0 non-manifold edges with 2,144 valid normals.
+- Boundary classification remained stable enough to begin conservative closed-loop filling.
+
+## v0.11.0 build prepared
+
+- Version: **0.11.0**
+- versionCode: **23**
+- Package: `PhotogrammetryStudioAndroid-v0.11.0-Combined-Diagnostics-Safe-Hole-Fill-Android-Studio-Ready.zip`
+- Package SHA-256: `392f033753fa059a2b64d1d57a5cdbce8e9901427abab77911679bb0cd2f2ba9`
+- Source manifest SHA-256: `c28c9d7370536773dfc5979e698c175020fd47a4676207c05fccc873bab46ab0`
+- v0.10.0 -> v0.11.0 code patch SHA-256: `0ae8b78e5a4010d98fd3801f7b8d6157d91a9451def81f394cb82d97c79c3570`
+- ZIP integrity test: **passed**
+- Gradle wrapper JAR included: **yes**
+- Android Studio/device compile: **pending**
+
+### Combined Project Diagnostics
+
+A new project card exports a single text file containing:
+- Quick Check when available,
+- full Stage 1 feature-match diagnostics,
+- full Stage 2 sparse diagnostics,
+- full Stage 3 multi-view camera/pair diagnostics,
+- full Stage 4 bundle diagnostics,
+- full Stage 5 dense-pair diagnostics,
+- full Stage 6 fusion diagnostics,
+- full Stage 7 mesh diagnostics.
+
+The export is rebuilt from current saved project state each time, so new/rebuilt stage reports automatically appear. Raw PLY/OBJ geometry remains separate only when actual geometry inspection is needed.
+
+### Stage 7 safe closed-loop fill
+
+Only simple closed boundary loops are considered. Conservative size, planarity, edge-length, aspect, degeneracy, and mobile-cap checks must all pass. Open/branched boundary groups are never filled automatically.
+
+Actual Kotlin validation using the real uploaded Stage 6 fused clouds:
+- **test4:** 40,922 source points -> 5,173 vertices / 12,876 faces / 0 non-manifold edges. 1 closed loop before fill, **1 filled**, 0 remaining, +1 center vertex, +4 faces.
+- **test3:** 41,017 source points -> 2,144 vertices / 4,938 faces / 0 non-manifold edges. 1 closed loop before fill, **0 filled**, 1 remaining. It was intentionally skipped because a centroid fan would create an overly long/thin/degenerate triangle.
+
+The test3 skip is a safety success, not a fill failure.
+
+### Next device test
+
+1. Export **Combined Project Diagnostics** on test3 and verify it contains all available Stage 1–7 sections.
+2. Rebuild Stage 7 on test3; verify non-manifold=0 and unsafe closed-loop skip reason is reported if it matches local validation.
+3. Rebuild Stage 7 on test4; verify non-manifold=0 and the safe loop is filled if it matches local validation.
+4. Export Combined Project Diagnostics again and verify the newest Stage 7 statistics are already included.
+5. Export the v0.11.0 version-test report.
+
+After v0.11.0 passes: begin texture-preparation work (camera/image selection, UV strategy, and first texture projection groundwork).
