@@ -408,3 +408,14 @@ Pipeline:
 9. Export colored PLY/OBJ without changing Stage 7 geometry.
 
 Known limitations at this milestone are approximate intrinsics, zero-distortion assumption, no full triangle-rasterized z-buffer occlusion test, and no UV texture atlas yet.
+
+
+## v0.13.0 visibility refinement + Stage 9 source assignment
+
+v0.13.0 can bridge a failed adjacent camera-orientation recovery by matching a later connected camera to an older recovered camera within a four-position window. Bridged recoveries are counted separately.
+
+For visibility, each recovered camera builds a coarse image-space nearest-depth grid from projected Stage 7 vertices. Appearance candidates substantially behind the nearest projected surface in the same region are rejected. This is intentionally lighter than a full triangle z-buffer but removes obvious behind-surface sampling.
+
+Stage 9 then evaluates Stage 7 faces against the recovered cameras. A face is assignable only when all three corners project inside the image and pass the visibility test. The best source photo and normalized source-image coordinates are persisted per face.
+
+This produces the source-view metadata needed for the next UV-atlas stage without changing Stage 7 topology.
