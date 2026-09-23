@@ -435,3 +435,10 @@ The first atlas is intentionally simple and deterministic:
 7. OBJ + MTL + PNG are packaged together.
 
 Later atlas work can merge neighboring faces into UV islands and blend seams/exposure once this export is proven correct in real viewers.
+
+
+## v0.15.0 connected UV islands and preview
+
+Stage 10 now builds mesh-edge adjacency among Stage 9-assigned faces. Neighboring faces that use the same source photograph are grouped into a shared UV island. The island copies one padded source-photo bounding region into the atlas, and each member face maps into it using its original relative source coordinates.
+
+This lowers seam count and makes the atlas more interpretable while keeping source-photo boundaries conservative. The new in-app preview uses the saved atlas plus per-face UVs to render the Stage 7 mesh; desktop OBJ/MTL/PNG remains the standards-based export.
