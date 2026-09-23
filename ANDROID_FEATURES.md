@@ -471,3 +471,23 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - DONE — standard OBJ/MTL/PNG export preserved.
 - TEST — Android Studio/device v0.15.0 guide.
 - NEXT — higher Stage 9 face coverage and seam/exposure blending.
+
+
+## v0.16.0 — texture coverage recovery + exposure normalization
+
+- PASSED — v0.15.0 guide: 8 Works / 0 Problems / 0 Untested.
+- PASSED — test4: 1,503 UV islands, largest 81 faces, 13.60% occupancy, 29.26% coverage.
+- DONE — versionName 0.16.0 / versionCode 28.
+- DONE — strict Stage 9 assignments always take priority.
+- DONE — conservative two-of-three visibility fallback for previously unassigned faces only.
+- DONE — fallback keeps positive-depth, in-image and front-facing requirements for all three corners.
+- DONE — minimum projected-area and mean-score safeguards.
+- DONE — Stage 9 warning reports fallback assignment/candidate counts.
+- DONE — Stage 10 source-photo luminance estimation.
+- DONE — median used-photo luminance target.
+- DONE — exposure gain clamped to 0.82..1.22.
+- DONE — connected UV islands and textured preview retained.
+- TEST — test4 coverage must not regress below 29.26%.
+- TEST — test3 coverage must not regress below 18.19%.
+- TEST — texture placement remains aligned and brightness stepping is no worse than v0.15.
+- NEXT — stronger source-view confidence/occlusion and seam blending after v0.16 device validation.
