@@ -379,3 +379,14 @@ Stage 7 retains the v0.9.1 manifold local-fan connectivity and then:
 6. exports normals in OBJ and PLY.
 
 No hole is auto-filled in v0.10.0. The real test clouds still contain many branched boundary vertices, so the next filling pass should start only with small/simple closed loops.
+
+
+## v0.11.0 conservative closed-loop capping
+
+After v0.10.0 boundary classification, v0.11.0 treats only boundary components whose vertices all have degree two as potential holes. A candidate is capped only when it is small, nearly planar, locally bounded by the existing accepted edge scale, and a centroid fan avoids long/thin/degenerate triangles. Open/branched borders are left untouched.
+
+This deliberately prefers an incomplete mesh over invented geometry. The real validation set demonstrates both paths: test4's small closed loop is capped, while test3's more uneven loop is rejected by the shape check. Both remain manifold under the current edge-count criterion.
+
+## Combined diagnostic contract
+
+One project diagnostic text now serializes the detailed information that was previously exported from individual Stage 1–7 cards, plus Quick Check and current pipeline state. Raw point/mesh coordinates remain in PLY/OBJ artifacts.
