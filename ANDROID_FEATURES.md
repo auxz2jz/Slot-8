@@ -340,3 +340,18 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - DONE — v0.9.2-specific test guide for cancel/reset/stale-card/persistence behavior.
 - TEST — Android Studio/device v0.9.2 regression.
 - NEXT — Stage 7 boundary/hole cleanup, normals and smoothing.
+
+
+## Cross-project isolation requirement
+
+- FOUND — while test4 Stage 1 runs in the background, opening test3 can display test4's live reconstruction status because MainViewModel progress/report StateFlows are global.
+- CONFIRMED — reconstruction jobs capture their starting PhotoProject and repository saves use that project's ID, so source photos/results remain project-specific.
+- FOUND — some later-stage completion handlers can set selectedProject back to the job-owning project.
+- TODO — attach immutable ownerProjectId to each running reconstruction job.
+- TODO — only publish a job's live progress/result to the project screen when that project is currently selected.
+- TODO — background completion must never change the currently selected project.
+- TODO — reload completed results when the user returns to the owning project.
+- TODO — keep one heavy reconstruction job active at a time until deliberate multi-job scheduling is implemented.
+- TODO — show an explicit busy message naming the project if the user tries to start processing on another project.
+- FUTURE — optional project-list processing/completed badge.
+- RULE — no cross-project result/data sharing unless a deliberate merge/compare feature is added later.
