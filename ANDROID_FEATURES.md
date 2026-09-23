@@ -394,3 +394,25 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - VALIDATED — test3 real fused cloud intentionally skips unsafe loop and stays at 0 non-manifold edges.
 - TEST — Android Studio/device v0.11.0 guide.
 - NEXT — texture preparation and first photographic texture projection groundwork.
+
+
+## v0.12.0 — Stage 8 photo color projection
+
+- PASSED — v0.11.0 guide: 7 Works / 0 Problems / 0 Untested.
+- PASSED — Combined Project Diagnostics is now the normal one-file diagnostic workflow.
+- DONE — versionName 0.12.0 / versionCode 24.
+- DONE — Stage 8 project-owned photo color projection.
+- DONE — rebuild connected camera orientation chain for appearance projection.
+- DONE — reuse Stage 4 refined camera centers and Stage 7 vertices/normals.
+- DONE — EXIF-normalized source-photo projection.
+- DONE — positive-depth, image-bounds and front-facing candidate filtering.
+- DONE — source-view ranking by facing, image center and camera distance.
+- DONE — blend up to three strongest photo samples per vertex.
+- DONE — persistent Stage 8 report and vertex-color array.
+- DONE — per-camera projected/selected contribution diagnostics.
+- DONE — colored Stage 8 preview.
+- DONE — colored PLY export with normals, RGB and faces.
+- DONE — vertex-colored OBJ export.
+- DONE — Combined Project Diagnostics expanded through Stage 8.
+- TEST — Android Studio/device v0.12.0 guide.
+- NEXT — triangle visibility/occlusion refinement, then UV coordinates and a texture atlas.
