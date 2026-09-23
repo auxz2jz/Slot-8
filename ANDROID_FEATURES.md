@@ -524,3 +524,22 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - TODO — calibration quality/reprojection-error report and poor-frame rejection.
 - TODO — apply calibrated intrinsics/distortion to Stages 2–10.
 - TODO — optional separate known-size marker workflow for metric scale.
+
+
+## v0.18.0 — guided camera calibration
+
+- DONE — versionName 0.18.0 / versionCode 30.
+- DONE — Camera Calibration entry from the project list.
+- DONE — printable Letter landscape 9×6-inner-corner / 25 mm-square checkerboard PDF.
+- DONE — calibration photo set stored separately from scan projects.
+- DONE — OpenCV checkerboard detection and sub-pixel refinement.
+- DONE — solve fx/fy/cx/cy and k1/k2/p1/p2/k3.
+- DONE — RMS reprojection quality check with <=1.5 px activation threshold.
+- DONE — persistent active lens/zoom/resolution profile.
+- DONE — export calibration report.
+- DONE — calibrated focal/principal-point values feed compatible reconstruction camera matrices.
+- DONE — calibration snapshot included in version and combined diagnostics.
+- ROADMAP — reflective 3/6 mm scanner dots as non-coded feature assistance.
+- ROADMAP — coded fiducial/tape support as identifiable pose/tracking anchors.
+- ROADMAP — known-size markers/rig dimensions for metric scale.
+- NEXT — validate v0.18 profile on-device, then apply saved distortion coefficients to raster/features.
