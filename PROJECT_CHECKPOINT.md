@@ -523,3 +523,50 @@ Next after a healthy Stage 9 result: real UV atlas generation and UV-mapped mode
 7. Export Combined Project Diagnostics and the v0.14.0 version-test report.
 
 Next after v0.14 device validation: verify texture orientation/viewer compatibility, then improve UV-island packing, seam/exposure blending and Stage 9 source coverage.
+
+
+## v0.14.0 device result — PASSED
+
+- Version guide: **8 Works / 0 Problems / 0 Untested**.
+- test4 Stage 10: 2048×2048 atlas; **3,768 / 12,876 textured faces (29.26%)**; 90 source photos; 0 missing-photo/rasterization skips; readyForExport=true.
+- test3 Stage 10: 2048×2048 atlas; **898 / 4,938 textured faces (18.19%)**; 39 source photos; 0 missing-photo/rasterization skips; readyForExport=true.
+- Both textured packages contained `textured_model.obj`, `texture_atlas.mtl`, and `texture_atlas.png`.
+- The v0.14 PNG by itself looks like a scrambled mosaic because each textured triangle had its own independent tile; OBJ UVs assemble those tiles on the 3D model.
+
+## v0.15.0 build prepared
+
+- Version: **0.15.0**
+- versionCode: **27**
+- Package: `PhotogrammetryStudioAndroid-v0.15.0-UV-Islands-Textured-Preview-Android-Studio-Ready.zip`
+- Package SHA-256: `3207682ee1202e53fd90c9eeb14edaa8386d31acb0a811235c030e6bc3544cb4`
+- Source-manifest file SHA-256: `d2a1cbc9b3cd95644d16fa0180dca81073e36c1580c0fd12b90c274a0ce30e49`
+- v0.14.0 -> v0.15.0 patch SHA-256: `50044e99d5134b33a70033f758c9193e8b8318bf45f148e0312df3451f2e954c`
+- ZIP integrity test: **passed**
+- Gradle wrapper JAR included: **yes**
+- Core Kotlin/model/diagnostic compile: **passed**
+- TextureAtlasBuilder Android-stub compile: **passed**
+- Synthetic two-triangle same-photo test: **1 UV island / 2 textured faces**
+- Full Gradle build here: blocked because `services.gradle.org` cannot be resolved; Android Studio/device remains authoritative.
+
+### v0.15.0 changes
+
+1. Edge-connected Stage 9 faces that use the same source photo are grouped into a shared UV island.
+2. Each island preserves the member triangles' relative coordinates inside their source-photo region.
+3. Variable rectangular islands are shelf-packed into a 2048 or 4096 atlas as needed.
+4. Stage 10 now reports UV island count, largest island face count, and atlas occupancy.
+5. New **View textured model in app** button applies the saved atlas PNG and actual Stage 10 UVs to a rotatable mesh preview.
+6. Unassigned faces remain gray in preview and export.
+7. Standard OBJ + MTL + PNG export stays unchanged.
+8. Stage 7 geometry remains unchanged.
+
+### Exact v0.15.0 device test
+
+1. Rebuild Stage 10 on test4 and confirm UV islands > 0 plus Ready for export=true.
+2. Tap **View textured model in app** and inspect all six fixed views plus rotation/zoom.
+3. Export the atlas PNG; it should contain larger photo regions/islands instead of thousands of isolated one-triangle tiles.
+4. Export the textured ZIP and optionally open the OBJ in MeshLab.
+5. Repeat Stage 10 on test3 as a partial-texture regression.
+6. Confirm Stage 7 vertex/face counts are unchanged.
+7. Export Combined Project Diagnostics and the v0.15.0 version-test report.
+
+Next after v0.15 passes: improve Stage 9 coverage and add seam/exposure blending across neighboring islands.
