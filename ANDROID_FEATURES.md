@@ -375,3 +375,22 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - LOCAL VALIDATION — test3: 2,144 vertices / 4,938 faces / 0 non-manifold / 2,144 normals.
 - TEST — Android Studio/device v0.10.0 guide.
 - NEXT — conservative small/simple closed-loop filling, then texture preparation.
+
+
+## v0.11.0 — combined diagnostics + safe closed-loop fill
+
+- PASSED — v0.10.0 guide: 8 Works / 0 Problems / 0 Untested.
+- DONE — one Combined Project Diagnostics text export per project.
+- DONE — combined export includes Quick Check and full available Stage 1–7 diagnostics.
+- DONE — newly built/rebuilt stages automatically appear in the next combined export.
+- DONE — PLY/OBJ geometry remains separate from the compact diagnostic text.
+- DONE — simple closed-boundary loop extraction.
+- DONE — conservative perimeter/radius/planarity/edge/aspect/degeneracy checks.
+- DONE — safe centroid cap adds one center vertex and one triangle per boundary edge.
+- DONE — open/branched borders never auto-fill.
+- DONE — Stage 7 reports before/filled/remaining/skipped loops plus added vertices/faces.
+- DONE — skipped candidates record a human-readable reason.
+- VALIDATED — test4 real fused cloud safely fills 1 loop and stays at 0 non-manifold edges.
+- VALIDATED — test3 real fused cloud intentionally skips unsafe loop and stays at 0 non-manifold edges.
+- TEST — Android Studio/device v0.11.0 guide.
+- NEXT — texture preparation and first photographic texture projection groundwork.
