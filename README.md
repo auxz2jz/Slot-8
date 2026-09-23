@@ -148,3 +148,14 @@ Current package:
 
 SHA-256:
 `a43dc5619dc90a82a5fb578e00fd45c26cb9a3dfd6c0aa19d0e2e584b377e630`
+
+
+## v0.13.0 — Stage 8 visibility refinement + Stage 9 texture sources
+
+v0.12.0 passed 8 Works / 0 Problems / 0 Untested. Stage 8 proved photo-to-mesh color projection, with 55.67% vertex coverage on test4 and 46.60% on test3.
+
+v0.13.0 strengthens pose recovery with short-gap bridging and adds a coarse depth/occlusion visibility filter. It also introduces **Stage 9 — Texture Source Assignment**, which chooses one visibility-approved source photo per usable mesh triangle and persists normalized source-image coordinates for the three triangle corners.
+
+This separates source-view correctness from UV atlas packing. If Stage 9 coverage is healthy, the next milestone is an actual atlas image and UV-mapped export.
+
+Package SHA-256: `fd8265a4156b548999dc1fcd66c9c914eb5b636c0427abb323d9e3ee9fa680b5`.
