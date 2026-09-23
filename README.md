@@ -122,3 +122,14 @@ Current package:
 
 SHA-256:
 `f9bca4a4096189c020c1c640b511fd9da0684ccd18507f3948b2224252687ba7`
+
+
+## v0.11.0 — combined diagnostics + conservative hole fill
+
+v0.10.0 passed 8 Works / 0 Problems / 0 Untested. v0.11.0 reduces repetitive uploads with **Export combined project diagnostics**, one text export containing Quick Check plus every available Stage 1–7 detailed diagnostic section for that project.
+
+Stage 7 now attempts conservative filling of only simple closed boundary loops. Open or branched borders are never auto-filled. On the real validation clouds, test4's small loop is safely capped (+1 vertex/+4 faces) while test3's less suitable loop is deliberately skipped; both remain at zero non-manifold edges.
+
+Current package SHA-256: `392f033753fa059a2b64d1d57a5cdbce8e9901427abab77911679bb0cd2f2ba9`.
+
+See `PROJECT_CHECKPOINT.md` for the exact device test.
