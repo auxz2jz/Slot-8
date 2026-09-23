@@ -706,3 +706,26 @@ The project Capture guidance card now includes:
 - Combined diagnostics must report neighbor-consistency candidate/assignment counts.
 
 If v0.17 still produces only a small coverage gain, the next priority is camera calibration/intrinsics and graph-based camera/source recovery rather than looser visibility rules.
+
+
+## v0.17.0 device result — PASSED / recovery experiment plateau
+
+- Guide: **8 Works / 0 Problems / 0 Untested**
+- test4 Stage 9: 3810/12876 = **29.59%**, unchanged from v0.16
+- test4 Stage 10: 1535 UV islands, largest 81 faces, 13.79% occupancy, 90 photos, 0 missing/mapping failures
+- test3 Stage 9: 927/4938 = **18.77%**, unchanged from v0.16
+- test3 Stage 10: 384 UV islands, largest 52 faces, 13.52% occupancy, 39 photos, 0 missing/mapping failures
+- Neighbor-consistency recovery did not produce a measurable coverage increase on these test sets.
+- Decision: stop loosening/stacking texture-recovery heuristics here.
+
+### Next accuracy priority — camera calibration
+
+The current pipeline still derives intrinsics approximately from EXIF focal information and assumes zero lens distortion. The next substantial accuracy milestone should therefore be a guided camera-calibration workflow and use of calibrated intrinsics/distortion in reconstruction and texture projection.
+
+Preferred direction:
+1. OpenCV ChArUco or checkerboard calibration target.
+2. Guided capture of calibration images using the exact lens/zoom/resolution intended for scanning.
+3. Solve and persist fx, fy, cx, cy plus radial/tangential distortion coefficients.
+4. Store calibration as a camera/lens/resolution profile.
+5. Use that profile in Stages 2–10 instead of approximate EXIF intrinsics / zero distortion.
+6. Keep calibration distinct from object-scale markers; absolute object scale still needs a known-size reference in the scan scene or known rig geometry.
