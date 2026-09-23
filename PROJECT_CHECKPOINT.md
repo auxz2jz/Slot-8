@@ -229,3 +229,27 @@ v0.9.2 changes:
 7. Added exact v0.9.2 in-app test steps for cancel/reset/stale-card/persistence behavior.
 
 Next after v0.9.2 passes: Stage 7 boundary/hole cleanup plus normals/smoothing before texture projection.
+
+
+## v0.9.2 cross-project live-state observation — 2026-09-22
+
+User started Stage 1 feature matching on test4, navigated back to the project list, and opened test3 while test4 matching was still running. test3 appeared to show the live matching activity.
+
+Source inspection confirms:
+- Each reconstruction function captures the selected PhotoProject at job launch.
+- Stage inputs and repository saves use that captured project's ID/photos, so test4 Stage 1 continues reading/saving test4 data even after navigation.
+- However, live `_reconstruction` progress and stage report StateFlows are global to MainViewModel, not keyed by project ID.
+- A background job from test4 can therefore update the progress/status/report displayed while test3 is selected.
+- Several later-stage success handlers also assign `_selectedProject = repository.getProject(project.id)`, which could pull the UI back to the job-owning project when a background job finishes.
+
+Project-isolation requirement:
+1. Photos, reports, point clouds, meshes, and settings remain stored strictly by project ID.
+2. Every running reconstruction job records an immutable ownerProjectId.
+3. Background job callbacks update shared UI only when the currently selected project matches ownerProjectId.
+4. Completion of a background job must never change the user's currently selected project.
+5. When reopening the owner project, load its newly completed result from repository.
+6. Use one heavy reconstruction worker at a time for now; if another project's job is requested while one is active, show which project is processing instead of silently running concurrent heavy jobs.
+7. Optional future UI: project-list badge such as "Processing Stage 1" / "Completed" for background work.
+8. Cross-project merge/compare remains explicitly out of scope unless intentionally added later.
+
+This is a live-state isolation issue, not evidence of on-disk project-data contamination.
