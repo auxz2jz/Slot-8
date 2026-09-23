@@ -416,3 +416,24 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - DONE — Combined Project Diagnostics expanded through Stage 8.
 - TEST — Android Studio/device v0.12.0 guide.
 - NEXT — triangle visibility/occlusion refinement, then UV coordinates and a texture atlas.
+
+
+## v0.13.0 — Stage 8 visibility refinement + Stage 9 texture sources
+
+- PASSED — v0.12.0 guide: 8 Works / 0 Problems / 0 Untested.
+- PASSED — test4 Stage 8: 55.67% color coverage, 72/100 recovered connected camera poses.
+- PASSED — test3 Stage 8: 46.60% color coverage, 41/41 recovered connected camera poses.
+- DONE — versionName 0.13.0 / versionCode 25.
+- DONE — short-gap camera-pose bridging up to four connected-camera positions back.
+- DONE — recovered adjacent vs bridged orientation-link diagnostics.
+- DONE — coarse image-space depth/visibility filter for Stage 8 source sampling.
+- DONE — visibility-rejected candidate diagnostics.
+- DONE — Stage 9 triangle source-photo assignment.
+- DONE — all three face vertices must project inside and pass visibility.
+- DONE — reject sub-pixel projected triangles.
+- DONE — choose best source camera per assigned face.
+- DONE — normalized source-photo coordinates for each triangle corner.
+- DONE — Stage 9 persistence, per-camera contribution diagnostics and source-map TSV export.
+- DONE — Combined Project Diagnostics extended through Stage 9.
+- TEST — Android Studio/device v0.13.0 guide.
+- NEXT — UV atlas packing/rasterization and UV-mapped model export if Stage 9 coverage is healthy.
