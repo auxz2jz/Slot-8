@@ -90,3 +90,20 @@ SHA-256:
 `a52e4fbdf42f6ef022f609a462c0d595ee686bb414474b1a5e5fc72008d9df83`
 
 Pure-Kotlin validation on the real uploaded fused clouds reached zero non-manifold edges for both test4 and test3. See `PROJECT_CHECKPOINT.md` for the exact device-test sequence.
+
+
+## v0.9.1 complete / v0.9.2 maintenance build
+
+The complete v0.9.1 device set passed: 7 Works / 0 Problems / 0 Untested. test4 completed all stages from 175-photo feature matching through a topology-clean Stage 7 mesh with 12,872 faces and 0 non-manifold edges. test3 remained topology-clean with 4,938 faces and 0 non-manifold edges.
+
+A rerun exposed a UI-state bug: persisted downstream files were correctly invalidated, but an already-loaded Stage 7 card could remain visible until a later stage cleared it from memory.
+
+v0.9.2 fixes state consistency and adds **Reset reconstruction stages** while leaving all reconstruction/mesh math unchanged.
+
+Current Android Studio package:
+`PhotogrammetryStudioAndroid-v0.9.2-Pipeline-Reset-State-Fix-Android-Studio-Ready.zip`
+
+SHA-256:
+`5f6b078a1b960c7220f36c1854f65cd03a3f9797a648706efc01c5c94454abdc`
+
+See `PROJECT_CHECKPOINT.md` for exact v0.9.2 test instructions.
