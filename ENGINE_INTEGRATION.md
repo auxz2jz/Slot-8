@@ -390,3 +390,21 @@ This deliberately prefers an incomplete mesh over invented geometry. The real va
 ## Combined diagnostic contract
 
 One project diagnostic text now serializes the detailed information that was previously exported from individual Stage 1–7 cards, plus Quick Check and current pipeline state. Raw point/mesh coordinates remain in PLY/OBJ artifacts.
+
+
+## v0.12.0 Stage 8 photo color projection
+
+Stage 8 is the first photographic appearance pass after topology validation. It intentionally starts with per-vertex color so camera registration and source-view coverage can be measured before introducing UV seams and atlas generation.
+
+Pipeline:
+1. Load saved Stage 3 connected-camera graph, Stage 4 refined camera centers and Stage 7 topology-clean mesh.
+2. Recompute adjacent relative camera rotations using ORB + essential matrix + recoverPose with the same world-orientation convention used by dense fusion.
+3. Decode source photos through the EXIF-normalizing bitmap loader.
+4. Project each Stage 7 vertex into recovered cameras with approximate intrinsics.
+5. Reject negative depth, out-of-image and strongly back-facing candidates.
+6. Rank candidate views by normal facing, image-center position and camera distance.
+7. Blend up to three strongest source-photo samples into one RGB value per mesh vertex.
+8. Persist camera contributions, coverage statistics and vertex colors.
+9. Export colored PLY/OBJ without changing Stage 7 geometry.
+
+Known limitations at this milestone are approximate intrinsics, zero-distortion assumption, no full triangle-rasterized z-buffer occlusion test, and no UV texture atlas yet.
