@@ -159,3 +159,14 @@ v0.13.0 strengthens pose recovery with short-gap bridging and adds a coarse dept
 This separates source-view correctness from UV atlas packing. If Stage 9 coverage is healthy, the next milestone is an actual atlas image and UV-mapped export.
 
 Package SHA-256: `fd8265a4156b548999dc1fcd66c9c914eb5b636c0427abb323d9e3ee9fa680b5`.
+
+
+## v0.14.0 — Stage 10 UV texture atlas
+
+v0.13.0 passed 8 Works / 0 Problems / 0 Untested. test4 reached 29.3% triangle-source coverage with all 100 connected camera poses recovered; test3 reached 18.19% with all 41 poses available.
+
+v0.14.0 turns the valid Stage 9 assignments into the first conventional textured-model export. Each assigned triangle gets a padded photo-derived atlas tile and UV coordinates. Unassigned faces remain gray rather than receiving fabricated image content.
+
+Stage 10 exports a single ZIP containing `textured_model.obj`, `texture_atlas.mtl`, and `texture_atlas.png`. Combined Project Diagnostics now covers Stages 1–10.
+
+Package SHA-256: `91f069323d1f50de94519d166e41e387050d438ccb912bdff62a42249161238c`.
