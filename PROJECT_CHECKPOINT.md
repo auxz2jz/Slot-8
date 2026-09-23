@@ -360,3 +360,60 @@ The test3 skip is a safety success, not a fill failure.
 5. Export the v0.11.0 version-test report.
 
 After v0.11.0 passes: begin texture-preparation work (camera/image selection, UV strategy, and first texture projection groundwork).
+
+
+## v0.11.0 device result — PASSED
+
+- Version guide: **7 Works / 0 Problems / 0 Untested**
+- Device: Samsung SM-S908U1 / Android 16
+- test4 Stage 7: **5,173 vertices / 12,876 faces / 0 non-manifold edges**, safe closed-loop fill **1/1**
+- test3 Stage 7: **2,144 vertices / 4,938 faces / 0 non-manifold edges**, unsafe loop intentionally left open
+- Combined Project Diagnostics successfully consolidated Quick Check + detailed stage reports into one routine text upload.
+
+## v0.12.0 build prepared
+
+- Version: **0.12.0**
+- versionCode: **24**
+- Package: `PhotogrammetryStudioAndroid-v0.12.0-Stage8-Photo-Color-Projection-Android-Studio-Ready.zip`
+- Package SHA-256: `a43dc5619dc90a82a5fb578e00fd45c26cb9a3dfd6c0aa19d0e2e584b377e630`
+- Source manifest SHA-256: `5d2a778f055488b6c5e52f9ef14f242e97d22303cf2052162cc60774b02e6158`
+- v0.11.0 -> v0.12.0 patch SHA-256: `3aefe6c24106a206ef1309ac79fd53d70733bda997df0c07674136479098b79b`
+- ZIP integrity test: **passed**
+- Gradle wrapper JAR included: **yes**
+- Android Studio/device compile: **pending**
+
+### Stage 8 — Photo Color Projection
+
+1. Rebuild connected camera orientations from original photos.
+2. Reuse Stage 4 refined camera centers and Stage 7 topology-clean geometry.
+3. Project Stage 7 vertices into EXIF-normalized source photos.
+4. Reject negative-depth, out-of-image and strongly back-facing samples.
+5. Rank views by surface facing, image-center position and camera distance.
+6. Blend up to three strong source-photo samples per mesh vertex.
+7. Persist vertex colors, coverage and per-camera contribution diagnostics.
+8. Add a colored mesh preview.
+9. Export colored PLY with normals + RGB + faces.
+10. Export vertex-colored OBJ.
+11. Add Stage 8 automatically to Combined Project Diagnostics.
+
+Stage 8 is appearance-only and must not alter Stage 7 vertex/face counts.
+
+### Known v0.12.0 limitations
+
+- Camera intrinsics are still approximate.
+- Lens distortion is still assumed to be zero.
+- Full triangle-rasterized visibility/occlusion is not implemented yet.
+- This is per-vertex photo color, not yet a UV texture atlas.
+
+### Exact next device test
+
+1. Install v0.12.0 and open **test4**.
+2. On **Stage 7 — Surface Mesh**, tap **Next: Stage 8 — Project photo colors**.
+3. Confirm the new Stage 8 card reports non-zero recovered camera poses, cameras used and colored vertices.
+4. Tap **View Stage 8 photo colors** and inspect several angles.
+5. Export **colored PLY**.
+6. Repeat Stage 8 on **test3**.
+7. Export **Combined Project Diagnostics** after Stage 8; it must include a Stage 8 section automatically.
+8. Export the v0.12.0 version-test report.
+
+Routine upload after v0.12.0: version-test report + one combined diagnostic TXT per tested project. Colored PLY is only needed when visual/color geometry inspection is requested.
