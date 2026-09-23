@@ -491,3 +491,22 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - TEST — test3 coverage must not regress below 18.19%.
 - TEST — texture placement remains aligned and brightness stepping is no worse than v0.15.
 - NEXT — stronger source-view confidence/occlusion and seam blending after v0.16 device validation.
+
+
+## v0.17.0 — neighbor-consistent texture recovery + capture guidance
+
+- PASSED — v0.16 guide: 8 Works / 0 Problems / 0 Untested.
+- PASSED — test4 coverage 29.59%; test3 18.77%.
+- DONE — versionName 0.17.0 / versionCode 29.
+- DONE — strict Stage 9 assignment remains first priority.
+- DONE — v0.16 two-of-three fallback remains second priority.
+- DONE — neighbor-consistency recovery for still-unassigned faces only.
+- DONE — at least two assigned edge neighbors must agree on the same source photo.
+- DONE — only strict/v0.16 anchors can vote; recovered faces never propagate.
+- DONE — target face must still pass geometry, projected-area, score and minimum visibility checks.
+- DONE — warnings report neighbor-consistency candidates and accepted assignments.
+- DONE — expanded Capture guidance with overlap, lens/zoom, multi-ring, lighting/sharpness, reflection and marker advice.
+- RETAINED — v0.16 exposure normalization.
+- RETAINED — v0.15 connected UV islands and textured preview.
+- TEST — test4 >=29.59%; test3 >=18.77%.
+- NEXT — if gain remains small, camera calibration/intrinsics and graph-based source-camera recovery.
