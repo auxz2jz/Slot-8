@@ -180,3 +180,52 @@ Root cause confirmed in v0.9.1 source:
 7. Add this exact behavior to the next version test guide.
 
 Additional test4 artifacts are still being uploaded; defer final next-geometry decision until the set is complete.
+
+
+## v0.9.1 complete test set — PASSED
+
+Full uploaded v0.9.1 pipeline set is now complete.
+
+Version guide:
+- 7 Works / 0 Problems / 0 Untested
+- Samsung SM-S908U1 / Android 16
+
+test4 full pipeline:
+- Feature match: 175 photos, 437,500 keypoints, 174/174 usable-or-strong adjacent pairs
+- Sparse: 1,096 triangulated points; ready for multi-view
+- Multi-view: 100 connected cameras, 99 connected adjacent pairs, 36,702 combined points
+- Bundle: 6,654 tracks built, 1,200 selected, 957 refined points, RMS 12.3533 px -> 2.2892 px
+- Dense pair: 143,648 valid disparity pixels, 30,000 exported points
+- Dense fusion: 71 eligible pair candidates, 4 selected pair clouds accepted, 40,922 fused points
+- Stage 7: 5,172 vertices, 12,872 faces, 7,982 boundary edges, 0 non-manifold edges, 11 retained components
+
+test3 Stage 7 regression:
+- 2,144 vertices, 4,938 faces, 3,364 boundary edges, 0 non-manifold edges, 34 retained components
+
+The uploaded rerun also confirmed persisted stage files are regenerated consistently. The stale Stage 7 observation is a UI/in-memory invalidation defect, not stale geometry being reused from disk.
+
+See TEST_OUTPUT_MANIFEST_v0.9.1.sha256 for hashes of the 18 uploaded v0.9.1 artifacts.
+
+## v0.9.2 build prepared
+
+- Version: **0.9.2**
+- versionCode: **21**
+- Package: `PhotogrammetryStudioAndroid-v0.9.2-Pipeline-Reset-State-Fix-Android-Studio-Ready.zip`
+- Package SHA-256: `5f6b078a1b960c7220f36c1854f65cd03a3f9797a648706efc01c5c94454abdc`
+- Source-manifest file SHA-256: `fcfd45dfe7983728bfac1a23e167762b795224b28d55419b99ffdd1909965696`
+- v0.9.1 -> v0.9.2 patch SHA-256: `8aee4f94489673a1f793cc01fc5ca1ab009f00a589ecc9b4dfc35fde51563ca0`
+- ZIP integrity test: passed
+- Includes Gradle wrapper JAR: yes
+- Geometry algorithms: unchanged from v0.9.1
+- Android Studio/device compile: pending
+
+v0.9.2 changes:
+1. Centralized memory + disk invalidation at every pipeline stage boundary.
+2. Rebuilding Stage 1 immediately clears Stages 1–7; Stage 2 clears 2–7; and so on.
+3. Stage 1 now clears the old persisted feature-match result before replacement matching starts.
+4. Added **Reset reconstruction stages** with confirmation.
+5. Reset keeps project photos/settings and deletes generated Stages 1–7 only.
+6. Reset is disabled while analysis/reconstruction is actively running.
+7. Added exact v0.9.2 in-app test steps for cancel/reset/stale-card/persistence behavior.
+
+Next after v0.9.2 passes: Stage 7 boundary/hole cleanup plus normals/smoothing before texture projection.
