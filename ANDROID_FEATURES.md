@@ -456,3 +456,18 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - DONE — project isolation/upstream invalidation includes Stage 10.
 - TEST — Android Studio/device v0.14.0 guide.
 - NEXT — atlas orientation/viewer validation, UV island packing, seam/exposure blending and higher Stage 9 coverage.
+
+
+## v0.15.0 — UV islands + textured preview
+
+- PASSED — v0.14.0 guide: 8 Works / 0 Problems / 0 Untested.
+- DONE — versionName 0.15.0 / versionCode 27.
+- DONE — edge-connected same-photo Stage 9 faces form shared UV islands.
+- DONE — preserve relative source-photo coordinates within each island.
+- DONE — variable 2048/4096 atlas packing.
+- DONE — UV island count / largest island / atlas occupancy diagnostics.
+- DONE — in-app textured model preview using actual atlas UVs.
+- DONE — unassigned faces stay gray.
+- DONE — standard OBJ/MTL/PNG export preserved.
+- TEST — Android Studio/device v0.15.0 guide.
+- NEXT — higher Stage 9 face coverage and seam/exposure blending.
