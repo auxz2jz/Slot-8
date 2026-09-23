@@ -729,3 +729,43 @@ Preferred direction:
 4. Store calibration as a camera/lens/resolution profile.
 5. Use that profile in Stages 2–10 instead of approximate EXIF intrinsics / zero distortion.
 6. Keep calibration distinct from object-scale markers; absolute object scale still needs a known-size reference in the scan scene or known rig geometry.
+
+
+## v0.18.0 build prepared — camera calibration milestone
+
+- Version: **0.18.0**
+- versionCode: **30**
+- Package: `PhotogrammetryStudioAndroid-v0.18.0-Camera-Calibration-Android-Studio-Ready.zip`
+- Package SHA-256: `d5064ce8d2f08b28c0403dd0c680ccc393256c2bbea5a1471b4fba0f97768c7d`
+- Local source-manifest file SHA-256: `ad8a95757efe7526e81026a737e7d8fc0f0889d2ec7f8c254ff7b0af0d89fa99`
+- v0.17 -> v0.18 patch SHA-256: `a72bb65f2757d0e11fdaa8df5bc588b982ffaf31ccd3af32877a5dea8972134f`
+- ZIP integrity test: **passed**
+- Gradle wrapper JAR included: **yes**
+- Models.kt standalone Kotlin compile: **passed**
+- Changed-file brace/syntax sanity checks: **passed**
+- Full Android Gradle build here: blocked because services.gradle.org cannot be resolved; Android Studio/device remains authoritative.
+
+v0.18 changes:
+1. New Camera Calibration screen from the project list.
+2. Built-in printable US Letter landscape checkerboard PDF: 9×6 inner corners, 25 mm squares.
+3. Import dedicated calibration photos separately from scan projects.
+4. OpenCV checkerboard detection + sub-pixel corner refinement.
+5. OpenCV calibrateCamera solve for fx/fy/cx/cy and k1/k2/p1/p2/k3.
+6. Minimum 10 accepted frames; 15–25 recommended.
+7. Profile activation requires RMS reprojection error <= 1.5 px.
+8. Calibration report export lists accepted/rejected frames and solved parameters.
+9. Existing reconstruction camera-matrix helpers use calibrated focal/principal-point values when image dimensions are compatible.
+10. Distortion coefficients are persisted but full raster/feature undistortion is deliberately deferred until the profile solve is validated on-device.
+11. Marker roadmap is explicitly separated:
+   - reflective/non-coded dots = extra visual features;
+   - coded fiducials/tape = identifiable tracking/pose anchors;
+   - known-size reference = future metric scale.
+
+Exact next test:
+- export and print target at 100% Actual Size;
+- take/import 15–25 sharp board photos with one fixed lens/zoom/orientation;
+- run calibration and export its report;
+- prefer RMS <1.0 px; <=1.5 px accepted for this milestone;
+- rebuild Stage 2 and confirm Intrinsics source begins with Calibrated;
+- optionally rebuild test4 Stage 8/9 to check for no major regression;
+- export v0.18 version-test report.
