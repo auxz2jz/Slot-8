@@ -170,3 +170,10 @@ v0.14.0 turns the valid Stage 9 assignments into the first conventional textured
 Stage 10 exports a single ZIP containing `textured_model.obj`, `texture_atlas.mtl`, and `texture_atlas.png`. Combined Project Diagnostics now covers Stages 1–10.
 
 Package SHA-256: `91f069323d1f50de94519d166e41e387050d438ccb912bdff62a42249161238c`.
+
+
+## v0.15.0 — connected UV islands + in-app textured preview
+
+v0.14.0 proved standard OBJ/MTL/PNG texture export. v0.15.0 reduces the one-triangle mosaic by grouping edge-connected faces that share the same source photograph into larger UV islands. It also adds a rotatable **View textured model in app** preview using the actual generated atlas and persisted UVs.
+
+Package SHA-256: `3207682ee1202e53fd90c9eeb14edaa8386d31acb0a811235c030e6bc3544cb4`.
