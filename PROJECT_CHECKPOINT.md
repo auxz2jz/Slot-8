@@ -612,3 +612,38 @@ Next after v0.15 passes: improve Stage 9 coverage and add seam/exposure blending
 - test3 Stage 9/10 coverage must be **>= 18.19%**.
 - Texture alignment must remain correct in the in-app preview.
 - Brightness stepping between source-photo regions should be no worse than v0.15 and ideally reduced.
+
+
+## v0.16.0 device-result upload checkpoint — analysis intentionally paused
+
+User explicitly stopped the analysis loop on 2026-09-23 and requested that all progress be saved before any further work.
+
+Received v0.16.0 artifacts (9 total):
+1. 3D_Scan_Studio_v0.16.0_test_report.txt
+2. test4_textured_model_package.zip
+3. test4_stage10_texture_atlas_report.txt
+4. test4_combined_project_diagnostics.txt
+5. test3_textured_model_package.zip
+6. test3_stage10_texture_atlas_report.txt
+7. test3_combined_project_diagnostics.txt
+8. test4_texture_atlas.png
+9. test3_texture_atlas.png
+
+Confirmed from the uploaded reports before stopping:
+- v0.16.0 guide: **8 Works / 0 Problems / 0 Untested**
+- test4 Stage 9/10: **3810 / 12876 faces = 29.59% coverage**
+- test4 Stage 10: 4096×4096 atlas, 1535 UV islands, largest island 81 faces, 13.79% occupancy, 90 source photos, 0 missing-photo skips, 0 mapping skips
+- test4 exposure normalization adjusted 41/90 source photos by at least 3%
+- test3 Stage 9/10: **927 / 4938 faces = 18.77% coverage**
+- test3 Stage 10: 2048×2048 atlas, 384 UV islands, largest island 52 faces, 13.52% occupancy, 39 source photos, 0 missing-photo skips, 0 mapping skips
+- test3 exposure normalization adjusted 16/39 source photos by at least 3%
+
+The visible results therefore show a small non-regressing coverage increase over v0.15:
+- test4: 29.26% -> 29.59%
+- test3: 18.19% -> 18.77%
+
+IMPORTANT:
+- No v0.17.0 source changes have been started.
+- No further interpretation should be assumed beyond the confirmed values above.
+- Next action, when explicitly resumed by the user, is to do one concise v0.16.0 review from these saved artifacts and then decide the next build once.
+- Do not re-request these nine artifacts unless a file is actually unavailable.
