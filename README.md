@@ -107,3 +107,18 @@ SHA-256:
 `5f6b078a1b960c7220f36c1854f65cd03a3f9797a648706efc01c5c94454abdc`
 
 See `PROJECT_CHECKPOINT.md` for exact v0.9.2 test instructions.
+
+
+## v0.10.0 — project isolation + Stage 7 surface quality
+
+v0.9.2 passed its reset/state test. A follow-up navigation test exposed that the on-disk project data was isolated correctly but live ViewModel progress could visually bleed into another selected project.
+
+v0.10.0 makes every heavy Stage 1–7 job project-owned. Background progress is shown only in the owner project, completion cannot change the user's selected project, and one heavy reconstruction job is allowed at a time until explicit multi-job scheduling is designed.
+
+The same build advances Stage 7 with boundary-preserving smoothing, per-vertex normals, OBJ/PLY normal export, and classification of remaining borders into simple closed loops versus open/branched boundary groups. Broad automatic hole filling is intentionally deferred until these diagnostics are validated on-device.
+
+Current package:
+`PhotogrammetryStudioAndroid-v0.10.0-Project-Isolation-Surface-Quality-Android-Studio-Ready.zip`
+
+SHA-256:
+`f9bca4a4096189c020c1c640b511fd9da0684ccd18507f3948b2224252687ba7`
