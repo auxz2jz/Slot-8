@@ -355,3 +355,23 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - TODO — show an explicit busy message naming the project if the user tries to start processing on another project.
 - FUTURE — optional project-list processing/completed badge.
 - RULE — no cross-project result/data sharing unless a deliberate merge/compare feature is added later.
+
+
+## v0.10.0 — project isolation + Stage 7 surface quality
+
+- PASSED — v0.9.2 guide: 7 Works / 0 Problems / 0 Untested.
+- FOUND — project files were isolated by ID, but shared live StateFlows could display another project's running progress.
+- DONE — immutable owner project for every heavy Stage 1–7 job.
+- DONE — owner-only live progress/report publishing.
+- DONE — background completion never changes selected project.
+- DONE — one heavy reconstruction job at a time with an explicit owner-project busy message.
+- RULE — no cross-project data sharing unless an explicit merge/compare feature is intentionally built.
+- DONE — Stage 7 two-pass boundary-preserving smoothing.
+- DONE — Stage 7 area-weighted per-vertex normals.
+- DONE — OBJ normal export using `vn` and normal-referenced faces.
+- DONE — PLY normal export using `nx ny nz`.
+- DONE — boundary closed-loop/open-or-branched classification and branch-vertex count.
+- LOCAL VALIDATION — test4: 5,172 vertices / 12,872 faces / 0 non-manifold / 5,172 normals.
+- LOCAL VALIDATION — test3: 2,144 vertices / 4,938 faces / 0 non-manifold / 2,144 normals.
+- TEST — Android Studio/device v0.10.0 guide.
+- NEXT — conservative small/simple closed-loop filling, then texture preparation.
