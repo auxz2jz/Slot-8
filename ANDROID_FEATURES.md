@@ -510,3 +510,17 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - RETAINED — v0.15 connected UV islands and textured preview.
 - TEST — test4 >=29.59%; test3 >=18.77%.
 - NEXT — if gain remains small, camera calibration/intrinsics and graph-based source-camera recovery.
+
+
+## Post-v0.17 direction — camera calibration
+
+- PASSED — v0.17 guide: 8 Works / 0 Problems / 0 Untested.
+- PLATEAU — test4 remained 29.59% texture coverage.
+- PLATEAU — test3 remained 18.77% texture coverage.
+- DECISION — stop adding broader Stage 9 recovery heuristics for now.
+- NEXT — guided camera calibration using a printed ChArUco/checkerboard target.
+- TODO — calibration profile keyed to camera/lens/zoom/resolution.
+- TODO — solve fx/fy/cx/cy and radial/tangential distortion.
+- TODO — calibration quality/reprojection-error report and poor-frame rejection.
+- TODO — apply calibrated intrinsics/distortion to Stages 2–10.
+- TODO — optional separate known-size marker workflow for metric scale.
