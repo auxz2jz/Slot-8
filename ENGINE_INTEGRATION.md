@@ -364,3 +364,18 @@ No geometry algorithm changes are made in v0.9.2.
 Each reconstruction stage is now an explicit invalidation boundary. Rebuilding a stage clears that stage and all later stages from both the currently displayed in-memory state and persisted reports/models before the replacement work begins. This fixes the stale Stage 7 card observed during v0.9.1 reruns.
 
 A full pipeline reset is now exposed to the user. It keeps the selected project's photo set and metadata but deletes generated Stage 1–7 outputs, allowing repeatable from-scratch testing without deleting/reimporting the photo set.
+
+
+## v0.10.0 project-scoped execution and surface-quality pass
+
+Project storage was already keyed by project ID; v0.10.0 also scopes live execution state. A heavy job owns the project that launched it. Navigation does not retarget that job, callbacks cannot overwrite another project's visible progress/results, and completion cannot change the selected project. One heavy job is scheduled at a time until deliberate multi-job scheduling is implemented.
+
+Stage 7 retains the v0.9.1 manifold local-fan connectivity and then:
+1. identifies boundary vertices;
+2. runs two light smoothing passes on interior vertices while keeping boundaries fixed;
+3. calculates area-weighted vertex normals;
+4. classifies boundary graph components as simple closed loops or open/branched groups;
+5. counts branched boundary vertices;
+6. exports normals in OBJ and PLY.
+
+No hole is auto-filled in v0.10.0. The real test clouds still contain many branched boundary vertices, so the next filling pass should start only with small/simple closed loops.
