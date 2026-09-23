@@ -442,3 +442,10 @@ Later atlas work can merge neighboring faces into UV islands and blend seams/exp
 Stage 10 now builds mesh-edge adjacency among Stage 9-assigned faces. Neighboring faces that use the same source photograph are grouped into a shared UV island. The island copies one padded source-photo bounding region into the atlas, and each member face maps into it using its original relative source coordinates.
 
 This lowers seam count and makes the atlas more interpretable while keeping source-photo boundaries conservative. The new in-app preview uses the saved atlas plus per-face UVs to render the Stage 7 mesh; desktop OBJ/MTL/PNG remains the standards-based export.
+
+
+## v0.16.0 appearance-quality refinement
+
+Stage 9 remains strict by default. The original path requires all three face vertices to pass the coarse depth-visibility test. v0.16 adds a fallback candidate only when the face has no strict source: all three vertices must still be geometrically valid (positive depth, image bounds, front-facing), at least two vertices must pass visibility, projected area must be non-trivial, and mean view score must clear a minimum. A fallback never replaces a strict assignment.
+
+Stage 10 retains the v0.15 connected same-photo UV islands. For each source photo actually used by the atlas, it estimates mean luminance while ignoring nearly clipped pixels. The median used-photo luminance becomes the target, and each source image receives a single luminance gain clamped to 0.82..1.22 before atlas copying. This intentionally reduces exposure stepping without performing aggressive color remapping.
