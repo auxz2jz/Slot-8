@@ -458,3 +458,12 @@ v0.16 showed that a generic visibility relaxation is safe but yields only small 
 After strict and v0.16 fallback assignments are frozen, the Stage 7 face graph is built from shared edges. A still-unassigned face may use a source photo only when at least two assigned edge neighbors agree on that photo and the target independently projects cleanly/front-facing into that camera with conservative area/score/visibility checks.
 
 Only the frozen strict/v0.16 assignment set can vote; v0.17 recovered faces never vote for more faces. Stage 10 atlas packing and exposure normalization are unchanged.
+
+
+## v0.18.0 camera calibration
+
+The app now stores one reusable physical-camera calibration profile independently from scan projects. A planar 9×6-inner-corner, 25 mm-square checkerboard is detected across multiple imported views; OpenCV then solves fx, fy, cx, cy plus k1, k2, p1, p2 and k3.
+
+Profiles require at least ten accepted views and RMS reprojection error <=1.5 px before activation. Existing reconstruction helpers consult the active profile and scale its focal/principal-point values to compatible working-image sizes. The distortion coefficients are saved and reported but are not yet globally applied to raster/feature undistortion in v0.18.
+
+Marker assistance remains separate from optical calibration: identical reflective dots add trackable texture; coded fiducials provide identifiable pose anchors; known-size references can later establish metric scale.
