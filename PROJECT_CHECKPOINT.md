@@ -417,3 +417,62 @@ Stage 8 is appearance-only and must not alter Stage 7 vertex/face counts.
 8. Export the v0.12.0 version-test report.
 
 Routine upload after v0.12.0: version-test report + one combined diagnostic TXT per tested project. Colored PLY is only needed when visual/color geometry inspection is requested.
+
+
+## v0.12.0 device result — PASSED
+
+- Version guide: **8 Works / 0 Problems / 0 Untested**
+- Device: Samsung SM-S908U1 / Android 16
+- test4 Stage 8: 5,173 vertices / 12,876 faces; 72/100 connected camera poses recovered; 65 cameras used; 2,880 colored vertices; **55.67% color coverage**.
+- test3 Stage 8: 2,144 vertices / 4,938 faces; 41/41 connected camera poses recovered; 35 cameras used; 999 colored vertices; **46.60% color coverage**.
+- Stage 8 colored PLY/OBJ exports preserved Stage 7 topology.
+- Combined Project Diagnostics correctly extended through Stage 8.
+
+See `TEST_OUTPUT_MANIFEST_v0.12.0.sha256` for the exact uploaded result set.
+
+## v0.13.0 build prepared
+
+- Version: **0.13.0**
+- versionCode: **25**
+- Package: `PhotogrammetryStudioAndroid-v0.13.0-Stage9-Texture-Source-Assignment-Android-Studio-Ready.zip`
+- Package SHA-256: `fd8265a4156b548999dc1fcd66c9c914eb5b636c0427abb323d9e3ee9fa680b5`
+- Source-manifest SHA-256: `d4138babad53f12028d207c0328d2e5da60fc71395f17b0f5c37b009af008dad`
+- v0.12.0 -> v0.13.0 patch SHA-256: `adbacd3df69fe996f98f41b0fe4f01228ba7a3b800de07f517ad3350f479441e`
+- ZIP integrity test: **passed**
+- Gradle wrapper JAR included: **yes**
+- Source parser/redeclaration checks: **passed**
+- Full Gradle compile here: blocked because `services.gradle.org` cannot be resolved; Android Studio/device build remains authoritative.
+
+### Stage 8 robustness upgrade
+
+- Short-gap pose bridging can recover across a failed adjacent orientation link using an older recovered connected camera, up to four positions back.
+- Adjacent recovered links and bridged links are reported separately.
+- A coarse image-space depth map rejects projected vertices that sit substantially behind the nearest projected mesh surface before color sampling.
+- Visibility-rejected candidate counts are persisted and included in Combined Project Diagnostics.
+
+### Stage 9 — Texture Source Assignment
+
+- Reuses the robust recovered camera set and visibility test.
+- Tests every Stage 7 face against usable source cameras.
+- Requires all three triangle corners to project inside the image and pass visibility.
+- Rejects effectively sub-pixel projected faces.
+- Chooses one best source photo per assigned triangle.
+- Stores normalized source-photo coordinates for all three face corners.
+- Reports assigned/unassigned faces, triangle source coverage, camera usage, recovered/bridged pose links and per-camera face contribution counts.
+- Exports a triangle source-map TSV.
+- Combined Project Diagnostics now includes Quick Check + Stages 1–9.
+
+Stage 9 does not yet build a UV atlas image. It is the source-view validation/preparation step immediately before atlas packing and rasterization.
+
+### Next device test
+
+1. Rebuild Stage 8 on test4 and inspect recovered/bridged poses plus visibility-rejected candidates.
+2. Tap **Next: Stage 9 — Assign triangle texture sources**.
+3. Confirm Stage 9 assigns non-zero faces, uses multiple cameras and reports triangle source coverage.
+4. Repeat Stage 8 + Stage 9 on test3.
+5. Export Combined Project Diagnostics for test3 and test4; both must contain Stage 9.
+6. Export the v0.13.0 version-test report.
+
+Routine upload: version-test report + one Combined Project Diagnostics TXT per tested project. The Stage 9 source-map TSV is only needed if assignment coverage/behavior needs deeper inspection.
+
+Next after a healthy Stage 9 result: real UV atlas generation and UV-mapped model export.
