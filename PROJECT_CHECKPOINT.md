@@ -570,3 +570,45 @@ Next after v0.14 device validation: verify texture orientation/viewer compatibil
 7. Export Combined Project Diagnostics and the v0.15.0 version-test report.
 
 Next after v0.15 passes: improve Stage 9 coverage and add seam/exposure blending across neighboring islands.
+
+
+## v0.15.0 device result — PASSED
+
+- Guide: **8 Works / 0 Problems / 0 Untested** on Samsung SM-S908U1 / Android 16.
+- test4 Stage 10: 4096×4096 atlas, **1,503 UV islands**, largest island **81 faces**, **13.60% occupancy**, 3,768/12,876 textured faces (**29.26%**), 90 source photos, 0 missing/mapping skips, readyExport=true.
+- test3 Stage 10: 2048×2048 atlas, **365 UV islands**, largest island **52 faces**, **13.06% occupancy**, 898/4,938 textured faces (**18.19%**), readyExport=true.
+- In-app textured preview, standard OBJ/MTL/PNG export, project isolation, and Stage 7 geometry preservation all passed.
+- The test4 atlas visually shows larger grouped source-photo regions, confirming the v0.15 UV-island change.
+
+## v0.16.0 build prepared
+
+- Version: **0.16.0**
+- versionCode: **28**
+- Package: `PhotogrammetryStudioAndroid-v0.16.0-Texture-Coverage-Exposure-Android-Studio-Ready.zip`
+- Package SHA-256: `bfb575d5dde6d18916a3bddacac46699bc77cdc8f1d3fff7a2bcd12392fa263b`
+- Source-manifest SHA-256: `2e7b7b6efa123fd96a198530154f5acb56dce60b224c7d13b26591b96867f11b`
+- v0.15.0 -> v0.16.0 patch SHA-256: `4861a56566d47a486f86bdb19b3b3345f81366ae88a0dca1dc3fe8a14835a0a1`
+- ZIP integrity test: **passed**
+- Gradle wrapper JAR included: **yes**
+- Core Kotlin/model/diagnostic compile: **passed**
+- TextureAtlasBuilder Android-stub compile: **passed**
+- Full Gradle build here remains blocked because the recovery environment cannot resolve the Gradle distribution host; Android Studio/device remains authoritative.
+
+### v0.16.0 appearance changes
+
+1. Strict Stage 9 three-vertex visibility assignments remain first choice.
+2. A second conservative candidate pool may recover only a previously unassigned face.
+3. Fallback still requires all three corners to have positive-depth, in-image, front-facing geometric projections.
+4. At least two of the three corners must pass the coarse depth visibility check.
+5. Fallback also requires a minimum projected area and mean source-view score.
+6. Stage 9 diagnostics report how many assignments came from the fallback.
+7. Stage 10 estimates mean luminance for each used source photo, chooses the median used-photo luminance as target, and applies a clamped 0.82..1.22 gain.
+8. Exposure normalization is luminance-only; no aggressive per-channel color correction is performed.
+9. v0.15 connected UV islands, in-app textured preview, and Stage 7 geometry remain unchanged.
+
+### v0.16.0 device baselines
+
+- test4 Stage 9/10 coverage must be **>= 29.26%**.
+- test3 Stage 9/10 coverage must be **>= 18.19%**.
+- Texture alignment must remain correct in the in-app preview.
+- Brightness stepping between source-photo regions should be no worse than v0.15 and ideally reduced.
