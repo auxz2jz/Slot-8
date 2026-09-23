@@ -437,3 +437,22 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - DONE — Combined Project Diagnostics extended through Stage 9.
 - TEST — Android Studio/device v0.13.0 guide.
 - NEXT — UV atlas packing/rasterization and UV-mapped model export if Stage 9 coverage is healthy.
+
+
+## v0.14.0 — Stage 10 UV texture atlas
+
+- PASSED — v0.13.0 guide: 8 Works / 0 Problems / 0 Untested.
+- PASSED — test4: 100/100 camera poses, 3,768 / 12,876 Stage 9 assigned faces (29.3%).
+- PASSED — test3: 41/41 camera poses, 898 / 4,938 Stage 9 assigned faces (18.19%).
+- DONE — versionName 0.14.0 / versionCode 26.
+- DONE — one padded UV-atlas tile per Stage 9-assigned triangle.
+- DONE — source-photo triangle patch rasterization into PNG.
+- DONE — OBJ UV coordinates aligned with atlas patches.
+- DONE — separate photo_atlas and untextured materials.
+- DONE — preserve unassigned faces as gray rather than inventing texture.
+- DONE — one-click ZIP package: OBJ + MTL + PNG.
+- DONE — individual PNG and Stage 10 report exports.
+- DONE — Combined Project Diagnostics through Stage 10.
+- DONE — project isolation/upstream invalidation includes Stage 10.
+- TEST — Android Studio/device v0.14.0 guide.
+- NEXT — atlas orientation/viewer validation, UV island packing, seam/exposure blending and higher Stage 9 coverage.
