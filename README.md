@@ -186,3 +186,12 @@ v0.15.0 passed all eight device tests and proved connected same-photo UV islands
 Stage 9 now keeps strict visibility assignments first, then allows a conservative fallback only for previously unassigned faces whose three corners still project cleanly and front-facing, with at least two corners passing the coarse visibility test. Stage 10 normalizes source-photo luminance toward the median used-photo brightness with a clamped 0.82..1.22 gain before copying photo regions into the atlas.
 
 Package SHA-256: `bfb575d5dde6d18916a3bddacac46699bc77cdc8f1d3fff7a2bcd12392fa263b`.
+
+
+## v0.17.0 — neighbor-consistent texture recovery
+
+v0.16 passed all eight tests but only slightly increased texture coverage. v0.17 keeps the strict and v0.16 fallback assignments, then uses mesh-edge continuity for still-unassigned faces. A source photo is considered only when at least two already-assigned edge neighbors agree on it and the missing face still projects cleanly into that camera. Recovered faces cannot propagate further recovery.
+
+The Capture guidance card now also includes overlap, lens consistency, multi-height rings, lighting/sharpness, reflection, and temporary-marker advice.
+
+Package SHA-256: `f55782bfd4906bb0c42d640fee02666d85bd12b4be18350f546b66c0a9a3b728`.
