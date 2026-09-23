@@ -49,7 +49,7 @@ b12b78bb06ca93d8207d05f642e9d8c0bcaf725c12ec523f59117f3b43a9ae0d  ./app/src/test
 2c00a0f75404ef06aafad5cbbf1d639b6225475862132cc87f7018a4c5888bdf  ./app/src/test/java/com/photogrammetrystudio/app/util/SurfaceMesherTest.kt
 ae6f00f4087e5fd54c0ef486fd895680d57ebbab1d461b6879939397c9f0d9ae  ./build.gradle.kts
 1b0d06c4540bd61cab45f373e963c74fa139d08167d7786012d2496666a0b258  ./gradle.properties
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649fff  ./gradle/wrapper/.gitkeep
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./gradle/wrapper/.gitkeep
 5bcd54cf8d7d97f789e8b4cb3fad8df893658cf714daed6ca1f89e3d9c27ddaf  ./gradle/wrapper/gradle-wrapper.jar
 f34e21a981617b8ab59ecbb41b541b35dcf724e01c246e1c0fc8c5420cb66ec0  ./gradle/wrapper/gradle-wrapper.properties
 1cc18a417d7facf05886b66d81fcb031c6c04675aed0bdc8627cf14b4355018b  ./gradlew
