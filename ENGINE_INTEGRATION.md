@@ -449,3 +449,12 @@ This lowers seam count and makes the atlas more interpretable while keeping sour
 Stage 9 remains strict by default. The original path requires all three face vertices to pass the coarse depth-visibility test. v0.16 adds a fallback candidate only when the face has no strict source: all three vertices must still be geometrically valid (positive depth, image bounds, front-facing), at least two vertices must pass visibility, projected area must be non-trivial, and mean view score must clear a minimum. A fallback never replaces a strict assignment.
 
 Stage 10 retains the v0.15 connected same-photo UV islands. For each source photo actually used by the atlas, it estimates mean luminance while ignoring nearly clipped pixels. The median used-photo luminance becomes the target, and each source image receives a single luminance gain clamped to 0.82..1.22 before atlas copying. This intentionally reduces exposure stepping without performing aggressive color remapping.
+
+
+## v0.17.0 neighbor-consistent source recovery
+
+v0.16 showed that a generic visibility relaxation is safe but yields only small gains. v0.17 therefore uses mesh topology rather than broadening the visibility threshold again.
+
+After strict and v0.16 fallback assignments are frozen, the Stage 7 face graph is built from shared edges. A still-unassigned face may use a source photo only when at least two assigned edge neighbors agree on that photo and the target independently projects cleanly/front-facing into that camera with conservative area/score/visibility checks.
+
+Only the frozen strict/v0.16 assignment set can vote; v0.17 recovered faces never vote for more faces. Stage 10 atlas packing and exposure normalization are unchanged.
