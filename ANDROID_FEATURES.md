@@ -322,3 +322,21 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - TODO — reset clears generated Stage 1–7 reports/clouds/meshes only.
 - TODO — confirmation dialog before reset.
 - TODO — add reset/rebuild-state coverage to the next in-app test guide.
+
+
+## v0.9.2 — pipeline reset and stale-card fix
+
+- PASSED — complete v0.9.1 guide: 7 Works / 0 Problems / 0 Untested.
+- PASSED — test4 full pipeline remains consistent through 40,922 fused points and 12,872 topology-clean Stage 7 faces.
+- PASSED — test3 Stage 7 remains 4,938 faces with 0 non-manifold edges.
+- FOUND — saved downstream files invalidate correctly, but old Stage 7 UI could remain loaded after rebuilding Stage 1.
+- DONE — centralized stage invalidation for in-memory state and persisted files.
+- DONE — rebuilding Stage 1 clears Stages 1–7 immediately; Stage 2 clears 2–7; Stage 3 clears 3–7; etc.
+- DONE — old persisted Stage 1 match report is cleared before a replacement Stage 1 run.
+- DONE — visible **Reset reconstruction stages** action with confirmation.
+- DONE — reset preserves photos and project metadata.
+- DONE — reset deletes only generated Stage 1–7 results.
+- DONE — reset is disabled while analysis/reconstruction is actively running.
+- DONE — v0.9.2-specific test guide for cancel/reset/stale-card/persistence behavior.
+- TEST — Android Studio/device v0.9.2 regression.
+- NEXT — Stage 7 boundary/hole cleanup, normals and smoothing.
