@@ -355,3 +355,12 @@ Results:
 - test3: 41,017 source points -> 2,144 compact used vertices / 4,938 faces / 3,364 boundary edges / 0 non-manifold edges / 34 retained components.
 
 The reduction in face count from v0.9.0 is intentional: overlapping faces are rejected rather than counted as extra surface detail. Boundary edges remain and will guide the next hole/open-border cleanup decision after device validation.
+
+
+## v0.9.2 state-management maintenance
+
+No geometry algorithm changes are made in v0.9.2.
+
+Each reconstruction stage is now an explicit invalidation boundary. Rebuilding a stage clears that stage and all later stages from both the currently displayed in-memory state and persisted reports/models before the replacement work begins. This fixes the stale Stage 7 card observed during v0.9.1 reruns.
+
+A full pipeline reset is now exposed to the user. It keeps the selected project's photo set and metadata but deletes generated Stage 1–7 outputs, allowing repeatable from-scratch testing without deleting/reimporting the photo set.
