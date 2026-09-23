@@ -177,3 +177,12 @@ Package SHA-256: `91f069323d1f50de94519d166e41e387050d438ccb912bdff62a4224916123
 v0.14.0 proved standard OBJ/MTL/PNG texture export. v0.15.0 reduces the one-triangle mosaic by grouping edge-connected faces that share the same source photograph into larger UV islands. It also adds a rotatable **View textured model in app** preview using the actual generated atlas and persisted UVs.
 
 Package SHA-256: `3207682ee1202e53fd90c9eeb14edaa8386d31acb0a811235c030e6bc3544cb4`.
+
+
+## v0.16.0 — texture coverage recovery + exposure normalization
+
+v0.15.0 passed all eight device tests and proved connected same-photo UV islands plus the in-app textured preview. v0.16.0 keeps that passing geometry and UV-island foundation while targeting the two biggest remaining appearance limitations: untextured faces and brightness jumps between source photos.
+
+Stage 9 now keeps strict visibility assignments first, then allows a conservative fallback only for previously unassigned faces whose three corners still project cleanly and front-facing, with at least two corners passing the coarse visibility test. Stage 10 normalizes source-photo luminance toward the median used-photo brightness with a clamped 0.82..1.22 gain before copying photo regions into the atlas.
+
+Package SHA-256: `bfb575d5dde6d18916a3bddacac46699bc77cdc8f1d3fff7a2bcd12392fa263b`.
