@@ -133,3 +133,18 @@ Stage 7 now attempts conservative filling of only simple closed boundary loops. 
 Current package SHA-256: `392f033753fa059a2b64d1d57a5cdbce8e9901427abab77911679bb0cd2f2ba9`.
 
 See `PROJECT_CHECKPOINT.md` for the exact device test.
+
+
+## v0.12.0 — Stage 8 photo color projection
+
+v0.11.0 passed 7 Works / 0 Problems / 0 Untested and confirmed the one-file Combined Project Diagnostics workflow.
+
+v0.12.0 adds the first photographic appearance stage. Stage 8 rebuilds the connected camera orientation chain, reuses Stage 4 refined camera centers, projects Stage 7 vertices into EXIF-normalized source photos, scores usable views, and blends photo color onto mesh vertices. It adds a colored preview, persistent color diagnostics, colored PLY/OBJ exports, and automatically extends Combined Project Diagnostics through Stage 8.
+
+Stage 8 does not change Stage 7 topology. This is intentionally a vertex-color validation milestone before triangle visibility refinement, UV coordinates and a real texture atlas.
+
+Current package:
+`PhotogrammetryStudioAndroid-v0.12.0-Stage8-Photo-Color-Projection-Android-Studio-Ready.zip`
+
+SHA-256:
+`a43dc5619dc90a82a5fb578e00fd45c26cb9a3dfd6c0aa19d0e2e584b377e630`
