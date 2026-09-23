@@ -647,3 +647,62 @@ IMPORTANT:
 - No further interpretation should be assumed beyond the confirmed values above.
 - Next action, when explicitly resumed by the user, is to do one concise v0.16.0 review from these saved artifacts and then decide the next build once.
 - Do not re-request these nine artifacts unless a file is actually unavailable.
+
+
+## v0.16.0 concise device review — PASSED
+
+- Guide: **8 Works / 0 Problems / 0 Untested**
+- test4: 3810/12876 textured faces = **29.59%**, up from 29.26%.
+- test4 v0.16 fallback recovered **42** faces from 20,683 relaxed candidates.
+- test4 Stage 10: 1535 UV islands, largest 81 faces, 13.79% occupancy, 90 source photos, 0 missing/mapping failures; exposure normalization adjusted 41/90 photos.
+- test3: 927/4938 textured faces = **18.77%**, up from 18.19%.
+- test3 v0.16 fallback recovered **29** faces from 672 relaxed candidates.
+- test3 Stage 10: 384 UV islands, largest 52 faces, 13.52% occupancy, 39 source photos, 0 missing/mapping failures; exposure normalization adjusted 16/39 photos.
+- User noted both coverage gains were only slight. v0.17 therefore does not broadly loosen visibility again.
+
+## v0.17.0 build prepared
+
+- Version: **0.17.0**
+- versionCode: **29**
+- Package: `PhotogrammetryStudioAndroid-v0.17.0-Neighbor-Texture-Recovery-Android-Studio-Ready.zip`
+- Package SHA-256: `f55782bfd4906bb0c42d640fee02666d85bd12b4be18350f546b66c0a9a3b728`
+- Source-manifest SHA-256: `f437a1438afb6a921870bad1b60f7c7d7761a5b91750fa2281720e0c92a1b188`
+- v0.16.0 -> v0.17.0 patch SHA-256: `011dfffbf0773990f3bd617055d9532544e52b7a5456b81714bf661ff8826c97`
+- ZIP integrity test: **passed**
+- Gradle wrapper JAR included: **yes**
+- Changed Kotlin files passed delimiter/parser sanity checks; full Android Studio/device compile remains authoritative.
+
+### v0.17 Stage 9 recovery order
+
+1. Strict three-vertex visibility assignment.
+2. v0.16 conservative two-of-three visibility fallback.
+3. v0.17 neighbor-consistency recovery for still-unassigned faces only.
+
+Neighbor recovery requires:
+- at least two edge-neighbor faces already assigned to the same source photo;
+- only pre-existing strict/v0.16 assignments may vote;
+- recovered v0.17 faces never vote for additional faces;
+- the target face still projects positive-depth, in-image and front-facing in that camera;
+- projected area and mean source-view score pass conservative thresholds;
+- at least one target vertex passes the coarse depth-visibility check.
+
+### Capture guidance
+
+The project Capture guidance card now includes:
+- about 70–80% overlap,
+- same lens/zoom,
+- small steps,
+- low/middle/high rings,
+- steady/even lighting and sharpness,
+- reflection avoidance,
+- temporary visual texture/markers for plain objects.
+
+### v0.17 device baselines
+
+- test4 coverage must be **>= 29.59%**.
+- test3 coverage must be **>= 18.77%**.
+- Stage 7 geometry must remain unchanged.
+- Texture alignment must remain usable.
+- Combined diagnostics must report neighbor-consistency candidate/assignment counts.
+
+If v0.17 still produces only a small coverage gain, the next priority is camera calibration/intrinsics and graph-based camera/source recovery rather than looser visibility rules.
