@@ -419,3 +419,19 @@ For visibility, each recovered camera builds a coarse image-space nearest-depth 
 Stage 9 then evaluates Stage 7 faces against the recovered cameras. A face is assignable only when all three corners project inside the image and pass the visibility test. The best source photo and normalized source-image coordinates are persisted per face.
 
 This produces the source-view metadata needed for the next UV-atlas stage without changing Stage 7 topology.
+
+
+## v0.14.0 Stage 10 texture atlas
+
+Stage 10 uses the exact Stage 9 face/source-photo mapping. Each assigned face is placed in its own padded atlas cell. The three Stage 9 source-image coordinates are rasterized barycentrically into a right-triangle patch and the corresponding atlas UVs are written into the OBJ.
+
+The first atlas is intentionally simple and deterministic:
+1. no UV overlap;
+2. no invented texture for unassigned faces;
+3. padding plus same-face centroid fill reduces texture-filter bleed;
+4. Stage 7 geometry is untouched;
+5. OBJ uses `photo_atlas` for assigned faces and `untextured` for all others;
+6. MTL references `texture_atlas.png`;
+7. OBJ + MTL + PNG are packaged together.
+
+Later atlas work can merge neighboring faces into UV islands and blend seams/exposure once this export is proven correct in real viewers.
