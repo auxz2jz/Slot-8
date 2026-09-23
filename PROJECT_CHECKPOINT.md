@@ -476,3 +476,50 @@ Stage 9 does not yet build a UV atlas image. It is the source-view validation/pr
 Routine upload: version-test report + one Combined Project Diagnostics TXT per tested project. The Stage 9 source-map TSV is only needed if assignment coverage/behavior needs deeper inspection.
 
 Next after a healthy Stage 9 result: real UV atlas generation and UV-mapped model export.
+
+
+## v0.13.0 device result — PASSED
+
+- Version guide: **8 Works / 0 Problems / 0 Untested**
+- Device: Samsung SM-S908U1 / Android 16
+- test4 Stage 8 recovered **100/100 connected camera poses** after gap bridging.
+- test4 Stage 9 assigned **3,768 / 12,876 triangles (29.3%)** using 90 cameras and was marked ready for texture-atlas work.
+- test3 Stage 9 recovered 41/41 camera poses and assigned **898 / 4,938 triangles (18.19%)** using 39 cameras.
+- test3 remains intentionally below the atlas-ready threshold; unassigned faces must stay untextured rather than receiving invented photo data.
+
+## v0.14.0 build prepared
+
+- Version: **0.14.0**
+- versionCode: **26**
+- Package: `PhotogrammetryStudioAndroid-v0.14.0-Stage10-UV-Texture-Atlas-Android-Studio-Ready.zip`
+- Package SHA-256: `91f069323d1f50de94519d166e41e387050d438ccb912bdff62a42249161238c`
+- Source-manifest file SHA-256: `2b233f5b0ddae8e06df72d1991f67a2826c3d73e2da8f0b8781953869ed8e9dd`
+- v0.13.0 -> v0.14.0 patch SHA-256: `abe0cec7e29445099cc7fd192a53dabf3bf902b563373d6a1eda940be3190484`
+- ZIP integrity test: **passed**
+- Gradle wrapper JAR included: **yes**
+- Core Kotlin model/diagnostic compile: **passed**
+- Full Gradle build here: blocked by unresolved Gradle distribution host; Android Studio/device build remains authoritative.
+
+### Stage 10 — UV Texture Atlas
+
+- consumes Stage 9's real source-photo assignments and normalized source-image triangle coordinates;
+- packs one padded atlas tile per assigned triangle;
+- barycentrically rasterizes the real source-photo patch into a PNG atlas;
+- writes matching OBJ UV coordinates;
+- keeps unassigned Stage 7 faces in the model under a gray untextured material;
+- does not change Stage 7 vertices/faces;
+- exports one ZIP containing `textured_model.obj`, `texture_atlas.mtl`, and `texture_atlas.png`;
+- allows partial atlas export for low-coverage projects such as test3 without fabricating missing texture;
+- extends Combined Project Diagnostics through Stage 10.
+
+### Exact next device test
+
+1. On test4 Stage 9 tap **Next: Stage 10 — Build UV texture atlas**.
+2. Confirm non-zero textured faces, atlas size, source photos used, and Ready for export=true.
+3. Export **textured model package (.zip)** and confirm it contains OBJ + MTL + PNG.
+4. Export/open the atlas PNG and confirm it contains real photo-derived triangle patches.
+5. Run Stage 10 on test3 as a partial-atlas regression.
+6. Confirm Stage 7 geometry counts remain unchanged.
+7. Export Combined Project Diagnostics and the v0.14.0 version-test report.
+
+Next after v0.14 device validation: verify texture orientation/viewer compatibility, then improve UV-island packing, seam/exposure blending and Stage 9 source coverage.
