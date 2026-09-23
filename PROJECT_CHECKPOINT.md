@@ -253,3 +253,55 @@ Project-isolation requirement:
 8. Cross-project merge/compare remains explicitly out of scope unless intentionally added later.
 
 This is a live-state isolation issue, not evidence of on-disk project-data contamination.
+
+
+## v0.9.2 device result — PASSED
+
+- Guide: **7 Works / 0 Problems / 0 Untested**
+- Reset kept test3's 95 photos and cleared generated Stages 1–7.
+- Stage rebuild invalidation behaved correctly and stale Stage 7 cards no longer survived an upstream rebuild.
+- test4 remained healthy through 40,922 fused points and its topology-clean Stage 7 result.
+
+### Cross-project observation after v0.9.2
+
+While test4 Stage 1 was running, the user opened test3. Source review confirmed project files/results were still keyed to the correct project ID, but live progress/report StateFlows were shared globally. This could make test3 *look* as though it was processing test4's job. Some later-stage completion paths could also reselect the job-owning project.
+
+## v0.10.0 build prepared
+
+- Version: **0.10.0**
+- versionCode: **22**
+- Package: `PhotogrammetryStudioAndroid-v0.10.0-Project-Isolation-Surface-Quality-Android-Studio-Ready.zip`
+- Package SHA-256: `f9bca4a4096189c020c1c640b511fd9da0684ccd18507f3948b2224252687ba7`
+- Source-manifest file SHA-256: `c707b56cdc7766270ee1d11a90893d4054730863f4f35472ab209cad4a174fa8`
+- ZIP integrity test: **passed**
+- Gradle wrapper JAR included: **yes**
+- Full Android compile here: blocked only because this environment cannot resolve services.gradle.org; Android Studio/device build remains authoritative.
+
+### Project-scoped execution
+
+1. Every heavy Stage 1–7 job has an immutable owner project ID/name/stage.
+2. Job progress/results are only published to the screen when that owner project is selected.
+3. Switching to another project no longer displays the first project's live progress.
+4. Background completion never changes the user's selected project.
+5. Reopening the owner project reloads its saved result from that project's repository folder.
+6. One heavy reconstruction job runs at a time for now; a second project receives an explicit message naming the project already processing.
+7. No cross-project data sharing is allowed unless a deliberate future merge/compare workflow is implemented.
+
+### Stage 7 surface-quality progress
+
+v0.10.0 keeps the v0.9.1 manifold local-fan topology and adds:
+- two conservative smoothing passes on interior vertices only;
+- fixed boundary vertices during smoothing;
+- area-weighted per-vertex normals;
+- normal-aware OBJ and PLY export;
+- closed boundary loop vs open/branched boundary-component analysis;
+- boundary branch-vertex count.
+
+No holes are automatically filled yet.
+
+### Local Kotlin validation on the real fused clouds
+
+- test4: 5,172 vertices / 12,872 faces / 7,982 boundary edges / 0 non-manifold / 1 closed loop / 5 open-or-branched groups / 2,480 branch vertices / 5,172 valid normals.
+- test3: 2,144 vertices / 4,938 faces / 3,364 boundary edges / 0 non-manifold / 1 closed loop / 5 open-or-branched groups / 1,043 branch vertices / 2,144 valid normals.
+
+Next after device validation: conservative filling of small/simple closed loops, then texture-preparation work.
