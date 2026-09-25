@@ -76,3 +76,27 @@ This document records the public/open-source projects being used as architectura
 ## Licensing rule
 
 Do not copy GPL implementation code into the app unless the project license is intentionally made GPL-compatible. GPL projects are valuable references for workflows and algorithms. Prefer independent reimplementation from documented mathematics and permissive sources (such as the MIT laser-triangulation project) when code reuse is desired.
+
+
+## Current physical target — manual DAVID-style scanner
+
+The first hardware target is intentionally simpler than Horus/Ciclop/FabScanPi:
+1. stationary object on a table;
+2. fixed camera/phone;
+3. rigid 90° calibration corner/backdrop with printed calibration markers;
+4. hand-held line laser swept over the object;
+5. capture frames while the stripe moves across the surface;
+6. reconstruct from calibrated camera geometry plus detected laser stripe.
+
+This mirrors the classic DAVID Laserscanner workflow more closely than a turntable scanner. The turntable/controller architecture remains useful later but is not required for the first laser reconstruction milestone.
+
+Important design implication:
+- do not hard-code a permanently fixed 45° laser plane as the only mode;
+- support a manual swept-laser workflow in which the laser plane can vary from frame to frame if the calibration background supplies enough information to recover that plane;
+- retain a fixed-laser-plane mode as an optional later/simple case.
+
+Future hardware automation:
+- turntable;
+- Arduino/ESP32 motor control;
+- fixed or motorized laser carriage;
+- automatic capture sequencing.
