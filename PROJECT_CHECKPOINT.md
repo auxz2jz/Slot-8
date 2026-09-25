@@ -769,3 +769,52 @@ Exact next test:
 - rebuild Stage 2 and confirm Intrinsics source begins with Calibrated;
 - optionally rebuild test4 Stage 8/9 to check for no major regression;
 - export v0.18 version-test report.
+
+
+## v0.19.0 build prepared — laser-line foundation while physical camera calibration is paused
+
+- Version: **0.19.0**
+- versionCode: **31**
+- Package: `PhotogrammetryStudioAndroid-v0.19.0-Laser-Line-Foundation-Android-Studio-Ready.zip`
+- Package SHA-256: `7b8f91099b4874331e73075bf2473f8c10650454ee788c57237f83a49ccfde84`
+- Source-manifest file SHA-256: `a4f6fe2c38c6ad9f23a78c46341ee5ff83184f2bd37939bb9a3747ad6cd3f4ed`
+- ZIP integrity test: **passed**
+- Gradle wrapper JAR included: **yes**
+- Models.kt standalone compile: **passed**
+- Changed Kotlin delimiter/syntax sanity checks: **passed**
+- Full Gradle build here remains blocked by unresolved services.gradle.org; Android Studio/device build is authoritative.
+
+Camera calibration status:
+- v0.18 remains intact.
+- User plans proper printed-board calibration after the 1st.
+- Temporary screen-displayed calibration must not be treated as the final accuracy baseline.
+- Do not tune Stage 2–7 geometry around temporary calibration results.
+
+v0.19 Laser Line Lab:
+1. Laser and Hybrid projects can open a dedicated Laser Line Lab.
+2. Import one matched laser-OFF frame and one laser-ON frame.
+3. Select red/green/blue laser and adjustable signal threshold.
+4. OFF/ON channel-difference suppresses static background.
+5. Extract weighted sub-pixel stripe center per image row.
+6. Reject very broad bright regions.
+7. Report stripe-row coverage, continuity, mean signal, mean width and X range.
+8. Save/export cyan detected-line preview PNG and text report.
+9. Laser files/results remain scoped to the owning project.
+10. No metric 3D triangulation is claimed yet.
+
+Open-source research references:
+- LibreScanner Horus/Ciclop + horus-fw — GPLv2 / CC BY-SA mechanical files.
+- hairu/FreeLSS — GPL-3.0.
+- mariolukas/FabScanPi-Server — project README states GPLv2.
+- songyuncen/laser-triangulation — MIT; direct sheet-of-light module split for camera, laser, movement calibration, extraction, reconstruction.
+- Sardau/Sardauscan — low-cost modular multi-laser scanner reference.
+
+Licensing rule: GPL implementations are workflow/algorithm references unless project licensing is intentionally made compatible. Prefer independent implementation and permissive references for reusable code.
+
+Next laser milestones:
+- laser-plane calibration;
+- turntable axis/angle calibration;
+- camera-ray / laser-plane triangulation;
+- multi-angle point-cloud fusion;
+- later ESP32/Arduino hardware control;
+- later Hybrid laser/photo alignment.
