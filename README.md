@@ -206,3 +206,14 @@ The app now includes a Camera Calibration screen, printable Letter-size 9×6-inn
 The saved distortion coefficients are intentionally not yet applied globally to raster/features; v0.18 first validates the profile solve on the real S22 Ultra workflow.
 
 Package SHA-256: `d5064ce8d2f08b28c0403dd0c680ccc393256c2bbea5a1471b4fba0f97768c7d`.
+
+
+## v0.19.0 — Laser Line Lab foundation
+
+Physical camera calibration remains paused until the proper printed board is available, but development continues. v0.19 adds a real Laser Line Lab for Laser and Hybrid projects: matched laser-OFF / laser-ON import, red/green/blue stripe extraction, adjustable threshold, sub-pixel line centers, diagnostics, and preview/report export.
+
+This version deliberately stops at 2D line extraction. Camera calibration, laser-plane calibration, and turntable/movement calibration are required before metric 3D triangulation.
+
+Open-source design references are documented in `LASER_LINE_RESEARCH.md`.
+
+Package SHA-256: `7b8f91099b4874331e73075bf2473f8c10650454ee788c57237f83a49ccfde84`.
