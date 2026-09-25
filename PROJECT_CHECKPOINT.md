@@ -818,3 +818,21 @@ Next laser milestones:
 - multi-angle point-cloud fusion;
 - later ESP32/Arduino hardware control;
 - later Hybrid laser/photo alignment.
+
+
+## Laser hardware scope clarified — manual DAVID-style first
+
+For the first real laser-line scanner milestone, do **not** assume a turntable or Arduino/ESP32 controller.
+
+Current intended physical setup:
+- object stationary on a table;
+- phone/camera fixed in place;
+- DAVID-style 90° calibration corner/backdrop behind the object;
+- printed calibration markers/pattern on the corner;
+- hand-held line laser swept manually up/down or across the object;
+- laser approximately off-axis from the camera; exact laser pose is not treated as a permanently fixed 45° mechanical requirement;
+- software detects the moving laser stripe frame-by-frame and later derives 3D from calibrated camera + calibration geometry / laser plane.
+
+Turntable, automated laser motion, and Arduino/ESP32 control are later milestones only.
+
+This manual setup should be treated as the primary first hardware target for Laser Scan mode.
