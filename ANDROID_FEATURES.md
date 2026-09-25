@@ -543,3 +543,22 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - ROADMAP — coded fiducial/tape support as identifiable pose/tracking anchors.
 - ROADMAP — known-size markers/rig dimensions for metric scale.
 - NEXT — validate v0.18 profile on-device, then apply saved distortion coefficients to raster/features.
+
+
+## v0.19.0 — Laser Line Lab foundation
+
+- DONE — versionName 0.19.0 / versionCode 31.
+- DONE — Laser/Hybrid project Laser Line Lab.
+- DONE — matched laser-OFF / laser-ON frame import.
+- DONE — red / green / blue line-laser selection.
+- DONE — adjustable color-difference threshold.
+- DONE — static-background suppression using OFF/ON pair.
+- DONE — weighted sub-pixel stripe centroid per image row.
+- DONE — broad-bright-region rejection.
+- DONE — coverage / continuity / signal / width diagnostics.
+- DONE — cyan detected-line overlay preview.
+- DONE — report and preview export.
+- DONE — per-project laser data isolation.
+- RESEARCH — Horus/Ciclop, FreeLSS, FabScanPi, Sardauscan and MIT OpenCV sheet-of-light references.
+- PAUSED — physical camera-calibration validation until printed target is available.
+- NEXT LASER — laser-plane calibration, turntable/movement calibration, then triangulation and point-cloud fusion.
