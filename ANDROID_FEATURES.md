@@ -562,3 +562,15 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - RESEARCH — Horus/Ciclop, FreeLSS, FabScanPi, Sardauscan and MIT OpenCV sheet-of-light references.
 - PAUSED — physical camera-calibration validation until printed target is available.
 - NEXT LASER — laser-plane calibration, turntable/movement calibration, then triangulation and point-cloud fusion.
+
+
+## Manual DAVID-style laser mode
+
+- PRIMARY FIRST HARDWARE TARGET — object stationary, camera fixed, 90° calibration corner, hand-swept line laser.
+- TODO — calibration-corner target/pattern workflow.
+- TODO — video/frame-sequence laser stripe extraction.
+- TODO — per-frame laser-plane recovery from calibration backdrop when using a freely swept hand laser.
+- TODO — triangulate object stripe points from calibrated camera ray + recovered laser plane.
+- LATER — fixed laser plane mode.
+- LATER — turntable + Arduino/ESP32 control.
+- LATER — automated laser carriage / synchronized capture.
