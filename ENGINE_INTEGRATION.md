@@ -467,3 +467,17 @@ The app now stores one reusable physical-camera calibration profile independentl
 Profiles require at least ten accepted views and RMS reprojection error <=1.5 px before activation. Existing reconstruction helpers consult the active profile and scale its focal/principal-point values to compatible working-image sizes. The distortion coefficients are saved and reported but are not yet globally applied to raster/feature undistortion in v0.18.
 
 Marker assistance remains separate from optical calibration: identical reflective dots add trackable texture; coded fiducials provide identifiable pose anchors; known-size references can later establish metric scale.
+
+
+## v0.19.0 laser-line foundation
+
+The first laser stage follows the common open-source sheet-of-light architecture but stops before triangulation. A matched OFF/ON frame pair is EXIF-normalized and compared by selected color-channel dominance. For each image row, the strongest narrow response is refined by an intensity-weighted centroid to produce a sub-pixel stripe coordinate.
+
+This avoids claiming metric geometry before calibration. The next geometric steps are:
+1. calibrated camera ray generation;
+2. laser-plane calibration;
+3. ray/plane intersection;
+4. turntable coordinate transform;
+5. multi-angle accumulation.
+
+Horus/Ciclop, FreeLSS and FabScanPi are retained mainly as GPL workflow/hardware references; the MIT `songyuncen/laser-triangulation` project is the most permissive direct OpenCV sheet-of-light code reference found so far.
