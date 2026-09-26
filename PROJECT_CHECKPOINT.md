@@ -836,3 +836,29 @@ Current intended physical setup:
 Turntable, automated laser motion, and Arduino/ESP32 control are later milestones only.
 
 This manual setup should be treated as the primary first hardware target for Laser Scan mode.
+
+
+## v0.19.0 compile-fix r1 — Android Studio build failure resolved
+
+User Android Studio build of the first v0.19.0 package reached `:app:compileDebugKotlin` and failed at:
+`LaserLineLabScreen.kt:86:13` — Material3 API is experimental.
+
+Root cause:
+- New Laser Line Lab used Material3 `TopAppBar`.
+- Unlike the existing Projects/Project/Calibration screens, it did not import `ExperimentalMaterial3Api` or opt in.
+
+Fix:
+- Added `import androidx.compose.material3.ExperimentalMaterial3Api`.
+- Added `@OptIn(ExperimentalMaterial3Api::class)` to `LaserLineLabScreen`.
+- No functional or algorithmic changes.
+- Keep versionName **0.19.0** / versionCode **31** because the original v0.19.0 package never compiled into a testable APK.
+
+Replacement package:
+`PhotogrammetryStudioAndroid-v0.19.0-r1-Laser-Line-Compile-Fix-Android-Studio-Ready.zip`
+SHA-256:
+`04d0f5312db10acd9a96a5dde87f59a413024454476cafd032aa2f175862a0d6`
+
+Verification:
+- Exact source diff contains only the Material3 import + OptIn annotation.
+- ZIP integrity test passed.
+- Assistant Gradle compile still cannot run because services.gradle.org cannot resolve; Android Studio compile remains authoritative.
