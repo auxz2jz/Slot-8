@@ -481,3 +481,12 @@ This avoids claiming metric geometry before calibration. The next geometric step
 5. multi-angle accumulation.
 
 Horus/Ciclop, FreeLSS and FabScanPi are retained mainly as GPL workflow/hardware references; the MIT `songyuncen/laser-triangulation` project is the most permissive direct OpenCV sheet-of-light code reference found so far.
+
+
+## v0.20.0 calibration-target preset integration
+
+Physical target choice is now explicit. `PhotoCalibrationTargetPreset` and `LaserCalibrationTargetPreset` define the available printable layouts, while `CalibrationTargetManager` persists the user's selected physical target and supplies bundled PDF bytes for Android document export.
+
+The two photo presets intentionally share one mathematical target geometry: 9×6 inner corners with 25.0 mm squares. Choosing Letter versus 12×18 therefore changes the printable page/margin, not the OpenCV object-point spacing. Newly solved calibration profiles still record the preset ID so diagnostics identify the physical sheet used.
+
+Laser presets have different marker layouts/sizes and are kept as distinct persistent IDs. v0.20 does not yet decode those markers: it preserves the v0.19 OFF/ON line extractor while establishing the exact physical-background identity required by the future laser-plane calibration stage.
