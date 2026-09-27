@@ -217,3 +217,14 @@ This version deliberately stops at 2D line extraction. Camera calibration, laser
 Open-source design references are documented in `LASER_LINE_RESEARCH.md`.
 
 Package SHA-256: `7b8f91099b4874331e73075bf2473f8c10650454ee788c57237f83a49ccfde84`.
+
+
+## v0.20.0 — selectable calibration target sizes
+
+v0.20 lets the user choose the physical print size available instead of assuming one calibration sheet. Photo calibration supports **US Letter 8.5×11** and **12×18**. Both retain the exact same 9×6-inner-corner / 25.0 mm-square checkerboard geometry, so the OpenCV camera-calibration object points remain compatible; the selected print preset is saved for traceability.
+
+The Laser Line Lab also supports **US Letter** and **12×18** DAVID-style backgrounds, with separate LEFT/RIGHT PDF exports. The target selection is persisted now for later marker decoding and laser-plane recovery. v0.20 still uses the v0.19 2D OFF/ON stripe extraction and does not yet claim marker-based 3D laser triangulation.
+
+The app bundles all target PDFs plus print-shop instructions. Matte cardstock mounted to inexpensive blank foam board is an acceptable budget setup when direct poster/foam-board printing is too expensive.
+
+Package SHA-256: `9f74ce9955f189af29ba7c011714cd840911ae52a98262d084555a05ecf99a58`.
