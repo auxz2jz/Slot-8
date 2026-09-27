@@ -913,3 +913,20 @@ Next device test:
 4. Export matching LEFT and RIGHT laser PDFs plus print instructions.
 5. Confirm an existing calibration profile still loads; physical recalibration is not required for this software regression.
 6. Export the v0.20 test report.
+
+
+## Pre-v0.21.0 checkpoint — standard in-store print sizes
+
+Baseline preserved before this change:
+- Latest packaged candidate: **v0.20.0 / versionCode 32**
+- Artifact: `PhotogrammetryStudioAndroid-v0.20.0-Multi-Calibration-Targets-Android-Studio-Ready.zip`
+- SHA-256: `9f74ce9955f189af29ba7c011714cd840911ae52a98262d084555a05ecf99a58`
+- Status: **CANDIDATE / not yet physically verified as a complete v0.20 release**
+- v0.19.0-r1 compiled successfully in the user's Android Studio; physical laser and camera calibration testing remained pending.
+
+New task:
+- Add standard copy-print target sizes that Staples publicly lists for store/self-service/full-service copies: Letter 8.5x11, Legal 8.5x14, and Ledger 11x17.
+- Preserve 12x18 as an optional poster preset for backward compatibility.
+- Show exact page dimensions and calibration-pattern dimensions in the app.
+- Add dedicated printable PDFs for every supported photo target and laser LEFT/RIGHT target size.
+- Preserve existing calibration profiles and existing reconstruction/laser functionality.
