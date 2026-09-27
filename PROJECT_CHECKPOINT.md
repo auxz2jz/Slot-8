@@ -862,3 +862,54 @@ Verification:
 - Exact source diff contains only the Material3 import + OptIn annotation.
 - ZIP integrity test passed.
 - Assistant Gradle compile still cannot run because services.gradle.org cannot resolve; Android Studio compile remains authoritative.
+
+
+## v0.20.0 prepared — selectable calibration print sizes
+
+Version: **0.20.0**  
+versionCode: **32**
+
+Replacement Android Studio package:
+`PhotogrammetryStudioAndroid-v0.20.0-Multi-Calibration-Targets-Android-Studio-Ready.zip`
+
+Package SHA-256:
+`9f74ce9955f189af29ba7c011714cd840911ae52a98262d084555a05ecf99a58`
+
+Source manifest SHA-256:
+`9ac0e6f94b5e09ac6a351dfc10418a140a5a68e9b9890bdcf8e7296bd2647177`
+
+v0.19.0-r1 -> v0.20.0 text patch SHA-256:
+`abbbdad678a9a8ab6385ac5bd6266b426ff0ecd617ff0b11f75467fdebae0f33`
+
+Implemented:
+- Photo calibration target selector: US Letter 8.5×11 or 12×18.
+- Both photo sizes deliberately use the same 9×6 inner-corner / exact 25.0 mm checkerboard geometry.
+- Selected photo target persists and is recorded into newly solved camera-calibration profiles/reports.
+- Older saved calibration profiles remain loadable with backward-compatible target metadata.
+- Laser background selector: US Letter or 12×18.
+- Each laser preset provides separate LEFT and RIGHT printable PDFs for the 90° DAVID-style corner.
+- Laser target choice persists and is included in laser diagnostics.
+- Photo, laser LEFT/RIGHT, and print-shop instruction PDFs are exportable from inside the app.
+- Corrected PDFs are bundled as app assets and copied into `CALIBRATION_PRINT_PACK/`.
+- v0.20 guided testing covers target selection persistence, PDF exports, profile regression and report export.
+
+Important boundaries:
+- Proper physical camera calibration remains pending the printed target.
+- Do not tune Stages 2–7 around the temporary monitor-displayed calibration.
+- v0.20 does not yet decode laser-background markers or perform laser-plane/3D triangulation.
+- Existing v0.19 OFF/ON laser stripe extraction is preserved.
+
+Verification:
+- ZIP integrity passed; Gradle wrapper JAR present.
+- Standalone Models.kt Kotlin compile passed.
+- Calibration asset paths and embedded/public PDF hashes match.
+- PDFs were rendered and visually checked after correcting a print-text color issue.
+- Full Gradle Android compilation is still unavailable in the assistant environment because services.gradle.org cannot resolve/connect. Android Studio remains authoritative.
+
+Next device test:
+1. Verify Letter ↔ 12×18 photo target selection persists.
+2. Export both photo PDFs.
+3. Verify Letter ↔ 12×18 laser selection persists.
+4. Export matching LEFT and RIGHT laser PDFs plus print instructions.
+5. Confirm an existing calibration profile still loads; physical recalibration is not required for this software regression.
+6. Export the v0.20 test report.
