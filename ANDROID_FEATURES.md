@@ -574,3 +574,21 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - LATER — fixed laser plane mode.
 - LATER — turntable + Arduino/ESP32 control.
 - LATER — automated laser carriage / synchronized capture.
+
+
+## v0.20.0 — multiple calibration target presets
+
+- DONE — Photo target selector: US Letter 8.5×11 or 12×18.
+- DONE — Exact 9×6 inner-corner / 25.0 mm photo-board geometry retained across both presets.
+- DONE — Photo target selection persists across restart.
+- DONE — Newly solved camera profile records the selected photo target.
+- DONE — Backward-compatible loading for older calibration profiles.
+- DONE — Photo calibration screen exports selected PDF.
+- DONE — Laser target selector: US Letter or 12×18.
+- DONE — Laser target selection persists across restart.
+- DONE — Matching LEFT/RIGHT laser PDFs export from Laser Line Lab.
+- DONE — Print-shop instructions PDF export.
+- DONE — Corrected print PDFs embedded as assets and included in the Android Studio print pack.
+- DONE — v0.20 guided test/report includes selected target presets.
+- NOT YET — Laser-background marker decoding / laser-plane recovery.
+- NOT YET — Laser 3D triangulation.
