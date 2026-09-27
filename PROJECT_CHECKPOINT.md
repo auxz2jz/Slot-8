@@ -930,3 +930,30 @@ New task:
 - Show exact page dimensions and calibration-pattern dimensions in the app.
 - Add dedicated printable PDFs for every supported photo target and laser LEFT/RIGHT target size.
 - Preserve existing calibration profiles and existing reconstruction/laser functionality.
+
+
+## v0.21.0 candidate packaged — standard copy-size calibration targets
+
+- Version: **0.21.0** / versionCode **33**
+- Status: **CANDIDATE** pending Android Studio/device test
+- Package: `PhotogrammetryStudioAndroid-v0.21.0-Standard-Print-Sizes-Android-Studio-Ready.zip`
+- Package SHA-256: `19b40b62bce3796696cf4dc1daf2c2e1b0124096c481da4d634f388691a9e0ca`
+- Calibration PDF pack: `3D_Scan_Studio_All_Calibration_PDFs_v0.21.zip`
+- Calibration pack SHA-256: `016cf8ea3a16138c59fa60316ae02cf63be6b177e35839362a1fdb06584f16c0`
+- v0.20 -> v0.21 text patch SHA-256: `8fd4329b3ccab7869a340f3255474089a0b850d61eeaa9672aa7479e371b9a80`
+- v0.21 source-manifest file SHA-256: `64ef22a5fb3fb90809c16194df9e9c44d1211f865a9041397a5d22275930cd8c`
+- ZIP integrity test: **passed**
+- Gradle wrapper included: **yes**
+- Models.kt standalone Kotlin compile: **passed**
+- All 13 calibration PDFs rendered and visually inspected; page MediaBox sizes verified.
+
+New target presets:
+- Letter 8.5x11 — standard copy size
+- Legal 8.5x14 — standard copy size
+- Ledger/Tabloid 11x17 — standard copy size
+- 12x18 — optional poster/backward-compatible
+
+Photo calibration keeps one invariant geometry for all sizes: 9x6 inner corners, 25.0 mm squares, 250x175 mm checker pattern.
+
+Exact next action:
+Build/install v0.21.0 in Android Studio and run the 9-step in-app Test This Version guide. No physical calibration board is required for this software regression.
