@@ -1026,3 +1026,20 @@ Cross-platform:
 
 Exact next device test:
 Install/build v0.22.0, open the real laser project, run threshold 32 once and threshold 64 twice, verify all three runs remain after reopening Laser Line Lab, export the JSONL history and laser report, then export the v0.22 version-test report.
+
+
+## 2026-10-04 cross-platform ownership boundary established
+
+User declared 3D Scan Studio one product with two separate implementations: Android and future Windows/PC.
+
+Repository transition completed conservatively:
+- Existing historical root remains Android-owned and unchanged in place.
+- No Android source/history file was moved, renamed, refactored, or rewritten for the transition.
+- Added root `CROSS_PLATFORM_OWNERSHIP.md`.
+- `shared/` now contains product vision, feature catalog, requirements, decisions, data/interchange contracts, shared Stage 1-10 photogrammetry definitions, and calibration/export expectations.
+- `android/` contains Android status/ownership/roadmap/testing/diagnostic pointers while root Android history remains authoritative.
+- `windows/` is reserved for future PC/Codex ownership with NOT STARTED status, memory/roadmap/testing/diagnostic placeholders only; no Windows program source has been created.
+- Android and Windows verified baselines remain independent.
+
+Current Android candidate remains **v0.22.0 / versionCode 34**, unchanged by this repository-structure work.
+Exact next Android action remains: build/install v0.22.0 and run its laser-analysis-history guided test.
