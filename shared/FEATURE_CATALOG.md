@@ -18,6 +18,7 @@ Shared behavior:
 - repeated threshold experiments append;
 - history can be exported in a platform-neutral format.
 Origin: Android hardware testing.
+Platform status: Android CANDIDATE v0.22.0; Windows NOT STARTED.
 
 ## F-005 — Structured-light scanning
 Intent: project known coded patterns, capture them with a calibrated camera, decode correspondences, and reconstruct 3D geometry.
