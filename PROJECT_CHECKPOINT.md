@@ -990,3 +990,39 @@ Cross-platform requirement:
 - Shared product intent/data formats belong in shared coordination docs.
 - Android and Windows source, versions, tests, diagnostics, checkpoints, and verified baselines stay separate.
 - Windows implementation status remains NOT STARTED until a Windows agent actually creates it.
+
+
+## v0.22.0 candidate packaged — laser analysis history + cross-platform foundation
+
+- Version: **0.22.0** / versionCode **34**
+- Status: **CANDIDATE** pending Android Studio/device verification
+- Package: `PhotogrammetryStudioAndroid-v0.22.0-Laser-Run-History-Cross-Platform-Android-Studio-Ready.zip`
+- Package SHA-256: `2c6d3468f3d35e813de6b71290b86a49754344a71f13cc7956cee9d06d743a85`
+- v0.21 -> v0.22 patch SHA-256: `94fdceeb48df8fbc7c552813e4757e1b62a01a8776ff84d7d480460e05356573`
+- source-manifest file SHA-256: `f2cc88cf96267f07302da9f6b711b7d5d2923c7d0796c9e3b52464d3bb3c8c9e`
+- ZIP integrity test: **passed**
+- Gradle wrapper JAR present: **yes**
+- Models.kt standalone Kotlin compile: **passed**
+- Changed Kotlin delimiter/string/comment balance checks: **passed**
+- Full Gradle build here remains blocked because the Gradle 9.6 distribution host cannot resolve/connect; Android Studio remains authoritative.
+
+Implemented:
+1. Every Laser Line Lab Analyze press creates a unique run and appends it to project history.
+2. Moving the threshold slider alone does not create a run.
+3. Success runs record threshold/color, UTC/epoch time, duration, input-pair metadata, selected laser-target preset, coverage, continuity, signal, stripe width, X range and readiness.
+4. Failure runs record attempted settings, error type/message/full stack trace and duration.
+5. History is bounded to newest 200 runs per project.
+6. UI shows newest 10 runs and retained count.
+7. Export `laser_analysis_history.jsonl` using shared schema v1.
+8. Human laser report includes recent history summary.
+9. Existing newest detailed report/preview behavior remains; historical preview PNGs are not retained in this build.
+10. Laser extraction math is unchanged from the v0.19 foundation.
+
+Cross-platform:
+- Slot-8 now contains `shared/`, `android/`, and `windows/` coordination/status docs.
+- Windows implementation is explicitly **NOT STARTED**.
+- Shared laser-history JSONL schema is documented for future Windows consumption.
+- Android and Windows keep separate source ownership, versions, tests, diagnostics, artifacts, checkpoints and verified baselines.
+
+Exact next device test:
+Install/build v0.22.0, open the real laser project, run threshold 32 once and threshold 64 twice, verify all three runs remain after reopening Laser Line Lab, export the JSONL history and laser report, then export the v0.22 version-test report.
