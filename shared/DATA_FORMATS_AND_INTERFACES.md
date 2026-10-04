@@ -14,6 +14,7 @@ Required fields:
 - `schemaVersion`: integer, currently 1
 - `runId`: unique string
 - `timestampEpochMs`: integer
+- `timestampUtc`: ISO-8601 UTC string
 - `laserColor`: `RED`, `GREEN`, or `BLUE`
 - `threshold`: integer
 - `success`: boolean
@@ -41,6 +42,7 @@ Successful-run measurement fields:
 Failure fields:
 - `errorType`
 - `errorMessage`
+- `errorStackTrace`
 
 Compatibility rules:
 - readers must ignore unknown fields;
