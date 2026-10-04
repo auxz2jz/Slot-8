@@ -957,3 +957,36 @@ Photo calibration keeps one invariant geometry for all sizes: 9x6 inner corners,
 
 Exact next action:
 Build/install v0.21.0 in Android Studio and run the 9-step in-app Test This Version guide. No physical calibration board is required for this software regression.
+
+
+## v0.22.0 plan — laser analysis run history + cross-platform foundation
+
+User evidence from the real v0.19 laser hardware test:
+- Red laser, threshold 64
+- 645/1000 detected rows
+- 64.50% coverage
+- 84.63% continuity
+- 100.56 mean signal
+- 4.80 px mean line width
+- readyForTriangulation=true
+- User confirmed they are actively changing threshold and rerunning Analyze.
+
+Root diagnostic gap:
+- Current app persists only the newest laser-line report/preview.
+- Repeated threshold experiments overwrite the prior result, so there is no durable per-run history.
+
+Planned Android candidate:
+1. Preserve every Analyze run in a bounded per-project laser analysis history.
+2. Record threshold/color, run ID/time, duration, input pair names, target preset, success/failure, metrics and readiness.
+3. Persist in a platform-neutral JSONL format suitable for future Windows consumption.
+4. Show recent runs in Laser Line Lab and keep the newest normal result/preview behavior.
+5. Export the JSONL history.
+6. Include run-history summary in human-readable laser diagnostics.
+7. Add v0.22 guided tests proving multiple thresholds append rather than overwrite and survive reopen.
+8. Do not change the laser extraction algorithm in this build; this is diagnostic instrumentation first.
+
+Cross-platform requirement:
+- 3D Scan Studio is one Android + future Windows product.
+- Shared product intent/data formats belong in shared coordination docs.
+- Android and Windows source, versions, tests, diagnostics, checkpoints, and verified baselines stay separate.
+- Windows implementation status remains NOT STARTED until a Windows agent actually creates it.
