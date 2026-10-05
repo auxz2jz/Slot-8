@@ -605,3 +605,17 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - VERIFIED OFF-DEVICE — software reassembly of tiled LEFT/RIGHT matched original 12×18 renders exactly at 120 dpi.
 - PENDING — Android Studio compile/install and on-device v0.23 guided test.
 - PENDING — physical print measurement/assembly and camera/laser calibration use.
+
+## v0.24.0 — pin-align four-Letter calibration
+
+- DONE — ordinary US Letter paper for the new tiled assemblies.
+- DONE — sacrificial matching crosshairs with center dots for pin registration.
+- DONE — straight-cut overlap method leaves no paper overlap covering final calibration artwork.
+- DONE — new Large 4-Letter photo target: 9×6 inner corners, 38.1 mm squares, 15×10.5 in checkerboard.
+- DONE — existing 25 mm photo targets remain unchanged.
+- DONE — laser LEFT/RIGHT pin-align tiled preset preserves original 12×18 / 35 mm marker geometry.
+- DONE — v0.24 guided test covers photo preset geometry, four-page exports, pin-align laser exports, instructions, and v0.22 laser-history regression.
+- VERIFIED OFF-DEVICE — PDF page sizes/rendering and digital reassembly geometry.
+- PASSED — standalone `Models.kt` Kotlin compile.
+- PENDING — Android Studio/device compile and v0.24 guided test.
+- PENDING — physical pin-align/cut/mount verification and real camera/laser calibration.
