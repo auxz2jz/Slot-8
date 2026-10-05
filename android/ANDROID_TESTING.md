@@ -25,3 +25,15 @@ The in-app 8-step **Test This Version** guide verifies:
 8. The v0.23 version-test report exports successfully.
 
 Physical calibration is a later validation step after this software regression passes.
+
+## v0.24.0 targeted regression
+
+The in-app 8-step **Test This Version** guide verifies:
+1. New Large 4-Letter 38.1 mm photo preset appears without removing old presets.
+2. Four-page landscape photo PDF export.
+3. Selected square size drives camera-calibration geometry (38.1 mm vs existing 25.0 mm).
+4. Pin-align laser preset reports original 12×18 / 35 mm geometry.
+5. Four-page LEFT and RIGHT laser exports.
+6. Pin-align assembly-instruction export.
+7. v0.22 laser-history regression.
+8. v0.24 version-test report export with photo/laser print-representation metadata.
