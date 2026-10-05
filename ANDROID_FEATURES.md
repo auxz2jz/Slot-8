@@ -592,3 +592,16 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - DONE — v0.20 guided test/report includes selected target presets.
 - NOT YET — Laser-background marker decoding / laser-plane recovery.
 - NOT YET — Laser 3D triangulation.
+
+## v0.23.0 — tiled Letter calibration candidate
+
+- DONE — Added exact-scale 12×18 tiled-on-Letter laser preset.
+- DONE — LEFT and RIGHT each export as 4 Letter pages (A1/A2/B1/B2).
+- DONE — Finished geometry remains 12×18 / 35 mm markers; existing single-sheet 12×18 preset remains.
+- DONE — Crop/registration marks stay outside calibration artwork.
+- DONE — Tiled assembly instructions export from Camera Calibration and Laser Line Lab.
+- DONE — Existing photo target geometry remains 9×6 inner corners / 25 mm squares / 250×175 mm.
+- DONE — v0.23 guided test covers new exports and regression of existing laser presets/history.
+- VERIFIED OFF-DEVICE — software reassembly of tiled LEFT/RIGHT matched original 12×18 renders exactly at 120 dpi.
+- PENDING — Android Studio compile/install and on-device v0.23 guided test.
+- PENDING — physical print measurement/assembly and camera/laser calibration use.
