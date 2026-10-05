@@ -1043,3 +1043,30 @@ Repository transition completed conservatively:
 
 Current Android candidate remains **v0.22.0 / versionCode 34**, unchanged by this repository-structure work.
 Exact next Android action remains: build/install v0.22.0 and run its laser-analysis-history guided test.
+
+## v0.23.0 candidate — tiled Letter calibration panels
+
+- Version: **0.23.0** / versionCode **35**.
+- Starting point: preserved v0.22.0 candidate; v0.22 laser extraction/history behavior is unchanged.
+- Android Studio source package: `PhotogrammetryStudioAndroid-v0.23.0-Tiled-Letter-Calibration-Android-Studio-Ready.zip`
+- Package SHA-256: `35770aa5eed29e3f46fcb7e9fba982d3a0cc249f6f55ce9d4ddc6924f9270d13`
+- Calibration print pack: `3D_Scan_Studio_Budget_Calibration_Print_Pack.zip`
+- Print-pack SHA-256: `416776d65fa9b4dbca88c89ccc8a646c9bb81d9120c46f6edad99dc6d044bb1c`
+- New laser preset: **12×18 tiled (4 Letter sheets)**, separate LEFT/RIGHT 4-page PDFs.
+- Physical laser geometry remains exactly the existing 12×18 / 35.0 mm-marker geometry.
+- Tiled split: vertical 4.25 in from left; horizontal 9.75 in from top, chosen through clear regions rather than coded markers/reference dots.
+- Tile pages carry crop/registration marks outside the calibration artwork; final assembly uses trimmed butt joints on a flat rigid board.
+- Photo calibration geometry is unchanged. The existing Letter target remains one sheet: 9×6 inner corners / 25.0 mm squares / 250×175 mm checker pattern.
+- Existing Letter, Legal, Ledger and single-sheet 12×18 presets remain available and saved IDs remain backward-compatible.
+- Added tiled/poster-board assembly-instructions export.
+- Off-device PDF verification: all new PDFs rendered successfully; software reassembly of both tiled panels matched the original 12×18 v0.22 artwork pixel-for-pixel at 120 dpi (mean/max difference 0).
+- `Models.kt` standalone Kotlin compile: **PASSED**.
+- Full Gradle compile attempt: **BLOCKED only by environment network resolution** while the wrapper attempted to download Gradle 9.6; Android Studio remains authoritative.
+- Status: **CANDIDATE / not yet Android Studio or device verified**.
+
+Exact next action:
+1. Build/install v0.23.0 in Android Studio.
+2. Run the 8-step in-app **Test This Version** guide.
+3. Export tiled LEFT and RIGHT PDFs and assembly instructions from the app.
+4. After software regression passes, print at 100% Actual Size, verify scale, trim/mount the eight laser pages, and mount the one-sheet photo checkerboard flat.
+5. Keep v0.22.0 and earlier artifacts preserved until v0.23 is user-tested.
