@@ -27,3 +27,16 @@ Intent: project known coded patterns, capture them with a calibrated camera, dec
 Intent: Android and Windows can exchange or consume the same project-level scan data and platform-neutral reports without requiring identical implementation code.
 
 Platform status is tracked separately.
+
+## F-007 — Pin-align multi-sheet calibration
+Intent: allow accurate calibration targets to be assembled from ordinary printer sheets while preserving or explicitly recording physical target geometry.
+
+Shared behavior:
+- matching registration marks support precise multi-sheet alignment;
+- registration marks are sacrificial or outside the active calibration field;
+- internal overlaps may be straight-cut and butted so no sheet covers active calibration artwork;
+- a tiled print representation must not silently change physical calibration geometry;
+- if a tiled target intentionally uses different physical geometry, the square/marker dimensions and preset identity must be recorded and used by calibration math.
+
+Origin: Android budget poster-board calibration workflow.
+Platform status: Android CANDIDATE v0.24.0; Windows NOT STARTED.
