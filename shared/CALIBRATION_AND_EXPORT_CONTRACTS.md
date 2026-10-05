@@ -62,3 +62,13 @@ Requirements:
 Current Android v0.23 example:
 - laser: the existing 12×18 in / 35.0 mm-marker LEFT and RIGHT geometry can be exported as four US Letter pages per panel;
 - photo/camera: the 9×6-inner-corner / 25.0 mm-square / 250×175 mm checkerboard remains one Letter sheet because its complete physical geometry already fits at 1:1 scale.
+
+## Large tiled camera-calibration geometry
+
+Tiling may be either a print representation of an unchanged target or a distinct larger physical calibration preset. These cases must not be conflated.
+
+Current Android v0.24 examples:
+- laser: four Letter sheets are only a print representation; assembled geometry remains the existing 12×18 in / 35.0 mm-marker target;
+- camera/photo: the optional Large 4-Letter target is a **new physical calibration preset** with 9×6 inner corners and 38.1 mm squares. Calibration object points must use 38.1 mm when that board is selected.
+
+A saved camera-calibration profile must continue recording `targetPresetId` and `squareSizeMm` so profiles solved from 25.0 mm and 38.1 mm boards remain distinguishable.
