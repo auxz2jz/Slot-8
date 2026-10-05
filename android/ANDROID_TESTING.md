@@ -11,3 +11,17 @@ Authoritative Android recovery/testing history:
 - Android version/build notes.
 
 A Windows test must never change Android verification status, and an Android test must never verify Windows.
+
+## v0.23.0 targeted regression
+
+The in-app 8-step **Test This Version** guide verifies:
+1. Existing Camera Calibration photo presets remain unchanged.
+2. The new **12×18 tiled (4 Letter sheets)** laser preset appears alongside the four prior presets.
+3. Tiled LEFT export produces a four-page US Letter PDF.
+4. Tiled RIGHT export produces a four-page US Letter PDF.
+5. Tiled/poster-board instructions export and document the 4.25 in vertical and 9.75 in horizontal assembly seams.
+6. Existing laser presets still export.
+7. v0.22 persistent laser Analyze history still appends/survives reopen/export.
+8. The v0.23 version-test report exports successfully.
+
+Physical calibration is a later validation step after this software regression passes.
