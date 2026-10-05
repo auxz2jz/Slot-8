@@ -49,3 +49,16 @@ Readers should ignore unknown optional fields. Breaking semantic changes require
 ## Current shared structured format
 
 `laser_analysis_history.jsonl` schema v1 is defined in `shared/DATA_FORMATS_AND_INTERFACES.md`.
+
+## Tiled calibration print representations
+
+A calibration target may be distributed across multiple printer sheets without becoming a new physical calibration geometry.
+
+Requirements:
+- The assembled target must preserve the exact intended physical dimensions, marker/checker geometry and orientation.
+- Tiling/crop/registration marks used only for assembly should remain outside the calibration field or be removed during trimming so they do not become unintended machine-visible features.
+- The selected calibration record should identify the physical target geometry independently from its print-sheet representation when practical.
+
+Current Android v0.23 example:
+- laser: the existing 12×18 in / 35.0 mm-marker LEFT and RIGHT geometry can be exported as four US Letter pages per panel;
+- photo/camera: the 9×6-inner-corner / 25.0 mm-square / 250×175 mm checkerboard remains one Letter sheet because its complete physical geometry already fits at 1:1 scale.
