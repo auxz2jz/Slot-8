@@ -1070,3 +1070,32 @@ Exact next action:
 3. Export tiled LEFT and RIGHT PDFs and assembly instructions from the app.
 4. After software regression passes, print at 100% Actual Size, verify scale, trim/mount the eight laser pages, and mount the one-sheet photo checkerboard flat.
 5. Keep v0.22.0 and earlier artifacts preserved until v0.23 is user-tested.
+
+## v0.24.0 candidate — pin-align four-Letter calibration boards
+
+- Version: **0.24.0** / versionCode **36**.
+- v0.23.0 remains preserved as the previous unverified candidate.
+- Android Studio source package: `PhotogrammetryStudioAndroid-v0.24.0-Pin-Align-4Letter-Calibration-Android-Studio-Ready.zip`
+- Package SHA-256: `3b881940d1731abb2d1c4f34bee479455e23b082caf9472ef4a82abf18ab7b9e`
+- Calibration print pack: `3D_Scan_Studio_4xLetter_Pin_Align_Calibration_Print_Pack.zip`
+- Print-pack SHA-256: `bd0e8e897e692559d1ee9a42ca6aa962d5fea1ca0d0874062ac74e7cde5493b9`
+- New camera-calibration preset: **Large 4-Letter (38.1 mm)**.
+- Large photo board keeps 9×6 inner corners but deliberately uses exact **38.1 mm / 1.5 in squares**: 15.0×10.5 in checkerboard on a 16.0×11.5 in finished target.
+- Four photo pages are US Letter landscape A1/A2/B1/B2.
+- Laser tiled preset keeps the same saved preset ID but upgrades to pin-align A1/A2/B1/B2 Letter pages.
+- Finished laser geometry remains exactly the existing 12×18 in / 35.0 mm-marker LEFT/RIGHT target.
+- Matching crosshairs are on sacrificial alignment tabs outside the final kept calibration artwork. The intended workflow is: overlap → pin matching center dots → straight-cut both layers through the pin centers → remove excess → butt fresh edges.
+- No paper overlap or registration crosshair needs to remain over the finished active calibration field.
+- Existing 25 mm Letter/Legal/Ledger/Poster 12×18 photo presets and all existing single-sheet laser presets remain available.
+- OpenCV camera calibration already derives object points from the selected preset's `squareSizeMm`; the new 38.1 mm board therefore has its own correct physical calibration geometry rather than pretending to be the old 25 mm board.
+- PDF verification: all pages render with correct Letter page sizes. Digital reassembly differs from source only at negligible raster antialiasing seam pixels (<0.006 mean channel difference at 160 dpi).
+- `Models.kt` standalone Kotlin compile: **PASSED**.
+- Full Gradle compile: **BLOCKED by environment network resolution before compilation** because the wrapper cannot download Gradle 9.6 from services.gradle.org. Android Studio remains authoritative.
+- Status: **CANDIDATE / not yet Android Studio or device verified**.
+
+Exact next action:
+1. Build/install v0.24.0 in Android Studio.
+2. Run the 8-step in-app **Test This Version** guide.
+3. Export the new four-page photo PDF, LEFT/RIGHT pin-align laser PDFs, and assembly instructions from the app.
+4. Print at 100% / Actual Size and verify one photo square = 38.1 mm / 1.5 in before assembly.
+5. Preserve v0.23 and prior packages until v0.24 is user-tested.
