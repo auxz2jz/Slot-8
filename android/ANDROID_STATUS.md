@@ -38,3 +38,14 @@ Windows verification never changes Android verification status.
 - Android Studio package SHA-256: `35770aa5eed29e3f46fcb7e9fba982d3a0cc249f6f55ce9d4ddc6924f9270d13`.
 - Status: **CANDIDATE** pending user Android Studio/device test.
 - Last physically confirmed laser-capable baseline remains v0.19.0-r1 until the user verifies a later candidate.
+
+## Current candidate — v0.24.0
+
+- versionCode 36.
+- Preserves v0.22 laser extraction/history behavior.
+- Adds **Large 4-Letter (38.1 mm)** camera calibration preset.
+- Upgrades the tiled laser preset to sacrificial pin-align crosshairs + straight-cut seams while preserving the same preset ID and 12×18 / 35 mm geometry.
+- Existing single-sheet presets remain.
+- Android Studio package SHA-256: `3b881940d1731abb2d1c4f34bee479455e23b082caf9472ef4a82abf18ab7b9e`.
+- Status: **CANDIDATE** pending user Android Studio/device test.
+- Last physically confirmed laser-capable baseline remains v0.19.0-r1 until the user verifies a later candidate.
