@@ -238,3 +238,11 @@ The tiled seams are placed through clear areas (4.25 in from the left and 9.75 i
 Photo/camera calibration is intentionally unchanged: the Letter checkerboard remains one sheet with 9×6 inner corners, 25.0 mm squares, and a 250×175 mm pattern. It can be mounted flat on poster board without enlargement. Existing Letter, Legal, Ledger and single-sheet 12×18 presets remain available.
 
 Current Android candidate: **v0.23.0 / versionCode 35**, pending Android Studio/device verification.
+
+## v0.24.0 — pin-align four-Letter calibration
+
+v0.24 upgrades the multi-sheet workflow for ordinary **US Letter 8.5×11 paper**. Matching crosshairs live on sacrificial tabs outside the finished target. Pages are overlapped, pinned through matching crosshair center dots, straight-cut through both layers, then butted edge-to-edge so no sheet covers another in the final calibration field.
+
+Laser LEFT/RIGHT panels preserve the original 12×18 in / 35 mm-marker geometry. Camera calibration gains an optional genuinely larger four-sheet target: 9×6 inner corners with **38.1 mm (1.5 in) squares**, producing a 15×10.5 in checkerboard on a 16×11.5 in finished board. Existing 25 mm targets remain available.
+
+Current Android candidate: **v0.24.0 / versionCode 36**, pending Android Studio/device verification.
