@@ -228,3 +228,13 @@ The Laser Line Lab also supports **US Letter** and **12×18** DAVID-style backgr
 The app bundles all target PDFs plus print-shop instructions. Matte cardstock mounted to inexpensive blank foam board is an acceptable budget setup when direct poster/foam-board printing is too expensive.
 
 Package SHA-256: `9f74ce9955f189af29ba7c011714cd840911ae52a98262d084555a05ecf99a58`.
+
+## v0.23.0 — tiled Letter laser calibration panels
+
+v0.23 keeps all v0.22 laser-history behavior and adds a budget print path for the existing 12×18 laser calibration geometry. A new **12×18 tiled (4 Letter sheets)** preset exports LEFT and RIGHT as four-page Letter PDFs (A1/A2/B1/B2). The finished panel remains 12×18 in with the same 35 mm marker geometry as the single-sheet poster preset.
+
+The tiled seams are placed through clear areas (4.25 in from the left and 9.75 in from the top) rather than through the large coded markers. Crop/registration marks are outside the calibration field. Software reassembly was verified pixel-identical to the original v0.22 12×18 assets at 120 dpi.
+
+Photo/camera calibration is intentionally unchanged: the Letter checkerboard remains one sheet with 9×6 inner corners, 25.0 mm squares, and a 250×175 mm pattern. It can be mounted flat on poster board without enlargement. Existing Letter, Legal, Ledger and single-sheet 12×18 presets remain available.
+
+Current Android candidate: **v0.23.0 / versionCode 35**, pending Android Studio/device verification.
