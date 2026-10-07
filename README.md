@@ -246,3 +246,13 @@ v0.24 upgrades the multi-sheet workflow for ordinary **US Letter 8.5×11 paper**
 Laser LEFT/RIGHT panels preserve the original 12×18 in / 35 mm-marker geometry. Camera calibration gains an optional genuinely larger four-sheet target: 9×6 inner corners with **38.1 mm (1.5 in) squares**, producing a 15×10.5 in checkerboard on a 16×11.5 in finished board. Existing 25 mm targets remain available.
 
 Current Android candidate: **v0.24.0 / versionCode 36**, pending Android Studio/device verification.
+
+## v0.26.0 — distortion-aware reconstruction + laser single-frame 3D
+
+v0.26 uses the measured camera calibration more completely. ORB descriptors stay on the original photographs, while Stage-2+ geometry removes measured distortion from feature coordinates, dense stereo uses calibrated undistort/rectify, and Stages 8/9 project through the saved Brown-Conrady camera model back into the original source rasters. Dense fusion now evaluates up to 12 quality/distribution-selected connected pairs and can retain up to 80k fused points.
+
+The laser workflow also advances beyond orientation-biased 2D extraction. v0.26 automatically evaluates row-wise and column-wise stripe extraction, detects the known LEFT/RIGHT ArUco backdrop markers, solves both physical panel planes from their full multi-marker layouts, measures the panel angle, fits the instantaneous hand-swept laser plane, and exports the current frame as metric millimeter PLY when the solve is healthy.
+
+This remains a controlled milestone: global non-adjacent pose-graph recovery is the next photogrammetry step if test5 still leaves many cameras disconnected, while multi-frame hand-sweep accumulation/fusion is the next laser step.
+
+Current Android candidate: **v0.26.0 / versionCode 38**, pending Android Studio/device validation.
