@@ -37,3 +37,17 @@ The in-app 8-step **Test This Version** guide verifies:
 6. Pin-align assembly-instruction export.
 7. v0.22 laser-history regression.
 8. v0.24 version-test report export with photo/laser print-representation metadata.
+
+## v0.26.0 targeted regression
+
+The v0.26 in-app guide is intended to verify:
+1. The existing ready camera-calibration profile still loads.
+2. Stage 2 reports distortion-aware calibrated geometry.
+3. Stages 3/4 complete and Stage 4 still improves reprojection error.
+4. Stage 5/6 use calibrated distortion and the expanded dense-pair budget without corrupting project isolation.
+5. Stages 8/9/10 complete with distortion-aware source-photo projection; compare texture coverage against the v0.25 test5 baseline of 34.85%.
+6. Laser Analyze is re-run on v0.26 at a useful threshold (roughly 68–81 for the current real test) and records which extraction orientation was selected.
+7. The marker-backed laser backdrop solve reports detected LEFT/RIGHT IDs, measured panel angle, fit residual, triangulated count, and exports preview/PLY/report.
+8. The v0.26 version-test report exports successfully.
+
+Use the same 274-photo test5 set for the photogrammetry A/B comparison. Do not take a replacement photo set before the software comparison is complete.
