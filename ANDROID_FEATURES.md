@@ -619,3 +619,33 @@ v0.2.1 adds this test-guide system. Its test plan covers scan-mode creation, cam
 - PASSED — standalone `Models.kt` Kotlin compile.
 - PENDING — Android Studio/device compile and v0.24 guided test.
 - PENDING — physical pin-align/cut/mount verification and real camera/laser calibration.
+
+## v0.26.0 — distortion-aware geometry + single-frame laser 3D
+
+Photogrammetry:
+- DONE — reusable scaled Brown-Conrady calibration geometry helper.
+- DONE — Stage 2 distortion-aware essential/pose geometry.
+- DONE — Stage 3 distortion-aware adjacent geometry.
+- DONE — Stage 4 distortion-aware observations + calibrated fx/fy/cx/cy; track budget 1600.
+- DONE — Stage 5 measured-distortion stereo undistort/rectify.
+- DONE — Stage 6 measured-distortion dense fusion; up to 12 quality/distribution-selected pairs; 80k fused-point cap.
+- DONE — Stage 8/9 distortion-aware source-photo projection.
+- RETAINED — Stage 1 ORB descriptors on original pixels.
+- NEXT IF NEEDED — global/non-adjacent pose graph and disconnected-component recovery.
+
+Laser:
+- DONE — automatic row-wise vs column-wise extraction selection.
+- DONE — expected marker-ID decoding for all current target presets.
+- DONE — multi-marker LEFT and RIGHT physical panel pose/plane solve.
+- DONE — measured panel-angle diagnostic.
+- DONE — calibrated backdrop stripe ray/plane intersections in millimeters.
+- DONE — instantaneous hand-swept laser-plane fit.
+- DONE — single-frame metric stripe triangulation.
+- DONE — laser-plane report, preview PNG and ASCII PLY persistence/export.
+- NEXT — multi-frame/video hand-sweep accumulation and point-cloud fusion.
+
+Validation:
+- PASSED — standalone Models.kt compile.
+- PASSED — source package ZIP integrity.
+- BLOCKED — full Gradle compile by runtime network resolution before compiler invocation.
+- PENDING — Android Studio/device v0.26 guided test.
