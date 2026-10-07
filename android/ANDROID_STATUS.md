@@ -49,3 +49,15 @@ Windows verification never changes Android verification status.
 - Android Studio package SHA-256: `3b881940d1731abb2d1c4f34bee479455e23b082caf9472ef4a82abf18ab7b9e`.
 - Status: **CANDIDATE** pending user Android Studio/device test.
 - Last physically confirmed laser-capable baseline remains v0.19.0-r1 until the user verifies a later candidate.
+
+## Current candidate — v0.26.0
+
+- versionCode 38.
+- Built from preserved v0.25.0 clean-single-sheet candidate/baseline.
+- Photogrammetry geometry is now distortion-aware from Stage 2 onward while Stage 1 descriptors remain on original pixels.
+- Dense fusion candidate budget increased to 12 and fused point cap to 80k.
+- Laser line extraction is dual-orientation.
+- Laser backdrop markers now support physical panel pose/angle solve, instantaneous laser-plane recovery and metric single-frame PLY output.
+- Package SHA-256: `8a9155a10424dc6c255141c8a46ead78b826ba3bb566e639e33be9f5d4b5ea7e`.
+- Status: **CANDIDATE** pending Android Studio/device test.
+- v0.25 remains the immediate rollback package.
