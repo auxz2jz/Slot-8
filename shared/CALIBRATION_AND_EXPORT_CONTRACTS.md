@@ -72,3 +72,25 @@ Current Android v0.24 examples:
 - camera/photo: the optional Large 4-Letter target is a **new physical calibration preset** with 9×6 inner corners and 38.1 mm squares. Calibration object points must use 38.1 mm when that board is selected.
 
 A saved camera-calibration profile must continue recording `targetPresetId` and `squareSizeMm` so profiles solved from 25.0 mm and 38.1 mm boards remain distinguishable.
+
+## Distortion-aware reconstruction and laser-plane records
+
+A saved camera calibration is not fully consumed merely because fx/fy/cx/cy are loaded. When a reconstruction stage claims distortion-aware calibrated geometry, it should also consume the compatible saved radial/tangential coefficients or explicitly document why a subset is suppressed.
+
+For source photographs that remain in their original distorted raster:
+- feature descriptors may remain on original pixels;
+- geometric coordinates may be undistorted for pose/triangulation;
+- texture/color projection should forward-project through the source camera distortion model when sampling original pixels.
+
+Laser-plane/background calibration records should additionally identify, when available:
+- detected marker IDs per physical panel;
+- selected target preset and marker geometry;
+- solved LEFT/RIGHT panel planes;
+- measured panel angle;
+- number of backdrop stripe points used to fit the laser plane;
+- laser-plane fit residual in physical units;
+- fitted instantaneous laser plane;
+- number of triangulated current-frame points;
+- readiness/quality status and warnings.
+
+Metric laser point-cloud exports should state their units.
