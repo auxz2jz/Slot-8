@@ -40,3 +40,31 @@ Shared behavior:
 
 Origin: Android budget poster-board calibration workflow.
 Platform status: Android CANDIDATE v0.24.0; Windows NOT STARTED.
+
+## F-008 — Distortion-aware calibrated reconstruction
+Intent: use a measured camera model consistently in geometric reconstruction without destructively rewriting original source photographs.
+
+Shared behavior:
+- original image pixels may remain authoritative for feature description and texture sampling;
+- geometric feature coordinates can be undistorted before epipolar/pose calculations;
+- dense stereo should undistort/rectify with measured intrinsics/distortion when compatible calibration exists;
+- source-photo projection should account for the source raster's lens distortion;
+- reports must state when calibrated distortion is active, suppressed, or unavailable.
+
+Origin: Android v0.26.
+Platform status: Android CANDIDATE v0.26.0; Windows NOT STARTED.
+
+## F-009 — Marker-backed laser plane and single-frame triangulation
+Intent: recover the instantaneous plane of a hand-swept line laser from a known LEFT/RIGHT calibration backdrop and triangulate metric 3D stripe points.
+
+Shared behavior:
+- identify the selected target's marker IDs and physical marker layout;
+- solve physical backdrop plane(s) with a calibrated camera;
+- report measured panel geometry/angle rather than silently assuming the backdrop is perfect;
+- intersect calibrated camera rays with known backdrop planes to obtain metric laser-plane samples;
+- fit and quality-score the instantaneous laser plane;
+- triangulate the current frame's stripe and export metric point-cloud data;
+- multi-frame accumulation is a later layer, not silently implied by a single-frame result.
+
+Origin: Android v0.26.
+Platform status: Android CANDIDATE v0.26.0; Windows NOT STARTED.
