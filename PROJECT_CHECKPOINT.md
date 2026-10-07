@@ -1099,3 +1099,56 @@ Exact next action:
 3. Export the new four-page photo PDF, LEFT/RIGHT pin-align laser PDFs, and assembly instructions from the app.
 4. Print at 100% / Actual Size and verify one photo square = 38.1 mm / 1.5 in before assembly.
 5. Preserve v0.23 and prior packages until v0.24 is user-tested.
+
+## v0.26.0 candidate — distortion-aware photogrammetry + laser single-frame 3D
+
+Version: **0.26.0** / versionCode **38**  
+Status: **CANDIDATE** pending Android Studio/device validation.
+
+Starting point and proven v0.25 baseline:
+- v0.25.0 clean single-sheet calibration assets remain preserved as rollback.
+- Real Letter 9×6 / 25 mm camera calibration on the user's Galaxy S22 Ultra solved successfully: 27 accepted views, RMS ≈0.8207 px, ready=true.
+- test5 completed Stages 1–10 with 274 photos; v0.25 baseline: 91 connected cameras, 2 dense pairs fused, 5,019 Stage-7 vertices / 13,112 faces, and 34.85% Stage-9/10 texture coverage.
+- Real Letter LEFT/RIGHT laser backdrop is physically built and v0.25 OFF/ON extraction is working. Useful threshold runs clustered around roughly 68–81.
+
+v0.26 photogrammetry:
+- Stage 1 ORB detection/descriptors intentionally remain on original source pixels.
+- From Stage 2 geometric calculations onward, compatible camera calibration now supplies scaled fx/fy/cx/cy plus measured Brown-Conrady lens distortion.
+- Same-orientation use applies k1/k2/p1/p2/k3.
+- Rotated-profile compatibility retains radial k1/k2/k3 and conservatively suppresses p1/p2 because width/height alone cannot determine CW vs CCW EXIF rotation.
+- Stage 2: distortion-aware essential matrix / RANSAC / pose recovery.
+- Stage 3: distortion-aware adjacent geometry inside the existing largest connected sequential component.
+- Stage 4: distortion-aware shared-track observations, calibrated intrinsics, optimization track budget 1200 → 1600.
+- Stage 5: calibrated stereo undistort + rectification.
+- Stage 6: calibrated dense fusion; candidate budget 6 → 12, quality + spatial-distribution pair selection, fused point cap 60k → 80k.
+- Stages 8/9: forward Brown-Conrady projection back into the original distorted photographs for color/source assignment.
+- Stage 10 algorithm remains unchanged but consumes the improved Stage-9 assignments.
+- If test5 still leaves a large disconnected-camera remainder, global/non-adjacent pose-graph recovery is the next photogrammetry milestone.
+
+v0.26 laser:
+- 2D detector now evaluates both row-wise and column-wise weighted-centroid extraction and automatically keeps the better orientation, fixing the old bias toward mostly vertical stripes.
+- New marker-backed backdrop solve uses DICT_4X4_50 IDs for the selected LEFT/RIGHT target.
+- Requires at least two expected markers on each panel and solves each physical panel from all detected marker corners plus known printed marker spacing/size.
+- Reports the measured LEFT/RIGHT panel angle rather than assuming the physical corner is exactly 90°.
+- Uses calibrated camera rays where the laser crosses the known backdrop to fit the instantaneous hand-swept laser plane.
+- Produces metric single-frame laser stripe points in millimeters.
+- Persists/exports a laser-plane report, annotated preview PNG, and ASCII PLY.
+- Multi-frame/video hand-sweep accumulation and fusion remain the next laser milestone.
+
+Artifacts:
+- Android Studio package: `PhotogrammetryStudioAndroid-v0.26.0-Distortion-Aware-Laser-3D-Android-Studio-Ready.zip`
+- Package SHA-256: `8a9155a10424dc6c255141c8a46ead78b826ba3bb566e639e33be9f5d4b5ea7e`
+- v0.25→v0.26 patch SHA-256: `e57519234ff27254777d609cd6b08c21353fe2afd471081890a5c2733ddb08cc`
+- Source manifest SHA-256: `b8930545ae85878f058a3dc36d2bd87c763c12ffe1d881aa4e5211310b473bbf`
+
+Validation in build runtime:
+- `Models.kt` standalone Kotlin compile: **PASSED**.
+- ZIP integrity test: **PASSED**.
+- Full Gradle Android compile: **BLOCKED BEFORE COMPILATION** because this runtime cannot resolve/download Gradle 9.6 from services.gradle.org. Android Studio/device build remains authoritative.
+
+Exact next action:
+1. Build/install v0.26.0 in Android Studio without deleting v0.25 source/archive.
+2. Open test5 and run the v0.26 in-app Test This Version guide.
+3. Re-run test5 from Stage 1 with the same 274 photos; compare connected cameras, Stage-4 RMS, Stage-6 accepted/fused pairs and points, Stage-9 texture coverage, and Stage-10 coverage against the v0.25 baseline.
+4. In the real laser project set roughly threshold 68–81, press Analyze again so the v0.26 dual-orientation detector runs, then run the new backdrop/laser-plane solve.
+5. Export the v0.26 version-test report, laser-plane report/preview/PLY, and updated combined test5 diagnostics.
